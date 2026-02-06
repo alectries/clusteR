@@ -70,3 +70,12 @@ In general, because each data source and its format are unique, clusteR is very 
 6. Your `get_x` function must return a plain dataframe, tibble, or similar with at least the required cohort fields properly named (see `vignette('setup_cohort')`). `get_data` will handle the rest. Note that this dataframe does not have to be particularly *clean*, just meet these basic requirements.
 
 While there is nothing stopping you from implementing an alternative data structure to the system default, it is not recommended. `get_data` will save and archive data in an appropriate format that is compatible across data source types and with all native clusteR functions.
+
+## Why not Excel?
+
+You may be wondering why I haven't created functions to get data from a Microsft Excel source file, even though clusteR supports Excel for other tasks (like importing a cohort file). The reasons are:
+
+1. You can easily save your Excel file as a CSV.
+2. If you *can't* easily save your Excel file as a CSV, it is probably because you have formatted your Excel file in a way that R (and therefore clusteR) will not handle well.
+
+To prevent very confusing and difficult to troubleshoot issues that would inevitably result from using clusteR with messy Excel files, I require you to either make a CSV, which will make formatting problems more obvious to you and force you to fix them sooner, or learn to write and implement your own `setup_get_excel` and `get_excel` functions, which is considerably more time-consuming.
