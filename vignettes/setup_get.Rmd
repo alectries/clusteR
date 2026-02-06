@@ -14,8 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup echo = FALSE}
-library(clusteR)
+```{r setup, echo = FALSE}
+suppressWarnings(library(clusteR))
 ```
 
 clusteR is a tool for local epidemiologists to manage a cohort survey. A survey generates survey data, and in order to manage the survey, clusteR needs to connect to this data. clusteR natively supports two data sources, but other packages can add support for additional data sources, and end users can write functions to support a custom data source. The two default sources are:
