@@ -1,0 +1,72 @@
+---
+title: "Set up a data connection for clusteR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Set up a data connection for clusteR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup echo = FALSE}
+library(clusteR)
+```
+
+clusteR is a tool for local epidemiologists to manage a cohort survey. A survey generates survey data, and in order to manage the survey, clusteR needs to connect to this data. clusteR natively supports two data sources, but other packages can add support for additional data sources, and end users can write functions to support a custom data source. The two default sources are:
+
+- **.csv files**, connected with [`setup_get_csv`].
+- **Alchemer surveys**, connected with [`setup_get_alc`]
+
+Additional native sources will be documented here in future releases.
+
+## Comma-delimited (.csv) data source
+
+The simplest data source in existence is the humble .csv file: a text file with values separated by commas and observations separated by newlines. These files are easy to create, modify, and view.
+
+clusteR accepts comma-delimited files as data sources via `setup_get_csv` and `get_csv`. You will need:
+
+- A permanent file path (given as a string) denoting the location of the input .csv file.
+- Any arguments you wish to pass to [`readr::read_csv`] to read your file correctly. (`col_types` is recommended!)
+
+To set up a comma-deliminated data source, you will need to run `setup` and include this argument:
+
+`setup_get = setup_get_csv(file, ...)`
+
+Once setup is completed, clusteR saves this information. You will not need to do this again.
+
+## Alchemer data source
+
+[Alchemer](https://www.alchemer.com/) is a survey tool used widely by local public health agencies in the United States. Alchemer surveys are handled natively by clusteR, not least because the author uses Alchemer at his local health department.
+
+clusteR accepts Alchemer survey data using Alchemer's [SurveyResponse API call](https://apihelp.alchemer.com/help/surveyresponse-sub-object-v5) via `setup_get_alc` and `get_alc`. You will need:
+
+- An Alchemer account, with your survey already created.
+- The Survey ID, which is a number that can be found in the URL when you are building a survey right after /id/.
+- An API token passed as a string.
+- An API token secret (password) passed as a string.
+- A codebook (as a *tab*-delimited file) to convert Alchemer questions to dataframe columns.
+
+To set up an Alchemer survey as your data source, you will need to run `setup` and include this argument:
+
+`setup_get = setup_get_alc(survey_id, api_token, api_token_secret, codebook)`
+
+Once setup is completed, clusteR saves this information. You will not need to do this again.
+
+## Custom data sources
+
+In general, because each data source and its format are unique, clusteR is very flexible with custom data sources. However, there are a few requirements (replace x with a shorthand for your data source):
+
+1. Your package or custom script must include a `setup_get_x` function that can be called in `setup`.
+2. Your `setup_get_x` function must return a list of named objects, which will be included in config.rds and loaded by clusteR as `cluster_cfg$setup_get`.
+3. If your get function is found in a custom script (or if your get function requires additional, non-standard setup), you must include the file path to the script as a string named `run_before` in this list.
+4. Your package or custom script must include a `get_x` function that can be called by `get_data` and retrieve all its arguments (such as URLs, file paths, and API keys) from `cluster_cfg$setup_get`.
+5. Your `get_x` function must be named (as a string) at `cluster_cfg$setup_get$get`.
+6. Your `get_x` function must return a plain dataframe, tibble, or similar with at least the required cohort fields properly named (see `vignette('setup_cohort')`). `get_data` will handle the rest. Note that this dataframe does not have to be particularly *clean*, just meet these basic requirements.
+
+While there is nothing stopping you from implementing an alternative data structure to the system default, it is not recommended. `get_data` will save and archive data in an appropriate format that is compatible across data source types and with all native clusteR functions.

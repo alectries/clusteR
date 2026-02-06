@@ -1,0 +1,19 @@
+---
+title: "Set up a cohort file for clusteR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Set up a cohort file for clusteR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(clusteR)
+```
