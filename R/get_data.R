@@ -15,12 +15,13 @@
 #' `cluster_cfg$setup_get$run_before`. This should be handled by your custom
 #' `setup_get_x` function as described in `vignette('setup_get')`.
 #'
+#' @param args If arguments are needed for your `get` function, they can be passed as a list.
 #' @importFrom cli style_bold
 #' @importFrom cli style_underline
 #' @importFrom rlang inform
 #' @export
 
-get_data <- function(){
+get_data <- function(args){
   # Execute run_before script if it exists
   if(exists("cluster_cfg$setup_get$run_before")){
     source(cluster_cfg$setup_get$run_before)
@@ -28,7 +29,8 @@ get_data <- function(){
 
   # Run get function
   data <- do.call(
-    what = cluster_cfg$setup_get$get
+    what = eval(parse(text = cluster_cfg$setup_get$get)),
+    args = args
   )
 
   # Save data and return path invisibly

@@ -20,13 +20,14 @@ setup_get_csv <- function(file,
 
   # Verify path exists and set
   tryCatch(
-    {suppressMessages(readr::read_csv(path))},
+    {suppressMessages(readr::read_csv(file))},
     error = function(cond){
       rlang::abort(message = c(
         cli::style_bold("Data source import failed."),
         paste0(cond)
       ))
-    }
+    },
+    finally = {setup_get$file <- file}
   )
 
   # Return
