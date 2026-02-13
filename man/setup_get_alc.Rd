@@ -2,9 +2,9 @@
 % Please edit documentation in R/setup_get_alc.R
 \name{setup_get_alc}
 \alias{setup_get_alc}
-\title{setup_get_alc: Set up connection to an Alchemer survey for survey data}
+\title{Set up a connection to an Alchemer survey}
 \usage{
-setup_get_alc(survey_id, api_token, api_token_secret, codebook)
+setup_get_alc(survey_id, api_token, api_token_secret, codebook, consent_opts)
 }
 \arguments{
 \item{survey_id}{The Survey ID for your Alchemer survey, found after /id/ in the builder URL.}
@@ -13,7 +13,9 @@ setup_get_alc(survey_id, api_token, api_token_secret, codebook)
 
 \item{api_token_secret}{Your API token secret (password).}
 
-\item{codebook}{A tab-delimited text file to key your survey data to standard column names.}
+\item{codebook}{The file path, as a string, to a tab-delimited text file to key your survey data to standard column names.}
+
+\item{consent_opts}{A named vector, where names are clusteR Consent options and values are survey responses.}
 }
 \description{
 Generates the setup_get item in cluster_cfg for a connection to an Alchemer
@@ -57,6 +59,13 @@ For example:\tabular{ll}{
 It is extremely important that all question and answer text appears exactly
 as it appears in Alchemer, in full. Shortening the text in ALC will cause
 \code{get_alc} to produce nonsensical results or fail.
+
+\code{consent_opts}: A named vector to convert your Alchemer survey's consent
+question responses to clusteR's Consent variable. This should be in the
+format \code{c(Consent = "Survey response")}, e.g.
+\code{c(Yes = "I agree", No = "I don't agree")}. Valid \code{Consent} values are
+shown in \code{vignette("setup_cohort")}. For valid \code{Consent} values with spaces,
+enclose the name in backticks (`).
 
 Due to a restriction in Alchemer's API, the maximum number of observations
 pulled by \code{get_alc} is 9,999. You will need to write a custom function if

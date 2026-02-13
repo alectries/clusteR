@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_alc.R
 \name{get_alc}
 \alias{get_alc}
-\title{get_alc: Get data from an Alchemer survey}
+\title{Get data from an Alchemer survey}
 \usage{
 get_alc()
 }
@@ -25,4 +25,8 @@ conversion using the codebook specified in \code{\link{setup_get_alc}}:
 You can format these fields largely however you'd like, and you can even
 leave them blank if they are not of use to you, but the fields must exist
 and be named correctly.
+
+Currently, \code{get_alc} can only handle four Alchemer output types: textbox,
+radio, essay, and parent. Most question types yield one of these field types,
+but you should verify before setup.
 }

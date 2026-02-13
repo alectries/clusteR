@@ -1,0 +1,53 @@
+---
+title: "Update Errors"
+output:
+  html_document:
+    theme: paper
+    toc: true
+    toc_float: true
+---
+
+This page displays any  mismatches in data between the current cohort file and survey inputs. Not every mismatch is an error that needs to be corrected.
+
+**No changes have been made, and the cohort file has been archived for safety.**
+
+Next steps:
+
+1. Review all tables on this page.
+2. Where needed, make changes to your source or to [Editor](Consent/Editor.csv "Click to open Editor").
+3. Re-run `update()`.
+4. Once you are satisfied that *all* the items remaining on this page are intended, run `update_confirm()`.
+
+# Changes from data
+
+These changes are from your data source, `r cat(cluster_cfg$setup_get$get)`.
+
+```{r, echo = FALSE, results = "asis"}
+for(i in 1:length(coh_src_errs)){
+  cat(paste0(
+    "## ",
+    names(coh_src_errs)[i],
+    "\n\n"
+  ))
+  knitr::kable(coh_src_errs[[i]])
+  cat("\n\n")
+}
+```
+
+
+# Manual changes
+
+These changes are from Editor and, when in conflict, will override changes from your data source.
+
+```{r, echo = FALSE, results = "asis"}
+for(i in 1:length(coh_man_errs)){
+  cat(paste0(
+    "## ",
+    names(coh_man_errs)[i],
+    "\n\n"
+  ))
+  knitr::kable(coh_man_errs[[i]])
+  cat("\n\n")
+}
+```
+

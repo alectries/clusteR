@@ -6,7 +6,7 @@
 .onLoad <- function(libname, pkgname){
   # Check for settings file
   tryCatch(
-    {cluster_cfg <- suppressWarnings(readRDS("Scripts/config.rds"))},
+    {cluster_cfg <<- suppressWarnings(readRDS("Scripts/config.rds"))},
     error = function(cond){
       rlang::warn(message = c(
         cli::style_bold("clusteR environment not configured!"),

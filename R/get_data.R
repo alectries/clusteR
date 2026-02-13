@@ -1,4 +1,4 @@
-#' get_data: Standardize and save survey data
+#' Standardize and save survey data
 #'
 #' Using the function specified during [`setup`], pull and process the latest
 #' survey data, then archive it. Invisibly returns the path to the saved data.
@@ -15,13 +15,17 @@
 #' `cluster_cfg$setup_get$run_before`. This should be handled by your custom
 #' `setup_get_x` function as described in `vignette('setup_get')`.
 #'
+#' You should not need to provide any arguments to `get_data`. However, if your
+#' get function requires arguments, provide them to `get_data` as a named list.
+#'
 #' @param args If arguments are needed for your `get` function, they can be passed as a list.
 #' @importFrom cli style_bold
 #' @importFrom cli style_underline
+#' @importFrom lubridate now
 #' @importFrom rlang inform
 #' @export
 
-get_data <- function(args){
+get_data <- function(args = list()){
   # Execute run_before script if it exists
   if(exists("cluster_cfg$setup_get$run_before")){
     source(cluster_cfg$setup_get$run_before)

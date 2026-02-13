@@ -1,4 +1,4 @@
-#' get_csv: Get data from a comma-delimited survey data file
+#' Get data from a comma-delimited survey data file
 #'
 #' Returns a dataframe of survey data from a comma-delimited file specified in
 #' setup.

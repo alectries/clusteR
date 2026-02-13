@@ -2,9 +2,12 @@
 % Please edit documentation in R/get_data.R
 \name{get_data}
 \alias{get_data}
-\title{get_data: Standardize and save survey data}
+\title{Standardize and save survey data}
 \usage{
-get_data()
+get_data(args = list())
+}
+\arguments{
+\item{args}{If arguments are needed for your \code{get} function, they can be passed as a list.}
 }
 \description{
 Using the function specified during \code{\link{setup}}, pull and process the latest
@@ -22,4 +25,7 @@ data for clusteR, ensure you have set it up properly by including the
 script's file path in the clusteR environment as
 \code{cluster_cfg$setup_get$run_before}. This should be handled by your custom
 \code{setup_get_x} function as described in \code{vignette('setup_get')}.
+
+You should not need to provide any arguments to \code{get_data}. However, if your
+get function requires arguments, provide them to \code{get_data} as a named list.
 }

@@ -1,4 +1,4 @@
-#' setup_get_csv: Set up connection to comma-delimited file for survey data
+#' Set up connection to a comma-delimited survey data file
 #'
 #' Generates the setup_get item in cluster_cfg for a connection to a .csv file.
 #'

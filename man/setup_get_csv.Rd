@@ -2,7 +2,7 @@
 % Please edit documentation in R/setup_get_csv.R
 \name{setup_get_csv}
 \alias{setup_get_csv}
-\title{setup_get_csv: Set up connection to comma-delimited file for survey data}
+\title{Set up connection to a comma-delimited survey data file}
 \usage{
 setup_get_csv(file, ...)
 }

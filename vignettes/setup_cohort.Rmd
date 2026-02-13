@@ -17,3 +17,60 @@ knitr::opts_chunk$set(
 ```{r setup, echo = FALSE}
 suppressWarnings(library(clusteR))
 ```
+
+For clusteR to perform management tasks, it needs to maintain a master file of cohort members, their information, and their participation status. clusteR maintains a raw text file in the Cohort subdirectory with this information and automatically updates some of the information as survey responses come in.
+
+## Required fields
+
+clusteR requires certain fields in the cohort file. These are:
+
+- **ID**: A unique identifier, which can be in any format.
+- **Cluster**: An identifier of the cluster a participant is in.
+- **Name**: The participant's name, which defaults to "Current Resident".
+- **Mailing**: The participant's mailing street address.
+- **Physical**: When the participant's mailing address is not their residence, the participant's actual street address of residence.
+- **City**: The city of the mailing address.
+- **State**: The state of the mailing address.
+- **ZIP**: The ZIP code of the mailing address.
+- **Phone**: The participant's phone number.
+- **Email**: The participant's email address.
+- **Consent**: The participant's consent status ("Yes", "No", "Unknown", "Do not contact", or NA), defaulting to NA.
+- **Status**: The participant's completion status with enrollment information, which is automatically determined.
+
+Most of these fields can be formatted however you like, but Consent is picky. You must use only the following options:
+
+- **Yes**: The participant has participated and consented to be surveyed.
+- **No**: The participant has participated or refused and did not consent to be surveyed.
+- **Unknown**: The participant has participated, but did not return a consent.
+- **Do not contact**: The participant wishes to be removed from the cohort; this is optional and "No" can be used instead.
+- **NA**: The system default, which should be used when a prospective participant has not yet been reached.
+
+`update` will throw an error if anything other than these options is used. For an Alchemer survey (but, importantly, not a CSV file), you can enter a key in `setup_get_alc` to convert responses for you.
+
+## Input
+
+During initial setup, you will need to specify a cohort input file, which must be a:
+
+- **.csv text file**
+- **.xls or .xlsx Excel file**
+- **.rds R data file**
+
+No other format is supported. There are two ways to provide this input file.
+
+### Pre-generate and provide (easy)
+
+The easy way is to generate the file in advance and provide its file path to `setup` as a string. The file should be pre-filled with as much participant information as you have available.
+
+### Generate during setup (harder)
+
+The more complicated way is to write and run a function as part of setup that will generate your cohort input file for you. This function can work however you like, but must be available when you run `setup` and must return only the file path, as a string, to the properly-formatted input file. If you choose to generate this file during setup, it is recommended to write your `setup` call in an R script that you source rather than running `setup` interactively in the console.
+
+## Cohort file storage
+
+The cohort data file will be stored in the automatically-generated Cohort subdirectory and will be named `short_name` as provided in `setup`. *It is not recommended to edit this file by hand.* However, should you need to edit it by hand, it is a CSV file that can be edited in a text editor or Excel.
+
+Because this file is plain-text, it should be stored in a secure location. clusteR does not have built-in protection for confidential information.
+
+## Editor
+
+During setup, clusteR will produce an Editor.csv file in the Cohort subdirectory so that you can manually make changes to existing cohort member records and add new records. It will include all columns in your custom cohort file, but will show no data from the file. Each time the cohort file is successfully updated, Editor will be cleared.

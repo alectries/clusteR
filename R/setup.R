@@ -1,4 +1,4 @@
-#' setup: Create folder structure and generate config file
+#' Create folder structure and generate config file
 #'
 #' Generates a folder structure and config.rds, which holds persistent
 #' information about the survey environment, in the current working directory.
@@ -52,6 +52,7 @@
 #' @importFrom rlang abort
 #' @importFrom rlang inform
 #' @importFrom rlang warn
+#' @importFrom stringr regex
 #' @importFrom stringr str_detect
 #' @export
 
@@ -98,7 +99,7 @@ setup <- function(name,
       "x" = paste0(short_name, " is not a string without spaces.")
     ))
   }
-  if(!exists("input$setup_get")){
+  if(!exists("setup_get", where = input)){
     rlang::warn(message = c(
       cli::style_bold("No data connection specified!"),
       "!" = "Data cannot be collected without a data connection.",
@@ -107,7 +108,7 @@ setup <- function(name,
       "i" = paste0("See ", cli::style_underline("vignette('setup_get')"), " for more information.")
     ))
   }
-  if(!exists("input$state") | !exists("input$county")){
+  if(!exists("state", where = input) | !exists("county", where = input)){
     rlang::warn(message = c(
       cli::style_bold("No state or county specified!"),
       "!" = "Mapping functions will fail without shapefiles.",
@@ -115,44 +116,20 @@ setup <- function(name,
     ))
   }
 
-  # Get shapefiles
-  if(exists("input$state") & exists("input$county")){
-    ## Get, unzip, and save name of county shapefile
-    download.file(
-      url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/County/tl_2020_us_county.zip"),
-      destfile = "Cohort/Shapefiles/tl_2020_us_county.zip"
-    )
-    unzip("Cohort/Shapefiles/tl_2020_us_county.zip", exdir = "Cohort/Shapefiles/")
-    input$shape_county <- "Cohort/Shapefiles/tl_2020_us_county.zip"
-
-    ## Get, unzip, and save name of block shapefile
-    download.file(
-      url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/tl_2020_",
-                   input$state,
-                   "_tabblock20.zip"),
-      destfile = paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip")
-    )
-    unzip(
-      paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip"),
-      exdir = "Cohort/Shapefiles/"
-    )
-    input$shape_block <- paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip")
-  }
-
   # Set up cohort file
-  if(exists("input$setup_cohort")){
+  if(exists("setup_cohort", where = input)){
     if(is.character(input$setup_cohort) && length(input$setup_cohort) == 1){
       ## Read file
-      if(stringr::str_detect(input$setup_cohort, regex("\\.csv", ignore_case = T))){cohort <- readr::read_csv(input$setup_cohort, show_col_types = F)}
-      if(stringr::str_detect(input$setup_cohort, regex("\\.xls|\\.xlsx", ignore_case = T))){cohort <- readxl::read_excel(input$setup_cohort)}
-      if(stringr::str_detect(input$setup_cohort, regex("\\.rds", ignore_case = T))){cohort <- readRDS(input$setup_cohort)}
+      if(stringr::str_detect(input$setup_cohort, stringr::regex("\\.csv", ignore_case = T))){cohort <- readr::read_csv(input$setup_cohort, show_col_types = F)}
+      if(stringr::str_detect(input$setup_cohort, stringr::regex("\\.xls|\\.xlsx", ignore_case = T))){cohort <- readxl::read_excel(input$setup_cohort)}
+      if(stringr::str_detect(input$setup_cohort, stringr::regex("\\.rds", ignore_case = T))){cohort <- readRDS(input$setup_cohort)}
 
       ## Fail if format not supported
-      if(stringr::str_detect(input$setup_cohort, regex("\\.csv|\\.xls|\\.xlsx|\\.rds", ignore_case = T), negate = T)){
+      if(stringr::str_detect(input$setup_cohort, stringr::regex("\\.csv|\\.xls|\\.xlsx|\\.rds", ignore_case = T), negate = T)){
         rlang::abort(message = c(
           cli::style_bold("Cohort file import failed."),
           "x" = "File type not supported.",
-          "i" = "Ensure your cohort file is a .csv, .xls, .xlsx, or .rds file."
+          "i" = "Ensure your cohort file is a .csv, .xls, .xlsx, or .rds file with the file extension included."
         ))
       }
 
@@ -173,6 +150,9 @@ setup <- function(name,
       input$cohort <- paste0("Cohort/", input$short_name)
       readr::write_csv(cohort, input$cohort)
 
+      ## Set up editor file
+      readr::write_csv(dplyr::slice(cohort, 0), "Cohort/Editor.csv")
+
     } else {
       rlang::abort(message = c(
         cli::style_bold("Cohort file import failed."),
@@ -188,8 +168,33 @@ setup <- function(name,
     ))
   }
 
+  # Get shapefiles
+  if(exists("state", where = input) & exists("county", where = input)){
+    ## Get, unzip, and save name of county shapefile
+    download.file(
+      url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/COUNTY/tl_2020_us_county.zip"),
+      destfile = "Cohort/Shapefiles/tl_2020_us_county.zip"
+    )
+    unzip("Cohort/Shapefiles/tl_2020_us_county.zip", exdir = "Cohort/Shapefiles/")
+    input$shape_county <- "Cohort/Shapefiles/tl_2020_us_county.zip"
+
+    ## Get, unzip, and save name of block shapefile
+    download.file(
+      url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/tl_2020_",
+                   input$state,
+                   "_tabblock20.zip"),
+      destfile = paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip")
+    )
+    unzip(
+      paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip"),
+      exdir = "Cohort/Shapefiles/"
+    )
+    input$shape_block <- paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip")
+  }
+
   # Output config
   saveRDS(input, file = "Scripts/config.rds")
+  cluster_cfg <<- input
   rlang::inform(message = c(
     cli::style_bold("clusteR: Configuration saved.")
   ))

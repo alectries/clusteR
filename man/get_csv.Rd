@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_csv.R
 \name{get_csv}
 \alias{get_csv}
-\title{get_csv: Get data from a comma-delimited survey data file}
+\title{Get data from a comma-delimited survey data file}
 \usage{
 get_csv()
 }

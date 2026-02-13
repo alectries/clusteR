@@ -1,4 +1,4 @@
-#' setup_get_alc: Set up connection to an Alchemer survey for survey data
+#' Set up a connection to an Alchemer survey
 #'
 #' Generates the setup_get item in cluster_cfg for a connection to an Alchemer
 #' survey.
@@ -40,6 +40,13 @@
 #' as it appears in Alchemer, in full. Shortening the text in ALC will cause
 #' `get_alc` to produce nonsensical results or fail.
 #'
+#' `consent_opts`: A named vector to convert your Alchemer survey's consent
+#' question responses to clusteR's Consent variable. This should be in the
+#' format `c(Consent = "Survey response")`, e.g.
+#' `c(Yes = "I agree", No = "I don't agree")`. Valid `Consent` values are
+#' shown in `vignette("setup_cohort")`. For valid `Consent` values with spaces,
+#' enclose the name in backticks (`).
+#'
 #' Due to a restriction in Alchemer's API, the maximum number of observations
 #' pulled by `get_alc` is 9,999. You will need to write a custom function if
 #' this is not adequate for your survey.
@@ -47,16 +54,19 @@
 #' @param survey_id The Survey ID for your Alchemer survey, found after /id/ in the builder URL.
 #' @param api_token Your API token.
 #' @param api_token_secret Your API token secret (password).
-#' @param codebook A tab-delimited text file to key your survey data to standard column names.
+#' @param codebook The file path, as a string, to a tab-delimited text file to key your survey data to standard column names.
+#' @param consent_opts A named vector, where names are clusteR Consent options and values are survey responses.
 #' @importFrom cli style_bold
 #' @importFrom jsonlite fromJSON
 #' @importFrom readr read_tsv
+#' @importFrom tibble enframe
 #' @export
 
 setup_get_alc <- function(survey_id,
                           api_token,
                           api_token_secret,
-                          codebook
+                          codebook,
+                          consent_opts
 ){
   # Make URL
   url <- paste0(
@@ -92,10 +102,19 @@ setup_get_alc <- function(survey_id,
     ))
   }
 
+  # Build consent_opts and test for compliance
+  consent <- tibble::enframe(
+    consent_opts,
+    name = "Consent",
+    value = "Consent_old"
+  )
+
   # Write setup_get
-  survey_get <- list(
+  setup_get <- list(
     get = "clusteR::get_alc",
     url = url,
-    codebook = codebook
+    codebook = codebook,
+    consent = consent
   )
+  return(setup_get)
 }

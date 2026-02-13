@@ -2,7 +2,7 @@
 % Please edit documentation in R/setup.R
 \name{setup}
 \alias{setup}
-\title{setup: Create folder structure and generate config file}
+\title{Create folder structure and generate config file}
 \usage{
 setup(name, short_name, ...)
 }

@@ -1,4 +1,4 @@
-#' get_alc: Get data from an Alchemer survey
+#' Get data from an Alchemer survey
 #'
 #' Returns a dataframe of survey data from an Alchemer survey specified in
 #' setup.
@@ -25,6 +25,7 @@
 #' @importFrom dplyr bind_cols
 #' @importFrom dplyr bind_rows
 #' @importFrom dplyr filter
+#' @importFrom dplyr left_join
 #' @importFrom dplyr rename
 #' @importFrom dplyr select
 #' @importFrom jsonlite fromJSON
@@ -133,7 +134,7 @@ get_alc <- function(){
     }
   }
 
-  # Convert to frame and rename
+  # Convert to frame, rename, and modify consent column
   res.bind <- dplyr::bind_cols(res.list)
   names(res.bind) <- gsub("\u00A0", " ", names(res.bind))
   res <- dplyr::rename(
@@ -144,7 +145,14 @@ get_alc <- function(){
       tibble::deframe()
   ) %>%
     dplyr::select(., ID, Name, Email, Phone, Consent, sort(names(.))) %>%
-    dplyr::select(tidyselect::where(~!all(is.na(.))))
+    dplyr::select(tidyselect::where(~!all(is.na(.)))) %>%
+    dplyr::rename("Consent_old" = Consent) %>%
+    dplyr::left_join(
+      cluster_cfg$setup_get$consent,
+      by = "Consent_old"
+    ) %>%
+    dplyr::select(-Consent_old)
+
 
   # Return data
   return(res)
