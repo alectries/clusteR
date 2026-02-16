@@ -10,7 +10,7 @@
       cluster_cfg <<- suppressWarnings(readRDS("Scripts/config.rds"))
       rlang::inform(message = c(
         cli::style_bold("clusteR started successfully!"),
-        "v" = paste0(cli::style_underline(cluster_cfg$name), "config loaded.")
+        "v" = paste0(cli::style_underline(cluster_cfg$name), " config loaded.")
       ))
     },
     error = function(cond){
