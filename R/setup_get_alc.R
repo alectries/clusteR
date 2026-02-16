@@ -42,8 +42,8 @@
 #'
 #' `consent_opts`: A named vector to convert your Alchemer survey's consent
 #' question responses to clusteR's Consent variable. This should be in the
-#' format `c(Consent = "Survey response")`, e.g.
-#' `c(Yes = "I agree", No = "I don't agree")`. Valid `Consent` values are
+#' format `c("Consent" = "Survey response")`, e.g.
+#' `c("Yes" = "I agree", "No" = "I don't agree")`. Valid `Consent` values are
 #' shown in `vignette("setup_cohort")`. For valid `Consent` values with spaces,
 #' enclose the name in backticks (`).
 #'

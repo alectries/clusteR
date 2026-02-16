@@ -46,6 +46,9 @@
 #' @param county The FIPS code for the county of interest
 #' @importFrom cli style_bold
 #' @importFrom cli style_underline
+#' @importFrom dplyr case_when
+#' @importFrom dplyr filter
+#' @importFrom dplyr mutate
 #' @importFrom readr read_csv
 #' @importFrom readr write_csv
 #' @importFrom readxl read_excel
@@ -145,6 +148,30 @@ setup <- function(name,
           "i" = paste0("See ", cli::style_underline("vignette('setup_cohort')"), " for more information.")
         ))
       }
+
+      ## Reset status column
+      cohort <- dplyr::mutate(
+        cohort,
+        Status = dplyr::case_when(
+          Consent == "Yes" ~ "Enrolled",
+          Consent == "No" ~ "Unenroll",
+          Consent == "Unknown" ~ "Re-enroll",
+          Consent == "Do not contact" ~ "Unenroll",
+          is.na(Consent) ~ "Not enrolled",
+          .default = NA
+        )
+      )
+
+      ## Remove and notify of unenrolled participants
+      if("Unenroll" %in% cohort$Status){
+        rlang::inform(message = c(
+          "i" = paste0("Removing ", table(cohort$Status)[["Unenroll"]], " participants.")
+        ))
+      }
+      cohort <- dplyr::filter(
+        cohort,
+        Status %in% c("Enrolled", "Not enrolled") | is.na(Status)
+      )
 
       ## Export cohort file and set path
       input$cohort <- paste0("Cohort/", input$short_name)

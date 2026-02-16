@@ -62,8 +62,8 @@ as it appears in Alchemer, in full. Shortening the text in ALC will cause
 
 \code{consent_opts}: A named vector to convert your Alchemer survey's consent
 question responses to clusteR's Consent variable. This should be in the
-format \code{c(Consent = "Survey response")}, e.g.
-\code{c(Yes = "I agree", No = "I don't agree")}. Valid \code{Consent} values are
+format \code{c("Consent" = "Survey response")}, e.g.
+\code{c("Yes" = "I agree", "No" = "I don't agree")}. Valid \code{Consent} values are
 shown in \code{vignette("setup_cohort")}. For valid \code{Consent} values with spaces,
 enclose the name in backticks (`).
 

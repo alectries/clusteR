@@ -58,11 +58,7 @@ update_confirm <- function(){
   # Merge in source data
   if(!is.null(df_source) && nrow(df_source) > 0){
     out <- out %>%
-      left_join(
-        df_source,
-        by = "ID",
-        suffix = c("", ".src")
-      )
+      dplyr::full_join(df_source, by = "ID", suffix = c("", ".src"))
     src_cols <- grep("\\.src$", names(out), value = T)
     for(col in src_cols){
       orig <- sub("\\.src$", "", col)
@@ -70,13 +66,13 @@ update_confirm <- function(){
         dplyr::mutate(!!orig := dplyr::coalesce(!!dplyr::sym(col), !!dplyr::sym(orig)))
     }
     out <- out %>%
-      dplyr::select(-tidyselect::all_of(src_cols), -Source)
+      dplyr::select(-tidyselect::all_of(src_cols))
   }
 
   # Merge in manual data
   if(!is.null(df_manual) && nrow(df_manual) > 0){
     out <- out %>%
-      dplyr::left_join(df_manual, by = "ID", suffix = c("", ".man"))
+      dplyr::full_join(df_manual, by = "ID", suffix = c("", ".man"))
     man_cols <- grep("\\.man$", names(out), value = T)
     for(col in man_cols){
       orig <- sub("\\.man$", "", col)
@@ -84,11 +80,25 @@ update_confirm <- function(){
         dplyr::mutate(!!orig := dplyr::coalesce(!!dplyr::sym(col), !!dplyr::sym(orig)))
     }
     out <- out %>%
-      dplyr::select(-tidyselect::all_of(man_cols), -Source)
+      dplyr::select(-tidyselect::all_of(man_cols))
   }
 
   # Sort
   out <- dplyr::arrange(out, ID)
+
+  # Update status
+  out <- out %>%
+    dplyr::mutate(
+      Status = case_when(
+        Consent == "Yes" & !is.na(Source) ~ "Completed - enrolled",
+        Consent == "No" & !is.na(Source) ~ "Completed - unenroll",
+        Consent == "No" & is.na(Source) ~ "Unenroll",
+        Consent == "Unknown" & !is.na(Source) ~ "Completed - re-enroll",
+        Consent == "Do not contact" ~ "Unenroll",
+        .default = Status
+      )
+    ) %>%
+    dplyr::select(-Source)
 
   # Save
   readr::write_csv(out, paste0("Cohort/", cluster_cfg$short_name))

@@ -39,6 +39,7 @@
 #' @importFrom readr read_csv
 #' @importFrom readr write_csv
 #' @importFrom rlang `:=`
+#' @importFrom rlang abort
 #' @importFrom rlang inform
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi viewer
@@ -123,6 +124,12 @@ update_cohort <- function(args = list()){
       )))
   }
   names(coh_man_errs) <- setdiff(names(df_manual), c("ID", "Source"))
+  if(length(unique(df_manual$ID)) != nrow(df_manual)){
+    rlang::abort(message = c(
+      cli::style_bold("Duplicate IDs in Editor!"),
+      "x" = "Remove duplicates from Editor.csv."
+    ))
+  }
 
   # Join and verify source data
   coh_src_errs <- list()
@@ -156,7 +163,7 @@ update_cohort <- function(args = list()){
     envir = knit_env,
     quiet = T
   )
-  if(rstudioapi::isAvailable()){
+  if(Sys.getenv("RSTUDIO") == "1"){
     rstudioapi::viewer("Update Errors.html")
   } else {
     rlang::inform(
