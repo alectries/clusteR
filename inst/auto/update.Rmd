@@ -15,12 +15,12 @@ Next steps:
 
 1. Review all tables on this page.
 2. Where needed, make changes to your source or to [Editor](Consent/Editor.csv "Click to open Editor").
-3. Re-run `update()`.
+3. Re-run `update_cohort()`.
 4. Once you are satisfied that *all* the items remaining on this page are intended, run `update_confirm()`.
 
 # Changes from data
 
-These changes are from your data source, `r cat(cluster_cfg$setup_get$get)`.
+These changes are from your data source, `r cluster_cfg$setup_get$get`.
 
 ```{r, echo = FALSE, results = "asis"}
 for(i in 1:length(coh_src_errs)){
@@ -29,7 +29,11 @@ for(i in 1:length(coh_src_errs)){
     names(coh_src_errs)[i],
     "\n\n"
   ))
-  knitr::kable(coh_src_errs[[i]])
+  if(nrow(coh_src_errs[[i]]) > 0){
+    print(knitr::kable(coh_src_errs[[i]]))
+  } else {
+    cat("No updates to show here.")
+  }
   cat("\n\n")
 }
 ```
@@ -46,7 +50,11 @@ for(i in 1:length(coh_man_errs)){
     names(coh_man_errs)[i],
     "\n\n"
   ))
-  knitr::kable(coh_man_errs[[i]])
+  if(nrow(coh_man_errs[[i]]) > 0){
+    print(knitr::kable(coh_man_errs[[i]]))
+  } else {
+    cat("No updates to show here.")
+  }
   cat("\n\n")
 }
 ```

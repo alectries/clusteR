@@ -57,7 +57,8 @@ update_cohort <- function(args = list()){
   # Get current cohort file
   df_cohort <<- readr::read_csv(
     paste0("Cohort/", cluster_cfg$short_name), show_col_types = F
-  )
+  ) %>%
+    dplyr::mutate("Phone" = as.character(Phone))
 
   # Archive current cohort file
   time <- gsub('[:. ]', '-', lubridate::now())
@@ -78,6 +79,7 @@ update_cohort <- function(args = list()){
       "Mailing" = toupper(Mailing),
       "City" = toupper(City),
       "ZIP" = as.character(ZIP),
+      "Phone" = as.character(Phone),
       "Status" = dplyr::case_when(
         Consent == "Do not contact" ~ "DO NOT CONTACT",
         Consent == "Yes" ~ "Completed - enrolled",
@@ -92,6 +94,7 @@ update_cohort <- function(args = list()){
   df_source <<- data %>%
     dplyr::select(tidyselect::any_of(names(df_cohort))) %>%
     dplyr::mutate(
+      "Phone" = as.character(Phone),
       "Status" = dplyr::case_when(
         Consent == "Do not contact" ~ "DO NOT CONTACT",
         Consent == "Yes" ~ "Completed - enrolled",
@@ -150,7 +153,8 @@ update_cohort <- function(args = list()){
     input = system.file("auto", "update.Rmd", package = "clusteR"),
     output_dir = getwd(),
     output_file = "Update Errors.html",
-    envir = knit_env
+    envir = knit_env,
+    quiet = T
   )
   if(rstudioapi::isAvailable()){
     rstudioapi::viewer("Update Errors.html")

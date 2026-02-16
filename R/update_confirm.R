@@ -70,7 +70,7 @@ update_confirm <- function(){
         dplyr::mutate(!!orig := dplyr::coalesce(!!dplyr::sym(col), !!dplyr::sym(orig)))
     }
     out <- out %>%
-      dplyr::select(-tidyselect::all_of(src_cols))
+      dplyr::select(-tidyselect::all_of(src_cols), -Source)
   }
 
   # Merge in manual data
@@ -84,7 +84,7 @@ update_confirm <- function(){
         dplyr::mutate(!!orig := dplyr::coalesce(!!dplyr::sym(col), !!dplyr::sym(orig)))
     }
     out <- out %>%
-      dplyr::select(-tidyselect::all_of(man_cols))
+      dplyr::select(-tidyselect::all_of(man_cols), -Source)
   }
 
   # Sort
