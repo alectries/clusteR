@@ -4,23 +4,24 @@
 #' data conflicts between the current cohort file and the updated data, and
 #' updates the cohort file.
 #'
-#' `update` is the first of two functions that must be run in series; after
-#' running and verifying the outputs of `update`, run `update_confirm`.
-#' `update` does not actually *perform* the cohort file update, but instead
-#' prepares the data to be updated later while providing a preview of the
-#' changes for your review. `update` will set three global values: `df_cohort`,
-#' `df_manual`, and `df_source`. These will then be accessed by `update_confirm`.
+#' `update_cohort` is the first of two functions that must be run in series;
+#' after running and verifying the outputs of `update_cohort`, run
+#' `update_confirm`. `update` does not actually *perform* the cohort file
+#' update, but instead prepares the data to be updated later while providing a
+#' preview of the changes for your review. `update_cohort` will set three global
+#' values: `df_cohort`, `df_manual`, and `df_source`. These will then be
+#' accessed by `update_confirm`.
 #'
-#' Importantly, if the `update` report alerts you to issues in your data
+#' Importantly, if the `update_cohort` report alerts you to issues in your data
 #' that you subsequently fix, you must run `update` again before running
 #' `update_confirm` for your changes to take effect.
 #'
-#' `update` runs `get_data` under the hood, meaning that messages will be
+#' `update_cohort` runs `get_data` under the hood, meaning that messages will be
 #' displayed in the console as you run it.
 #'
-#' You should not need to provide any arguments to `update`. However, if your
-#' get function requires arguments, provide them to `update` as a named list, as
-#' you would to `get_data`.
+#' You should not need to provide any arguments to `update_cohort`. However, if
+#' your get function requires arguments, provide them to `update` as a named
+#' list, as you would to `get_data`.
 #'
 #' @param args If arguments are needed for your `get` function, they can be passed as a list.
 #' @importFrom cli style_bold
