@@ -1,0 +1,15 @@
+---
+title: ""
+output: 
+  pdf_document:
+    latex_engine: lualatex
+geometry: margin=1cm
+header-includes:
+- \usepackage{fontspec}
+- \usepackage{longtable}
+---
+\setmainfont{Arial}
+```{r, echo = FALSE, results = "asis"}
+print(knitr::kable(out, format = "latex", longtable = TRUE))
+```
+
