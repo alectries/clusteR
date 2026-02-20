@@ -14,7 +14,7 @@ make_email(output, ..., .status = NA)
 \item{.status}{If not NA, filters for a status category; see details.}
 }
 \description{
-Produces a email list using the email addresses specified in the cohort file.
+Produces an email list using the email addresses specified in the cohort file.
 Can output a formatted report as a PDF or a CSV for use outside R.
 }
 \details{

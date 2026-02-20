@@ -1,6 +1,6 @@
 #' Generate email list from cohort file
 #'
-#' Produces a email list using the email addresses specified in the cohort file.
+#' Produces an email list using the email addresses specified in the cohort file.
 #' Can output a formatted report as a PDF or a CSV for use outside R.
 #'
 #' `.status` accepts three options:
