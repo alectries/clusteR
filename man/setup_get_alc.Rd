@@ -18,7 +18,7 @@ setup_get_alc(survey_id, api_token, api_token_secret, codebook, consent_opts)
 \item{consent_opts}{A named vector, where names are clusteR Consent options and values are survey responses.}
 }
 \description{
-Generates the setup_get item in cluster_cfg for a connection to an Alchemer
+Generates the setup_get item in .cluster$cfg for a connection to an Alchemer
 survey.
 }
 \details{

@@ -31,7 +31,7 @@ make_phone <- function(output, ..., .status = NA){
   dots <- rlang::enquos(...)
 
   # Read cohort file
-  cohort <- readr::read_csv(paste0("Cohort/", cluster_cfg$short_name),
+  cohort <- readr::read_csv(paste0("Cohort/", .cluster$cfg$short_name),
                             show_col_types = F)
 
   # Filter cohort file

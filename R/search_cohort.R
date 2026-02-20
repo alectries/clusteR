@@ -9,7 +9,7 @@
 
 search_cohort <- function(...){
   # Load cohort
-  cohort <- readr::read_csv(paste0("Cohort/", cluster_cfg$short_name), show_col_types = F)
+  cohort <- readr::read_csv(paste0("Cohort/", .cluster$cfg$short_name), show_col_types = F)
 
   # Filter
   filtered <- dplyr::filter(cohort, ...)

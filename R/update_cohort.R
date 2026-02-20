@@ -8,9 +8,9 @@
 #' after running and verifying the outputs of `update_cohort`, run
 #' `update_confirm`. `update` does not actually *perform* the cohort file
 #' update, but instead prepares the data to be updated later while providing a
-#' preview of the changes for your review. `update_cohort` will set three global
-#' values: `df_cohort`, `df_manual`, and `df_source`. These will then be
-#' accessed by `update_confirm`.
+#' preview of the changes for your review. `update_cohort` will create three
+#' objects in clusteR's environment: `df_cohort`, `df_manual`, and `df_source`.
+#' These will then be accessed by `update_confirm`.
 #'
 #' Importantly, if the `update_cohort` report alerts you to issues in your data
 #' that you subsequently fix, you must run `update` again before running
@@ -56,26 +56,26 @@ update_cohort <- function(args = list()){
   data <- readRDS(path)
 
   # Get current cohort file
-  df_cohort <<- readr::read_csv(
-    paste0("Cohort/", cluster_cfg$short_name), show_col_types = F
+  .cluster$df_cohort <<- readr::read_csv(
+    paste0("Cohort/", .cluster$cfg$short_name), show_col_types = F
   ) %>%
     dplyr::mutate("Phone" = as.character(Phone))
 
   # Archive current cohort file
   time <- gsub('[:. ]', '-', lubridate::now())
-  saveRDS(df_cohort, paste0("Cohort/Archive/", cluster_cfg$short_name, time, ".rds"))
+  saveRDS(df_cohort, paste0("Cohort/Archive/", .cluster$cfg$short_name, time, ".rds"))
   inform(message = c(
     paste0(
       cli::style_bold("Archive saved to: "),
       cli::style_underline(paste0("Cohort/Archive/",
-                                  cluster_cfg$short_name, time, ".rds"))
+                                  .cluster$cfg$short_name, time, ".rds"))
     ),
     "i" = "Restore using restore()."
   ))
 
   # Pull new data
   ## From editor
-  df_manual <<- readr::read_csv("Cohort/Editor.csv", show_col_types = F) %>%
+  .cluster$df_manual <<- readr::read_csv("Cohort/Editor.csv", show_col_types = F) %>%
     dplyr::mutate(
       "Mailing" = toupper(Mailing),
       "City" = toupper(City),
@@ -92,7 +92,7 @@ update_cohort <- function(args = list()){
     )
 
   ## From source
-  df_source <<- data %>%
+  .cluster$df_source <<- data %>%
     dplyr::select(tidyselect::any_of(names(df_cohort))) %>%
     dplyr::mutate(
       "Phone" = as.character(Phone),
@@ -103,7 +103,7 @@ update_cohort <- function(args = list()){
         Consent == "Unknown" ~ "Completed - re-enroll",
         .default = NA
       ),
-      "Source" = cluster_cfg$setup_get$get
+      "Source" = .cluster$cfg$setup_get$get
     )
 
   # Join and verify manual data
@@ -152,7 +152,7 @@ update_cohort <- function(args = list()){
 
   # Knit
   knit_env <- list(
-    cluster_cfg = cluster_cfg,
+    cluster_cfg = .cluster$cfg,
     coh_man_errs = coh_man_errs,
     coh_src_errs = coh_src_errs
   )

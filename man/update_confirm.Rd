@@ -19,9 +19,9 @@ updates the cohort file.
 after running and verifying the outputs of \code{update_cohort}, run
 \code{update_confirm}. \code{update} does not actually \emph{perform} the cohort file
 update, but instead prepares the data to be updated later while providing a
-preview of the changes for your review. \code{update_cohort} will set three global
-values: \code{df_cohort}, \code{df_manual}, and \code{df_source}. These will then be
-accessed by \code{update_confirm}.
+preview of the changes for your review. \code{update_cohort} will create three
+objects in clusteR's environment: \code{df_cohort}, \code{df_manual}, and \code{df_source}.
+These will then be accessed by \code{update_confirm}.
 
 Importantly, if the \code{update_cohort} report alerts you to issues in your data
 that you subsequently fix, you must run \code{update} again before running

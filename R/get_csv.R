@@ -23,6 +23,6 @@
 get_csv <- function(){
   do.call(
     what = eval(parse(text = "readr::read_csv")),
-    args = cluster_cfg$setup_get[!names(cluster_cfg$setup_get) %in% c("run_before", "get")]
+    args = .cluster$cfg$setup_get[!names(.cluster$cfg$setup_get) %in% c("run_before", "get")]
   )
 }

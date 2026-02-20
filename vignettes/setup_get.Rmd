@@ -63,10 +63,10 @@ Once setup is completed, clusteR saves this information. You will not need to do
 In general, because each data source and its format are unique, clusteR is very flexible with custom data sources. However, there are a few requirements (replace x with a shorthand for your data source):
 
 1. Your package or custom script must include a `setup_get_x` function that can be called in `setup`.
-2. Your `setup_get_x` function must return a list of named objects, which will be included in config.rds and loaded by clusteR as `cluster_cfg$setup_get`.
+2. Your `setup_get_x` function must return a list of named objects, which will be included in config.rds and loaded by clusteR as `.cluster$cfg$setup_get`.
 3. If your get function is found in a custom script (or if your get function requires additional, non-standard setup), you must include the file path to the script as a string named `run_before` in this list.
-4. Your package or custom script must include a `get_x` function that can be called by `get_data` and retrieve all its arguments (such as URLs, file paths, and API keys) from `cluster_cfg$setup_get`.
-5. Your `get_x` function must be named (as a string) at `cluster_cfg$setup_get$get`.
+4. Your package or custom script must include a `get_x` function that can be called by `get_data` and retrieve all its arguments (such as URLs, file paths, and API keys) from `.cluster$cfg$setup_get`.
+5. Your `get_x` function must be named (as a string) at `.cluster$cfg$setup_get$get`.
 6. Your `get_x` function must return a plain dataframe, tibble, or similar with at least the required cohort fields properly named (see [`vignette('setup_cohort')`](setup_cohort.html)). `get_data` will handle the rest. Note that this dataframe does not have to be particularly *clean*, just meet these basic requirements.
 
 While there is nothing stopping you from implementing an alternative data structure to the system default, it is not recommended. `get_data` will save and archive data in an appropriate format that is compatible across data source types and with all native clusteR functions.

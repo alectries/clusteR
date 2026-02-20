@@ -42,7 +42,7 @@ get_alc <- function(){
   `%>%` <- magrittr::`%>%`
 
   # Connect to API
-  alc <- jsonlite::fromJSON(cluster_cfg$setup_get$url)
+  alc <- jsonlite::fromJSON(.cluster$cfg$setup_get$url)
   if(alc$result_ok){
     rlang::inform(message = c(
       cli::style_bold("Data download from Alchemer successful."),
@@ -139,7 +139,7 @@ get_alc <- function(){
   names(res.bind) <- gsub("\u00A0", " ", names(res.bind))
   res <- dplyr::rename(
     res.bind,
-    !!!readr::read_delim(cluster_cfg$setup_get$codebook, delim = "  ",
+    !!!readr::read_delim(.cluster$cfg$setup_get$codebook, delim = "  ",
                   show_col_types = F) %>%
       dplyr::filter(ALC %in% names(res.bind)) %>%
       tibble::deframe()
@@ -148,7 +148,7 @@ get_alc <- function(){
     dplyr::select(tidyselect::where(~!all(is.na(.)))) %>%
     dplyr::rename("Consent_old" = Consent) %>%
     dplyr::left_join(
-      cluster_cfg$setup_get$consent,
+      .cluster$cfg$setup_get$consent,
       by = "Consent_old"
     ) %>%
     dplyr::select(-Consent_old)

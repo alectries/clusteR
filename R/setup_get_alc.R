@@ -1,6 +1,6 @@
 #' Set up a connection to an Alchemer survey
 #'
-#' Generates the setup_get item in cluster_cfg for a connection to an Alchemer
+#' Generates the setup_get item in .cluster$cfg for a connection to an Alchemer
 #' survey.
 #'
 #' For [`get_alc`] to properly process survey data, certain information is

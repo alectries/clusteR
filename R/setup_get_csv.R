@@ -1,6 +1,6 @@
 #' Set up connection to a comma-delimited survey data file
 #'
-#' Generates the setup_get item in cluster_cfg for a connection to a .csv file.
+#' Generates the setup_get item in .cluster$cfg for a connection to a .csv file.
 #'
 #' @param file A string representing a permanent file path to your input .csv file.
 #' @param ... Arguments passed to readr::read_csv.

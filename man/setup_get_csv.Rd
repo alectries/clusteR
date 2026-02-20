@@ -12,5 +12,5 @@ setup_get_csv(file, ...)
 \item{...}{Arguments passed to readr::read_csv.}
 }
 \description{
-Generates the setup_get item in cluster_cfg for a connection to a .csv file.
+Generates the setup_get item in .cluster$cfg for a connection to a .csv file.
 }

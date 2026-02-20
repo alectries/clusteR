@@ -8,9 +8,9 @@
 #' after running and verifying the outputs of `update_cohort`, run
 #' `update_confirm`. `update` does not actually *perform* the cohort file
 #' update, but instead prepares the data to be updated later while providing a
-#' preview of the changes for your review. `update_cohort` will set three global
-#' values: `df_cohort`, `df_manual`, and `df_source`. These will then be
-#' accessed by `update_confirm`.
+#' preview of the changes for your review. `update_cohort` will create three
+#' objects in clusteR's environment: `df_cohort`, `df_manual`, and `df_source`.
+#' These will then be accessed by `update_confirm`.
 #'
 #' Importantly, if the `update_cohort` report alerts you to issues in your data
 #' that you subsequently fix, you must run `update` again before running
@@ -53,12 +53,12 @@ update_confirm <- function(){
   `:=` <- rlang::`:=`
 
   # Initial values
-  out <- df_cohort
+  out <- .cluster$df_cohort
 
   # Merge in source data
-  if(!is.null(df_source) && nrow(df_source) > 0){
+  if(!is.null(.cluster$df_source) && nrow(.cluster$df_source) > 0){
     out <- out %>%
-      dplyr::full_join(df_source, by = "ID", suffix = c("", ".src"))
+      dplyr::full_join(.cluster$df_source, by = "ID", suffix = c("", ".src"))
     src_cols <- grep("\\.src$", names(out), value = T)
     for(col in src_cols){
       orig <- sub("\\.src$", "", col)
@@ -70,9 +70,9 @@ update_confirm <- function(){
   }
 
   # Merge in manual data
-  if(!is.null(df_manual) && nrow(df_manual) > 0){
+  if(!is.null(.cluster$df_manual) && nrow(.cluster$df_manual) > 0){
     out <- out %>%
-      dplyr::full_join(df_manual, by = "ID", suffix = c("", ".man"))
+      dplyr::full_join(.cluster$df_manual, by = "ID", suffix = c("", ".man"))
     man_cols <- grep("\\.man$", names(out), value = T)
     for(col in man_cols){
       orig <- sub("\\.man$", "", col)
@@ -101,7 +101,7 @@ update_confirm <- function(){
     dplyr::select(-Source)
 
   # Save
-  readr::write_csv(out, paste0("Cohort/", cluster_cfg$short_name))
+  readr::write_csv(out, paste0("Cohort/", .cluster$cfg$short_name))
   rlang::inform(message = c(
     cli::style_bold("Cohort file updated.")
   ))

@@ -12,7 +12,7 @@
 #' function. If you are using a custom function from an R script to download
 #' data for clusteR, ensure you have set it up properly by including the
 #' script's file path in the clusteR environment as
-#' `cluster_cfg$setup_get$run_before`. This should be handled by your custom
+#' `.cluster$cfg$setup_get$run_before`. This should be handled by your custom
 #' `setup_get_x` function as described in `vignette('setup_get')`.
 #'
 #' You should not need to provide any arguments to `get_data`. However, if your
@@ -27,19 +27,19 @@
 
 get_data <- function(args = list()){
   # Execute run_before script if it exists
-  if(exists("cluster_cfg$setup_get$run_before")){
-    source(cluster_cfg$setup_get$run_before)
+  if(exists(".cluster$cfg$setup_get$run_before")){
+    source(.cluster$cfg$setup_get$run_before)
   }
 
   # Run get function
   data <- do.call(
-    what = eval(parse(text = cluster_cfg$setup_get$get)),
+    what = eval(parse(text = .cluster$cfg$setup_get$get)),
     args = args
   )
 
   # Save data and return path invisibly
   time <- gsub('[:. ]', '-', lubridate::now())
-  path <- paste0("Survey Data/", cluster_cfg$short_name, "-", time, ".rds")
+  path <- paste0("Survey Data/", .cluster$cfg$short_name, "-", time, ".rds")
   saveRDS(data, path)
   rlang::inform(
     message = c(

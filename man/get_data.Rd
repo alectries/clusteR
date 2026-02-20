@@ -23,7 +23,7 @@ clusteR, you may wish to attach it using \code{library} before running this
 function. If you are using a custom function from an R script to download
 data for clusteR, ensure you have set it up properly by including the
 script's file path in the clusteR environment as
-\code{cluster_cfg$setup_get$run_before}. This should be handled by your custom
+\code{.cluster$cfg$setup_get$run_before}. This should be handled by your custom
 \code{setup_get_x} function as described in \code{vignette('setup_get')}.
 
 You should not need to provide any arguments to \code{get_data}. However, if your

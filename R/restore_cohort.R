@@ -33,7 +33,7 @@ restore_cohort <- function(file = NA){
 
   # Save
   if(save == "save" | save == "'save'"){
-    readr::write_csv(out, paste0("Cohort/", cluster_cfg$short_name))
+    readr::write_csv(out, paste0("Cohort/", .cluster$cfg$short_name))
     rlang::inform(message = c(
       cli::style_bold("Cohort file restored."),
       "v" = paste0("Overwritten with ", cli::style_underline(file), ".")

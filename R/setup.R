@@ -221,7 +221,7 @@ setup <- function(name,
 
   # Output config
   saveRDS(input, file = "Scripts/config.rds")
-  cluster_cfg <<- input
+  .cluster$cfg <<- input
   rlang::inform(message = c(
     cli::style_bold("clusteR: Configuration saved.")
   ))
