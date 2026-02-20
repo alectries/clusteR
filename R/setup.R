@@ -38,12 +38,19 @@
 #' FIPS/INCITS codes for your area. These are technically not required if you
 #' choose to avoid all mapping functions, but that may cause problems.
 #'
+#' `geoids`: To perform mapping functions, this package needs to know which
+#' cluster ID matches which U.S. Census GEOID. You may specify a file with
+#' columns "geoid" (specifying the 15-digit Census block ID) and "cluster"
+#' (matching the cluster identifiers in your cohort file) or a function to
+#' create that file, such as `make_clusters`.
+#'
 #' @param name A string, the full name of your project (used for formatted outputs)
 #' @param short_name A string, the short name of your project (used for file names and other short outputs)
 #' @param setup_get The output of a function, such as setup_get_csv or setup_get_alc, to set up your data source connection (see `vignette('setup_get')`)
 #' @param setup_cohort The name of a properly-formatted cohort input file or a function to generate that file (see `vignette('setup_cohort')`)
 #' @param state The FIPS code for the state of interest
 #' @param county The FIPS code for the county of interest
+#' @param geoids The name of a properly-formatted cluster matching file or a function to generate that file
 #' @importFrom cli style_bold
 #' @importFrom cli style_underline
 #' @importFrom dplyr case_when
@@ -192,6 +199,36 @@ setup <- function(name,
       cli::style_bold("No cohort file or function specified!"),
       "!" = "A cohort file is required to use clusteR.",
       "i" = paste0("See ", cli::style_underline("vignette('setup_cohort')"), " for more information.")
+    ))
+  }
+
+  # Read geoids file
+  if(exists("geoids", where = input)){
+    ## Read file
+    geoids <- readr::read_delim(input$geoids, show_col_types = F)
+
+    ## Fail if improperly named
+    if(F %in% (names(geoids) != c("geoid", "cluster")) & F %in% (names(geoids) != c("cluster", "geoid"))){
+      rlang::abort(message = c(
+        cli::style_bold("GEOID file import failed."),
+        "x" = "Given input is incorrectly named.",
+        "i" = "Ensure your GEOID file has exactly two variables named 'cluster' and 'geoid'."
+      ))
+    }
+
+    ## Fail if clusters in cohort file do not exist in geoids file
+    if(exists("setup_cohort", where = input) && FALSE %in% (cohort$Cluster %in% geoids$cluster)){
+      rlang::abort(message = c(
+        cli::style_bold("GEOID file import failed."),
+        "x" = "Clusters in cohort file do not exist in GEOID file.",
+        "i" = "Check cohort file for incorrectly named or unmatched clusters."
+      ))
+    }
+  } else {
+    rlang::warn(message = c(
+      cli::style_bold("No GEOID file specified!"),
+      "!" = "Mapping functions will fail without GEOID matching.",
+      "i" = "To solve this issue, run setup with a GEOID file or function."
     ))
   }
 

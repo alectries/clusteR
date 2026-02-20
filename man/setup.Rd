@@ -18,6 +18,8 @@ setup(name, short_name, ...)
 \item{state}{The FIPS code for the state of interest}
 
 \item{county}{The FIPS code for the county of interest}
+
+\item{geoids}{The name of a properly-formatted cluster matching file or a function to generate that file}
 }
 \description{
 Generates a folder structure and config.rds, which holds persistent
@@ -58,4 +60,10 @@ shapefiles for your county for you, but you must specify the
 and \href{https://en.wikipedia.org/wiki/List_of_United_States_INCITS_codes_by_county}{county}
 FIPS/INCITS codes for your area. These are technically not required if you
 choose to avoid all mapping functions, but that may cause problems.
+
+\code{geoids}: To perform mapping functions, this package needs to know which
+cluster ID matches which U.S. Census GEOID. You may specify a file with
+columns "geoid" (specifying the 15-digit Census block ID) and "cluster"
+(matching the cluster identifiers in your cohort file) or a function to
+create that file, such as \code{make_clusters}.
 }
