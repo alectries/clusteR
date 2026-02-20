@@ -63,7 +63,7 @@ update_cohort <- function(args = list()){
 
   # Archive current cohort file
   time <- gsub('[:. ]', '-', lubridate::now())
-  saveRDS(df_cohort, paste0("Cohort/Archive/", .cluster$cfg$short_name, time, ".rds"))
+  saveRDS(.cluster$df_cohort, paste0("Cohort/Archive/", .cluster$cfg$short_name, time, ".rds"))
   inform(message = c(
     paste0(
       cli::style_bold("Archive saved to: "),
@@ -93,7 +93,7 @@ update_cohort <- function(args = list()){
 
   ## From source
   .cluster$df_source <<- data %>%
-    dplyr::select(tidyselect::any_of(names(df_cohort))) %>%
+    dplyr::select(tidyselect::any_of(names(.cluster$df_cohort))) %>%
     dplyr::mutate(
       "Phone" = as.character(Phone),
       "Status" = dplyr::case_when(
@@ -112,7 +112,7 @@ update_cohort <- function(args = list()){
   for(col in setdiff(names(df_manual), c("ID", "Source"))){
     i <- i + 1
     coh_man_errs[[i]] <- dplyr::full_join(
-      df_cohort,
+      .cluster$df_cohort,
       df_manual,
       by = "ID",
       suffix = c(".coh", ".man")
@@ -137,7 +137,7 @@ update_cohort <- function(args = list()){
   for(col in setdiff(names(df_source), c("ID", "Source"))){
     i <- i + 1
     coh_src_errs[[i]] <- dplyr::full_join(
-      df_cohort,
+      .cluster$df_cohort,
       df_source,
       by = "ID",
       suffix = c(".coh", ".src")
