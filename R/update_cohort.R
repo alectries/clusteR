@@ -109,11 +109,11 @@ update_cohort <- function(args = list()){
   # Join and verify manual data
   coh_man_errs <- list()
   i <- 0
-  for(col in setdiff(names(df_manual), c("ID", "Source"))){
+  for(col in setdiff(names(.cluster$df_manual), c("ID", "Source"))){
     i <- i + 1
     coh_man_errs[[i]] <- dplyr::full_join(
       .cluster$df_cohort,
-      df_manual,
+      .cluster$df_manual,
       by = "ID",
       suffix = c(".coh", ".man")
     ) %>%
@@ -123,8 +123,8 @@ update_cohort <- function(args = list()){
         paste0(col, ".man")
       )))
   }
-  names(coh_man_errs) <- setdiff(names(df_manual), c("ID", "Source"))
-  if(length(unique(df_manual$ID)) != nrow(df_manual)){
+  names(coh_man_errs) <- setdiff(names(.cluster$df_manual), c("ID", "Source"))
+  if(length(unique(.cluster$df_manual$ID)) != nrow(.cluster$df_manual)){
     rlang::abort(message = c(
       cli::style_bold("Duplicate IDs in Editor!"),
       "x" = "Remove duplicates from Editor.csv."
@@ -134,11 +134,11 @@ update_cohort <- function(args = list()){
   # Join and verify source data
   coh_src_errs <- list()
   i <- 0
-  for(col in setdiff(names(df_source), c("ID", "Source"))){
+  for(col in setdiff(names(.cluster$df_source), c("ID", "Source"))){
     i <- i + 1
     coh_src_errs[[i]] <- dplyr::full_join(
       .cluster$df_cohort,
-      df_source,
+      .cluster$df_source,
       by = "ID",
       suffix = c(".coh", ".src")
     ) %>%
@@ -148,7 +148,7 @@ update_cohort <- function(args = list()){
         paste0(col, ".src")
       )))
   }
-  names(coh_src_errs) <- setdiff(names(df_source), c("ID", "Source"))
+  names(coh_src_errs) <- setdiff(names(.cluster$df_source), c("ID", "Source"))
 
   # Knit
   knit_env <- list(
