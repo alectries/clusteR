@@ -203,7 +203,7 @@ setup <- function(name,
       destfile = "Cohort/Shapefiles/tl_2020_us_county.zip"
     )
     unzip("Cohort/Shapefiles/tl_2020_us_county.zip", exdir = "Cohort/Shapefiles/")
-    input$shape_county <- "Cohort/Shapefiles/tl_2020_us_county.zip"
+    input$shape_county <- "Cohort/Shapefiles/tl_2020_us_county.shp"
 
     ## Get, unzip, and save name of block shapefile
     download.file(
@@ -216,7 +216,7 @@ setup <- function(name,
       paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip"),
       exdir = "Cohort/Shapefiles/"
     )
-    input$shape_block <- paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip")
+    input$shape_block <- paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.shp")
   }
 
   # Output config
