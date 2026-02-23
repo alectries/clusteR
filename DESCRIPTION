@@ -16,8 +16,22 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.3
 URL: https://alectries.github.io/clusteR/
-Suggests: 
-    knitr,
-    rmarkdown
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+Imports: 
+    cli,
+    dplyr,
+    ggplot2,
+    jsonlite,
+    knitr,
+    lubridate,
+    magrittr,
+    readr,
+    readxl,
+    rlang,
+    rmarkdown,
+    rstudioapi,
+    sf,
+    stringr,
+    tibble,
+    tidyselect
