@@ -4,9 +4,17 @@
 \alias{mult_kmeans}
 \title{Run multiple iterations of kmeans on cluster geography}
 \usage{
-mult_kmeans(geoids, shape_county, shape_block, k, runs, iter.max)
+mult_kmeans(include, geoids, shape_county, shape_block, k, runs, iter.max)
 }
 \arguments{
+\item{include}{A vector of cluster identifiers to include in the map.}
+
+\item{geoids}{A table matching cluster identifiers to Census GEOIDs.}
+
+\item{shape_county}{The path to the county shapefile.}
+
+\item{shape_block}{The path to the Census block shapefile.}
+
 \item{k}{The number of groups to create.}
 
 \item{runs}{The number of kmeans runs to complete.}

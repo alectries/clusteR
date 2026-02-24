@@ -2,6 +2,10 @@
 #'
 #' Not exported.
 #'
+#' @param include A vector of cluster identifiers to include in the map.
+#' @param geoids A table matching cluster identifiers to Census GEOIDs.
+#' @param shape_county The path to the county shapefile.
+#' @param shape_block The path to the Census block shapefile.
 #' @param k The number of groups to create.
 #' @param runs The number of kmeans runs to complete.
 #' @param iter.max The number of loops each kmeans run should complete.
@@ -17,7 +21,7 @@
 #' @importFrom tibble tibble_row
 #' @keywords internal
 
-mult_kmeans <- function(geoids, shape_county, shape_block, k, runs, iter.max){
+mult_kmeans <- function(include, geoids, shape_county, shape_block, k, runs, iter.max){
   # Definitions
   `%>%` <- magrittr::`%>%`
 
@@ -36,7 +40,8 @@ mult_kmeans <- function(geoids, shape_county, shape_block, k, runs, iter.max){
       select(blocks, geoid = GEOID20, lat = INTPTLAT20, long = INTPTLON20,
              ur = UR20, geometry),
       by = "geoid"
-    )
+    ) %>%
+    dplyr::filter(cluster %in% include)
 
   # Run kmeans
   kruns <- list()

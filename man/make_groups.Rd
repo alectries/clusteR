@@ -6,6 +6,7 @@
 \usage{
 make_groups(
   k,
+  filt = n > 0,
   fn = "clusteR:::mult_kmeans",
   geoids = .cluster$cfg$geoids,
   shape_county = .cluster$cfg$shape_county,
@@ -17,6 +18,8 @@ make_groups(
 }
 \arguments{
 \item{k}{The number of groups to create.}
+
+\item{filt}{How to filter the summary for making the groups; see details.}
 
 \item{fn}{The function to group clusters, by default \code{mult_kmeans}.}
 
@@ -30,6 +33,19 @@ make adjustments before running \code{make_walklist} or \code{make_walkmap} to e
 simple door-to-door materials.
 }
 \details{
+You can filter the clusters by the number of completed, pending, and enrolled
+participants in each cluster in the \code{filt} argument. The filter defaults to
+the numbers in the following columns:
+\itemize{
+\item \emph{n}: The total number of cohort members in the cluster.
+\item \emph{completed}, \emph{completed_pct}: The number or percent (out of 100) of
+participants with any Completed status.
+\item \emph{pending}, \emph{pending_pct}: The number or percent (out of 100) of
+participants with an Enrolled, Re-enroll, or Not enrolled status.
+\item \emph{enrolled}, \emph{enrolled_pct}: The number or percent (out of 100) of
+participants with a Completed - enrolled or Enrolled status.
+}
+
 \code{make_groups} uses the internal function \code{mult_kmeans} by default. You can
 write a custom function instead and pass it as an argument to produce data
 if needed. \code{make_groups} requires that function output a dataframe with the

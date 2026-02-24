@@ -6,6 +6,19 @@
 #' make adjustments before running `make_walklist` or `make_walkmap` to export
 #' simple door-to-door materials.
 #'
+#' You can filter the clusters by the number of completed, pending, and enrolled
+#' participants in each cluster in the `filt` argument. The filter defaults to
+#` include all clusters that have at least one resident. You can filter based on
+#' the numbers in the following columns:
+#'
+#' - *n*: The total number of cohort members in the cluster.
+#' - *completed*, *completed_pct*: The number or percent (out of 100) of
+#' participants with any Completed status.
+#' - *pending*, *pending_pct*: The number or percent (out of 100) of
+#' participants with an Enrolled, Re-enroll, or Not enrolled status.
+#' - *enrolled*, *enrolled_pct*: The number or percent (out of 100) of
+#' participants with a Completed - enrolled or Enrolled status.
+#'
 #' `make_groups` uses the internal function `mult_kmeans` by default. You can
 #' write a custom function instead and pass it as an argument to produce data
 #' if needed. `make_groups` requires that function output a dataframe with the
@@ -29,13 +42,17 @@
 #' `Contacts/Assignments.csv` so you can manipulate it in R if you choose.
 #'
 #' @param k The number of groups to create.
+#' @param filt How to filter the summary for making the groups; see details.
 #' @param fn The function to group clusters, by default `mult_kmeans`.
 #' @param ... Arguments to be passed to fn.
 #' @importFrom cli style_bold
 #' @importFrom cli style_underline
 #' @importFrom dplyr arrange
+#' @importFrom dplyr filter
 #' @importFrom dplyr mutate
+#' @importFrom dplyr n
 #' @importFrom dplyr select
+#' @importFrom dplyr summarize
 #' @importFrom ggplot2 aes
 #' @importFrom ggplot2 geom_sf
 #' @importFrom ggplot2 geom_sf_text
@@ -45,11 +62,16 @@
 #' @importFrom ggplot2 scale_fill_manual
 #' @importFrom ggplot2 theme_void
 #' @importFrom Polychrome createPalette
+#' @importFrom readr read_csv
 #' @importFrom readr write_csv
+#' @importFrom rlang `!!`
+#' @importFrom rlang enquo
 #' @importFrom sf read_sf
+#' @importFrom stringr str_detect
 #' @export
 
 make_groups <- function(k,
+                        filt = n > 0,
                         fn = "clusteR:::mult_kmeans",
                         geoids = .cluster$cfg$geoids,
                         shape_county = .cluster$cfg$shape_county,
@@ -58,11 +80,31 @@ make_groups <- function(k,
                         iter.max = 50,
                         ...
 ){
+  # Definitions
+  `!!` <- rlang::`!!`
+
+  # Get unenrolled clusters
+  cohort <- readr::read_csv(paste0("Cohort/", .cluster$cfg$short_name), show_col_types = F)
+  summary <- dplyr::summarize(
+    cohort,
+    .by = Cluster,
+    n = n(),
+    completed = sum(stringr::str_detect(Status, "Completed"), na.rm = T),
+    completed_pct = completed / n * 100,
+    pending = sum(Status %in% c("Enrolled", "Re-enroll", "Not enrolled"), na.rm = T),
+    pending_pct = pending / n * 100,
+    enrolled = sum(Status %in% c("Enrolled", "Completed - enrolled"), na.rm = T),
+    enrolled_pct = enrolled / n * 100
+  )
+  filt <- rlang::enquo(filt)
+  include <- sort(unique(dplyr::filter(summary, !!filt)$Cluster))
+
   # Run grouping function
   assign <- do.call(
     what = eval(parse(text = fn)),
     args = list(
       k = k,
+      include = include,
       geoids = geoids,
       shape_county = shape_county,
       shape_block = shape_block,
