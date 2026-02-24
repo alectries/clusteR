@@ -61,6 +61,7 @@
 #' @importFrom ggplot2 scale_color_brewer
 #' @importFrom ggplot2 scale_fill_manual
 #' @importFrom ggplot2 theme_void
+#' @importFrom magrittr `%>%`
 #' @importFrom Polychrome createPalette
 #' @importFrom readr read_csv
 #' @importFrom readr write_csv
@@ -81,6 +82,7 @@ make_groups <- function(k,
                         ...
 ){
   # Definitions
+  `%>%` <- magrittr::`%>%`
   `!!` <- rlang::`!!`
 
   # Get unenrolled clusters
