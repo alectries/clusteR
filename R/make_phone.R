@@ -47,7 +47,7 @@ make_phone <- function(output, ..., .status = NA){
     }
     ## Pending
     if(.status == "pending"){
-      cohort <- dplyr::filter(cohort, Status %in% c("Enrolled", "Not enrolled"))
+      cohort <- dplyr::filter(cohort, Status %in% c("Enrolled", "Re-enroll", "Not enrolled"))
     }
     ## Enrolled
     if(.status == "enrolled"){
