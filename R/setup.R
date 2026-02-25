@@ -64,6 +64,7 @@
 #' @importFrom rlang warn
 #' @importFrom stringr regex
 #' @importFrom stringr str_detect
+#' @importFrom stringr str_length
 #' @export
 
 setup <- function(name,
@@ -234,6 +235,21 @@ setup <- function(name,
 
   # Get shapefiles
   if(exists("state", where = input) & exists("county", where = input)){
+    ## Check that county is five digits
+    if(stringr::str_length(input$county) != 5){
+      if(stringr::str_length(input$county) == 3){
+        input$county <- paste0(input$state, input$county)
+      } else {
+        rlang::abort(message = c(
+          cli::style_bold("Invalid county!"),
+          "x" = paste0("The county FIPS code is length ",
+                       stringr::str_length(input$county),
+                       ", which is invalid."),
+          "i" = paste0("See ", cli::style_underline("?setup"), ".")
+        ))
+      }
+    }
+
     ## Get, unzip, and save name of county shapefile
     download.file(
       url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/COUNTY/tl_2020_us_county.zip"),
