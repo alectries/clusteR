@@ -11,12 +11,12 @@
 #` include all clusters that have at least one resident. You can filter based on
 #' the numbers in the following columns:
 #'
-#' - *n*: The total number of cohort members in the cluster.
-#' - *completed*, *completed_pct*: The number or percent (out of 100) of
+#' - **n**: The total number of cohort members in the cluster.
+#' - **completed**, **completed_pct**: The number or percent (out of 100) of
 #' participants with any Completed status.
-#' - *pending*, *pending_pct*: The number or percent (out of 100) of
+#' - **pending**, **pending_pct**: The number or percent (out of 100) of
 #' participants with an Enrolled, Re-enroll, or Not enrolled status.
-#' - *enrolled*, *enrolled_pct*: The number or percent (out of 100) of
+#' - **enrolled**, **enrolled_pct**: The number or percent (out of 100) of
 #' participants with a Completed - enrolled or Enrolled status.
 #'
 #' `make_groups` uses the internal function `mult_kmeans` by default. You can

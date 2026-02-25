@@ -37,12 +37,12 @@ You can filter the clusters by the number of completed, pending, and enrolled
 participants in each cluster in the \code{filt} argument. The filter defaults to
 the numbers in the following columns:
 \itemize{
-\item \emph{n}: The total number of cohort members in the cluster.
-\item \emph{completed}, \emph{completed_pct}: The number or percent (out of 100) of
+\item \strong{n}: The total number of cohort members in the cluster.
+\item \strong{completed}, \strong{completed_pct}: The number or percent (out of 100) of
 participants with any Completed status.
-\item \emph{pending}, \emph{pending_pct}: The number or percent (out of 100) of
+\item \strong{pending}, \strong{pending_pct}: The number or percent (out of 100) of
 participants with an Enrolled, Re-enroll, or Not enrolled status.
-\item \emph{enrolled}, \emph{enrolled_pct}: The number or percent (out of 100) of
+\item \strong{enrolled}, \strong{enrolled_pct}: The number or percent (out of 100) of
 participants with a Completed - enrolled or Enrolled status.
 }
 
