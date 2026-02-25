@@ -14,6 +14,7 @@
 #' @importFrom dplyr filter
 #' @importFrom dplyr left_join
 #' @importFrom dplyr mutate
+#' @importFrom dplyr select
 #' @importFrom magrittr `%>%`
 #' @importFrom readr read_delim
 #' @importFrom rlang inform
@@ -37,7 +38,7 @@ mult_kmeans <- function(include, geoids, shape_county, shape_block, k, runs, ite
   clusters <- geoids %>%
     dplyr::mutate(geoid = as.character(geoid)) %>%
     dplyr::left_join(
-      select(blocks, geoid = GEOID20, lat = INTPTLAT20, long = INTPTLON20,
+      dplyr::select(blocks, geoid = GEOID20, lat = INTPTLAT20, long = INTPTLON20,
              ur = UR20, geometry),
       by = "geoid"
     ) %>%

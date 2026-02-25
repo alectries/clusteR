@@ -90,7 +90,7 @@ make_groups <- function(k,
   summary <- dplyr::summarize(
     cohort,
     .by = Cluster,
-    n = n(),
+    n = dplyr::n(),
     completed = sum(stringr::str_detect(Status, "Completed"), na.rm = T),
     completed_pct = completed / n * 100,
     pending = sum(Status %in% c("Enrolled", "Re-enroll", "Not enrolled"), na.rm = T),
