@@ -35,6 +35,7 @@ simple door-to-door materials.
 \details{
 You can filter the clusters by the number of completed, pending, and enrolled
 participants in each cluster in the \code{filt} argument. The filter defaults to
+include all clusters that have at least one resident. You can filter based on
 the numbers in the following columns:
 \itemize{
 \item \strong{n}: The total number of cohort members in the cluster.

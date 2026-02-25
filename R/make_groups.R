@@ -8,7 +8,7 @@
 #'
 #' You can filter the clusters by the number of completed, pending, and enrolled
 #' participants in each cluster in the `filt` argument. The filter defaults to
-#` include all clusters that have at least one resident. You can filter based on
+#' include all clusters that have at least one resident. You can filter based on
 #' the numbers in the following columns:
 #'
 #' - **n**: The total number of cohort members in the cluster.
