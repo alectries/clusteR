@@ -33,11 +33,11 @@ view_map <- function(title = NULL,
 
   # Get shapefiles
   county <- sf::read_sf(.cluster$cfg$shape_county) %>%
-    dplyr::filter(GEOID == as.character(.cluster$cfg$county))
+    dplyr::filter(GEOID %in% as.character(.cluster$cfg$county))
   blocks <- sf::read_sf(.cluster$cfg$shape_block) %>%
     dplyr::filter(
       STATEFP20 == as.character(.cluster$cfg$state) &
-        COUNTYFP20 == substr(as.character(.cluster$cfg$county), 3, 5)
+        COUNTYFP20 %in% substr(as.character(.cluster$cfg$county), 3, 5)
     )
 
   # Get geoids and merge

@@ -31,7 +31,7 @@ mult_kmeans <- function(include, geoids, shape_county, shape_block, k, runs, ite
   blocks <- sf::read_sf(shape_block) %>%
     dplyr::filter(
       STATEFP20 == as.character(.cluster$cfg$state) &
-        COUNTYFP20 == substr(as.character(.cluster$cfg$county), 3, 5)
+        COUNTYFP20 %in% substr(as.character(.cluster$cfg$county), 3, 5)
     )
 
   # Merge clusters with geographies

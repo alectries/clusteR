@@ -118,7 +118,7 @@ make_groups <- function(k,
 
   # Load county sf
   county <- sf::read_sf(shape_county) %>%
-    dplyr::filter(GEOID == as.character(.cluster$cfg$county))
+    dplyr::filter(GEOID %in% as.character(.cluster$cfg$county))
 
   # Map
   plot_map <- ggplot2::ggplot() +

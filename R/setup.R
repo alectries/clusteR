@@ -49,7 +49,7 @@
 #' @param setup_get The output of a function, such as setup_get_csv or setup_get_alc, to set up your data source connection (see `vignette('setup_get')`)
 #' @param setup_cohort The name of a properly-formatted cohort input file or a function to generate that file (see `vignette('setup_cohort')`)
 #' @param state The FIPS code for the state of interest
-#' @param county The FIPS code for the county of interest
+#' @param county The FIPS code (or vector of FIPS codes) for the county (or counties) of interest
 #' @param geoids The name of a properly-formatted cluster matching file or a function to generate that file
 #' @importFrom cli style_bold
 #' @importFrom cli style_underline
@@ -65,6 +65,7 @@
 #' @importFrom stringr regex
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_length
+#' @importFrom tibble tibble
 #' @export
 
 setup <- function(name,
@@ -236,18 +237,33 @@ setup <- function(name,
   # Get shapefiles
   if(exists("state", where = input) & exists("county", where = input)){
     ## Check that county is five digits
-    if(stringr::str_length(input$county) != 5){
-      if(stringr::str_length(input$county) == 3){
-        input$county <- paste0(input$state, input$county)
-      } else {
-        rlang::abort(message = c(
-          cli::style_bold("Invalid county!"),
-          "x" = paste0("The county FIPS code is length ",
-                       stringr::str_length(input$county),
-                       ", which is invalid."),
-          "i" = paste0("See ", cli::style_underline("?setup"), ".")
-        ))
+    if(length(input$county) == 1){
+      if(stringr::str_length(input$county) != 5){
+        if(stringr::str_length(input$county) == 3){
+          input$county <- paste0(input$state, input$county)
+        } else {
+          rlang::abort(message = c(
+            cli::style_bold("Invalid county!"),
+            "x" = paste0("The county FIPS code is length ",
+                         stringr::str_length(input$county),
+                         ", which is invalid."),
+            "i" = paste0("See ", cli::style_underline("?setup"), ".")
+          ))
+        }
       }
+    } else {
+      counties <- tibble::tibble(
+        orig = input$county
+      )
+      counties <- dplyr::mutate(
+        counties,
+        new = dplyr::case_when(
+          stringr::str_length(orig) == 5 ~ orig,
+          stringr::str_length(orig) == 3 ~ paste0(input$state, orig),
+          .default = NA
+        )
+      )
+      input$county <- counties$new
     }
 
     ## Get, unzip, and save name of county shapefile

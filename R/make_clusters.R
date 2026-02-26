@@ -30,7 +30,8 @@ make_clusters <- function(n,
 
   # If county is from config, modify it
   if(exists(".cluster") && exists("cfg", where = .cluster) &&
-     exists("county", where = .cluster$cfg) && .cluster$cfg$county == county){
+     exists("county", where = .cluster$cfg) &&
+     !(F %in% (.cluster$cfg$county == county))){
     county <- substr(county, 3, 5)
   }
 

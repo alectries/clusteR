@@ -17,7 +17,7 @@ setup(name, short_name, ...)
 
 \item{state}{The FIPS code for the state of interest}
 
-\item{county}{The FIPS code for the county of interest}
+\item{county}{The FIPS code (or vector of FIPS codes) for the county (or counties) of interest}
 
 \item{geoids}{The name of a properly-formatted cluster matching file or a function to generate that file}
 }
