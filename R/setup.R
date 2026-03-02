@@ -154,9 +154,22 @@ setup <- function(name,
         rlang::abort(message = c(
           cli::style_bold("Cohort file import failed."),
           "x" = "Required columns not present in cohort file.",
-          "i" = paste0("See ", cli::style_underline("vignette('setup_cohort')"), " for more information.")
+          "i" = paste0("See ", cli::style_underline("vignette('setup_cohort')"),
+                       " for more information.")
         ))
       }
+
+      ## Set blank names to "Current Resident"
+      cohort <- dplyr::mutate(
+        cohort,
+        Name = dplyr::case_when(
+          is.na(Name) ~ "Current Resident",
+          Name == "" ~ "Current Resident",
+          stringr::str_detect(Name, stringr::regex("current resident", ignore_case = T)) ~
+            "Current Resident",
+          .default = Name
+        )
+      )
 
       ## Reset status column
       cohort <- dplyr::mutate(
