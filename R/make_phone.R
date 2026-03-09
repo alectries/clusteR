@@ -13,7 +13,9 @@
 #' @param output Output format, either "pdf" or "csv".
 #' @param .status If not NA, filters for a status category; see details.
 #' @param ... Arguments passed to `dplyr::filter` to limit the cohort file.
+#' @importFrom dplyr case_when
 #' @importFrom dplyr filter
+#' @importFrom dplyr mutate
 #' @importFrom dplyr select
 #' @importFrom knitr kable
 #' @importFrom readr read_csv
@@ -23,6 +25,7 @@
 #' @importFrom rlang list2
 #' @importFrom rmarkdown render
 #' @importFrom stringr str_detect
+#' @importFrom stringr str_remove
 #' @export
 
 make_phone <- function(output, ..., .status = NA){
@@ -57,6 +60,19 @@ make_phone <- function(output, ..., .status = NA){
 
   # Select columns
   out <- dplyr::select(cohort, ID, Name, Phone)
+
+  # Remove NAs and format
+  out <- dplyr::mutate(out, Phone = dplyr::case_when(
+    is.na(Phone) ~ "",
+    !is.na(Phone) ~ paste0(
+      "(",
+      substr(stringr::str_remove(Phone, " ()-./"), 1, 3),
+      ") ",
+      substr(stringr::str_remove(Phone, " ()-./"), 4, 6),
+      "-",
+      substr(stringr::str_remove(Phone, " ()-./"), 7, 10)
+    )
+  ))
 
   # Output CSV
   if(output == "csv"){

@@ -13,7 +13,9 @@
 #' @param output Output format, either "pdf" or "csv".
 #' @param .status If not NA, filters for a status category; see details.
 #' @param ... Arguments passed to `dplyr::filter` to limit the cohort file.
+#' @importFrom dplyr case_when
 #' @importFrom dplyr filter
+#' @importFrom dplyr mutate
 #' @importFrom dplyr select
 #' @importFrom knitr kable
 #' @importFrom readr read_csv
@@ -57,6 +59,12 @@ make_email <- function(output, ..., .status = NA){
 
   # Select columns
   out <- dplyr::select(cohort, ID, Name, Email)
+
+  # Remove NAs
+  out <- dplyr::mutate(out, Email = dplyr::case_when(
+    is.na(Email) ~ "",
+    .default = Email
+  ))
 
   # Output CSV
   if(output == "csv"){
