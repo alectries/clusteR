@@ -1,0 +1,38 @@
+---
+title: "Current Progress Report"
+output:
+  html_document:
+    theme: paper
+    fig_caption: false
+    toc: true
+    toc_float: true
+---
+
+Report generated at `r time`.
+
+# Overall
+
+Currently, **`r completion` people** have completed the survey.
+
+```{r, echo = FALSE}
+plot_stat_overall
+```
+
+This plot shows the current statuses of all cohort members. **The current count of cohort addresses is `r total`.**
+
+# Cluster completion
+
+```{r, echo = FALSE, warning = FALSE}
+plot_stat_cluster
+```
+
+The above map shows the census blocks of included participants. Blocks with white fill have no returned surveys, blocks with red fill have an insufficient number of returned surveys, and blocks with blue fill have returned enough surveys for analysis.
+
+```{r, echo = FALSE, results = "asis"}
+`%>%` <- magrittr::`%>%`
+stat_cluster %>% 
+  dplyr::mutate(dplyr::across(tidyselect::everything(), ~as.character(.x) %>% tidyr::replace_na(""))) %>% 
+  knitr::kable(align = "ccccr") %>% 
+  kableExtra::row_spec(n_clusters + 1, bold = T, underline = T, background = "gray40", color = "white") %>% 
+  kableExtra::kable_material()
+```

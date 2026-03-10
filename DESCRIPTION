@@ -23,6 +23,7 @@ Imports:
     dplyr,
     ggplot2,
     jsonlite,
+    kableExtra,
     knitr,
     lubridate,
     magrittr,
@@ -35,4 +36,5 @@ Imports:
     stringr,
     tibble,
     tidycensus,
+    tidyr,
     tidyselect
