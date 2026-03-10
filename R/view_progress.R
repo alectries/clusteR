@@ -217,7 +217,7 @@ view_progress <- function(breaks = c(1, 30, 50, 80, 90),
     quiet = T
   )
   if(Sys.getenv("RSTUDIO") == "1"){
-    rstudioapi::viewer("Contacts/Progress Report.html")
+    rstudioapi::viewer("Cohort/Progress Report.html")
   } else {
     rlang::inform(message = c(
       cli::style_bold("Progress report generated."),
