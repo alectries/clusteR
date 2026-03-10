@@ -64,8 +64,7 @@ as it appears in Alchemer, in full. Shortening the text in ALC will cause
 question responses to clusteR's Consent variable. This should be in the
 format \code{c("Consent" = "Survey response")}, e.g.
 \code{c("Yes" = "I agree", "No" = "I don't agree")}. Valid \code{Consent} values are
-shown in \code{vignette("setup_cohort")}. For valid \code{Consent} values with spaces,
-enclose the name in backticks (`).
+shown in \code{vignette("setup_cohort")}.
 
 Due to a restriction in Alchemer's API, the maximum number of observations
 pulled by \code{get_alc} is 9,999. You will need to write a custom function if

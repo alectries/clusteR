@@ -44,8 +44,7 @@
 #' question responses to clusteR's Consent variable. This should be in the
 #' format `c("Consent" = "Survey response")`, e.g.
 #' `c("Yes" = "I agree", "No" = "I don't agree")`. Valid `Consent` values are
-#' shown in `vignette("setup_cohort")`. For valid `Consent` values with spaces,
-#' enclose the name in backticks (`).
+#' shown in `vignette("setup_cohort")`.
 #'
 #' Due to a restriction in Alchemer's API, the maximum number of observations
 #' pulled by `get_alc` is 9,999. You will need to write a custom function if
