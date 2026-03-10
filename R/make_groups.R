@@ -169,6 +169,7 @@ make_groups <- function(k,
     "*" = paste0("Review ", cli::style_underline("Contacts/Assignments.csv"), "."),
     "*" = "Assign groups by filling in the `manual` column with a group identifier.",
     "*" = "Leave groups as assigned by leaving the `manual` column blank.",
+    "*" = "Exclude clusters from all groups by entering 0 in `manual`.",
     "*" = paste0("Run ", cli::style_underline("make_walklist"), " or ",
                  cli::style_underline("make_walkmap"), ".")
   ))

@@ -1,0 +1,42 @@
+---
+title: ""
+output: 
+  pdf_document:
+    latex_engine: lualatex
+geometry: margin=1cm, landscape
+header-includes:
+- \usepackage{fontspec}
+- \usepackage{longtable}
+- \pagenumbering{gobble}
+---
+\setmainfont{Arial}
+# Front material
+
+You may include front material in this section. This material will only be on
+the first page of the printout, not on every group's coversheet.
+
+\newpage
+```{r, echo = FALSE, results = "asis"}
+for(i in 1:length(by_group)){
+  if(nrow(by_group[[i]]) == 0){next}
+  cat("\\newpage")
+  
+  # Cover page (include additional text in a cat() call and end paragraphs with two newlines (\n\n)!)
+  ## Header
+  cat(paste0("\\textbf{", cluster_cfg$name, "}\n\n"))
+  cat(paste0("# Team #", i, "\n\n"))
+  
+  ## Content
+  cat("Names: ____________________ and ____________________\n\n")
+  cat(paste0(
+    "**Addresses to visit: ",
+    nrow(by_group[[i]]),
+    "**\n\n"
+  ))
+  cat("\\newpage")
+  
+  # Table (you can, but probably shouldn't, edit this section)
+  print(knitr::kable(by_group[[i]], format = "latex", longtable = T, escape = F))
+}
+
+```
