@@ -15,7 +15,7 @@
 #'
 #' `setup_get`: setup should see a list that contains information necessary
 #' for a corresponding `get` function to retrieve data from a connection.
-#' As a user, you should call a `setup_get` function (like [`setup_get_csv`]),
+#' As a user, you should call a `setup_get` function (like `setup_get_csv`),
 #' which will create this list and pass it to setup for you. For a highly
 #' customized setup, you may wish to `source` a script to generate this list
 #' instead.
