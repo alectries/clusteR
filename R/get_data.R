@@ -37,14 +37,17 @@ get_data <- function(args = list()){
     args = args
   )
 
-  # Save data and return path invisibly
+  # Save data, add to .cluster, and return path invisibly
   time <- gsub('[:. ]', '-', lubridate::now())
   path <- paste0("Survey Data/", .cluster$cfg$short_name, "-", time, ".rds")
   saveRDS(data, path)
+  .cluster$cfg$last_data <- path
+  saveRDS(.cluster$cfg, "Scripts/config.rds")
   rlang::inform(
     message = c(
       cli::style_bold("Data archived:"),
-      "i" = cli::style_underline(path)
+      "i" = cli::style_underline(path),
+      "v" = "Path saved to config."
     )
   )
   return(invisible(path))
