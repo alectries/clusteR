@@ -22,7 +22,9 @@
 #' @importFrom dplyr left_join
 #' @importFrom dplyr mutate
 #' @importFrom dplyr rename
+#' @importFrom dplyr rowwise
 #' @importFrom dplyr summarize
+#' @importFrom dplyr ungroup
 #' @importFrom ggplot2 aes
 #' @importFrom ggplot2 element_text
 #' @importFrom ggplot2 geom_col
@@ -138,10 +140,12 @@ view_progress <- function(breaks = c(1, 30, 50, 80, 90),
     ) %>%
     dplyr::count(Cluster, Completion) %>%
     tidyr::spread(Completion, n) %>%
+    dplyr::rowwise() %>%
     dplyr::mutate(
       "Completed" = ifelse("Completed" %in% names(.) && !is.na(Completed), Completed, 0),
       Completion = paste0(round(Completed / (Completed + `Not yet completed`) * 100, 1), "%")
     ) %>%
+    dplyr::ungroup() %>%
     dplyr::arrange(Cluster) %>%
     dplyr::bind_rows(dplyr::summarize(
       .,
