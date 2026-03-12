@@ -70,7 +70,7 @@ update_cohort <- function(args = list()){
       cli::style_underline(paste0("Cohort/Archive/",
                                   .cluster$cfg$short_name, time, ".rds"))
     ),
-    "i" = "Restore using restore()."
+    "i" = "Restore using restore_cohort()."
   ))
 
   # Pull new data
