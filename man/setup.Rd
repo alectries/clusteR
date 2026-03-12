@@ -38,7 +38,7 @@ warnings for parameters you did not specify that are soft-required.
 
 \code{setup_get}: setup should see a list that contains information necessary
 for a corresponding \code{get} function to retrieve data from a connection.
-As a user, you should call a \code{setup_get} function (like \code{\link{setup_get_csv}}),
+As a user, you should call a \code{setup_get} function (like \code{setup_get_csv}),
 which will create this list and pass it to setup for you. For a highly
 customized setup, you may wish to \code{source} a script to generate this list
 instead.
