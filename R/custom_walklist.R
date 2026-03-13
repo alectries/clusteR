@@ -12,6 +12,8 @@
 #' If you would like to include additional columns in the walklist tables, you
 #' will need to specify them in `make_walklist`, not in a custom template.
 #'
+#' @importFrom cli style_bold
+#' @importFrom rlang inform
 #' @export
 
 custom_walklist <- function(){
