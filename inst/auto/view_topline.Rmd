@@ -1,0 +1,69 @@
+---
+title: ""
+output: 
+  pdf_document:
+    latex_engine: lualatex
+geometry: margin=1cm
+header-includes:
+- \usepackage{fontspec}
+- \pagenumbering{gobble}
+---
+\setmainfont{Arial}
+
+```{r, echo = FALSE, results = 'asis'}
+# Definitions
+`%>%` <- magrittr::`%>%`
+`!!` <- rlang::`!!`
+`:=` <- rlang::`:=`
+escape <- function(x) {
+  if (is.na(x) || is.null(x)) return("")
+  x <- gsub("\\\\", "\\\\textbackslash{}", x)  # backslash first
+  x <- gsub("([{}$&#_%])", "\\\\\\1", x)       # { } $ & # _ %
+  x <- gsub("\\^", "\\\\textasciicircum{}", x)
+  x <- gsub("~", "\\\\textasciitilde{}", x)
+  x
+}
+
+# Page title
+cat(paste0("# ", cluster_cfg$name, ": Topline Report\n\n"))
+
+# Print tables
+for(i in 1:length(tables)){
+  
+  # Subheading
+  if("title" %in% names(codebook)){
+    cat(paste0(
+      "## ",
+      escape(codebook$title[i]),
+      "\n\n"
+    ))
+  } else {
+    cat(paste0(
+      "## ",
+      escape(codebook$QN[i]),
+      "\n\n"
+    ))
+  }
+  
+  # Caption
+  if("caption" %in% names(codebook)){
+    cat(paste0(
+      escape(codebook$caption[i]),
+      "\n\n"
+    ))
+  }
+  
+  # Table
+  tables[[i]] %>% 
+    dplyr::mutate(
+      dplyr::across(tidyselect::where(~is.double(.x) && max(.x <= 1, na.rm = T)), ~round(.x * 100, 2)),
+      dplyr::across(tidyselect::where(~is.double(.x) && max(.x > 1, na.rm = T)), ~round(.x, 2)),
+      dplyr::across(tidyselect::where(~is.numeric(.x)), ~ifelse(is.na(.x), ".", as.character(.x)))
+    ) %>% 
+    knitr::kable(align = c("l", rep("r", times = length(tables[[i]]) - 1))) %>% 
+    kableExtra::column_spec(1, width = "6cm") %>% 
+    print()
+  cat("\n\n")
+}
+```
+

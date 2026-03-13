@@ -27,6 +27,7 @@ Imports:
     knitr,
     lubridate,
     magrittr,
+    purrr,
     readr,
     readxl,
     rlang,
