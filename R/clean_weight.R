@@ -16,6 +16,8 @@
 #' members should be stored in the cohort file, which will be imported and
 #' joined before mutates are applied.
 #'
+#' Inside your mutates, you may refer to the dataset as `.`.
+#'
 #' By default, every entry in the cohort file is included for weighting. You
 #' can filter those included for weighting using .filt: for example, you can
 #' use `.filt = stringr::str_detect(Status, "Completed")` to only apply
@@ -71,7 +73,8 @@ clean_weight <- function(formula,
     data <- dplyr::filter(data, !!rlang::expr(.filt))
 
     # Perform mutates
-    data <- dplyr::mutate(data, ...)
+    data <- data %>%
+      dplyr::mutate(...)
 
     # Regression
     model <- glm(

@@ -25,6 +25,8 @@ unwieldy in a console.
 If a path to a data file is not specified, the most recent data file will
 be used. You can specify another filepath as a string, passed to \code{.x}.
 
+Inside your mutates, you may refer to the dataset as \code{.}.
+
 You can specify a function call, such as \code{clean_weight}, as \code{.wt} to weight
 data. The function you call should return a function with one argument (the
 dataframe of survey data); the created weighting function must return a

@@ -33,6 +33,8 @@ identifiers consistent with the cohort file. Additional data for cohort
 members should be stored in the cohort file, which will be imported and
 joined before mutates are applied.
 
+Inside your mutates, you may refer to the dataset as \code{.}.
+
 By default, every entry in the cohort file is included for weighting. You
 can filter those included for weighting using .filt: for example, you can
 use \code{.filt = stringr::str_detect(Status, "Completed")} to only apply

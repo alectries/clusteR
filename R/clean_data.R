@@ -10,6 +10,8 @@
 #' If a path to a data file is not specified, the most recent data file will
 #' be used. You can specify another filepath as a string, passed to `.x`.
 #'
+#' Inside your mutates, you may refer to the dataset as `.`.
+#'
 #' You can specify a function call, such as `clean_weight`, as `.wt` to weight
 #' data. The function you call should return a function with one argument (the
 #' dataframe of survey data); the created weighting function must return a
@@ -24,6 +26,7 @@
 #' @importFrom cli style_bold
 #' @importFrom cli style_underline
 #' @importFrom dplyr left_join
+#' @importFrom magrittr `%>%`
 #' @importFrom rlang inform
 #' @importFrom stringr str_remove
 #' @export
@@ -32,6 +35,8 @@ clean_data <- function(...,
                        .x = .cluster$cfg$last_data,
                        .wt = NULL
 ){
+  # Definitions
+  `%>%` <- magrittr::`%>%`
   # Get data
   x <- readRDS(.x)
 
@@ -42,7 +47,8 @@ clean_data <- function(...,
   }
 
   # Mutates
-  out <- dplyr::mutate(x, ...)
+  out <- x %>%
+    dplyr::mutate(...)
 
   # Save and return
   path <- paste0(stringr::str_remove(.x, ".rds"), "_clean.rds")
