@@ -40,6 +40,7 @@
 #' @importFrom readr write_csv
 #' @importFrom rlang `:=`
 #' @importFrom rlang inform
+#' @importFrom rlang sym
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi viewer
 #' @importFrom tidyselect all_of
@@ -63,7 +64,7 @@ update_confirm <- function(){
     for(col in src_cols){
       orig <- sub("\\.src$", "", col)
       out <- out %>%
-        dplyr::mutate(!!orig := dplyr::coalesce(!!dplyr::sym(col), !!dplyr::sym(orig)))
+        dplyr::mutate(!!orig := dplyr::coalesce(!!rlang::sym(col), !!rlang::sym(orig)))
     }
     out <- out %>%
       dplyr::select(-tidyselect::all_of(src_cols))
@@ -77,7 +78,7 @@ update_confirm <- function(){
     for(col in man_cols){
       orig <- sub("\\.man$", "", col)
       out <- out %>%
-        dplyr::mutate(!!orig := dplyr::coalesce(!!dplyr::sym(col), !!dplyr::sym(orig)))
+        dplyr::mutate(!!orig := dplyr::coalesce(!!rlang::sym(col), !!rlang::sym(orig)))
     }
     out <- out %>%
       dplyr::select(-tidyselect::all_of(man_cols))

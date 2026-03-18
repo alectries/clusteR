@@ -24,7 +24,7 @@ objects in clusteR's environment: \code{df_cohort}, \code{df_manual}, and \code{
 These will then be accessed by \code{update_confirm}.
 
 Importantly, if the \code{update_cohort} report alerts you to issues in your data
-that you subsequently fix, you must run \code{update} again before running
+that you subsequently fix, you must run \code{update_cohort} again before running
 \code{update_confirm} for your changes to take effect.
 
 \code{update_cohort} runs \code{get_data} under the hood, meaning that messages will be
