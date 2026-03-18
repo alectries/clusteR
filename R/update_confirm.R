@@ -13,7 +13,7 @@
 #' These will then be accessed by `update_confirm`.
 #'
 #' Importantly, if the `update_cohort` report alerts you to issues in your data
-#' that you subsequently fix, you must run `update` again before running
+#' that you subsequently fix, you must run `update_cohort` again before running
 #' `update_confirm` for your changes to take effect.
 #'
 #' `update_cohort` runs `get_data` under the hood, meaning that messages will be
