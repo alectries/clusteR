@@ -4,7 +4,12 @@
 \alias{view_map}
 \title{Generate a map of clusters}
 \usage{
-view_map(title = NULL, subtitle = NULL, fill = "lightgray")
+view_map(
+  title = NULL,
+  subtitle = NULL,
+  fill = "lightgray",
+  background = "white"
+)
 }
 \arguments{
 \item{title}{The title of the resulting map, if desired.}
@@ -12,6 +17,8 @@ view_map(title = NULL, subtitle = NULL, fill = "lightgray")
 \item{subtitle}{The subtitle of the resulting map, if desired.}
 
 \item{fill}{The fill color for the clusters. Defaults to light gray.}
+
+\item{background}{The background color for the map. Defaults to white.}
 }
 \description{
 Produces a simple, labeled map of your clusters. Simpler than \code{make_groups},

@@ -6,6 +6,7 @@
 #' @param title The title of the resulting map, if desired.
 #' @param subtitle The subtitle of the resulting map, if desired.
 #' @param fill The fill color for the clusters. Defaults to light gray.
+#' @param background The background color for the map. Defaults to white.
 #' @importFrom dplyr filter
 #' @importFrom dplyr left_join
 #' @importFrom dplyr mutate
@@ -26,7 +27,8 @@
 
 view_map <- function(title = NULL,
                      subtitle = NULL,
-                     fill = "lightgray"
+                     fill = "lightgray",
+                     background = "white"
 ){
   # Definitions
   `%>%` <- magrittr::`%>%`
@@ -77,7 +79,7 @@ view_map <- function(title = NULL,
       color = "Rural/Urban"
     ) +
     ggplot2::scale_color_brewer(palette = "Accent") +
-    ggplot2::theme_void() +
+    ggplot2::theme_void(paper = background) +
     ggplot2::theme(
       plot.title = ggplot2::element_text(hjust = 0.5),
       plot.subtitle = ggplot2::element_text(hjust = 0.5)
