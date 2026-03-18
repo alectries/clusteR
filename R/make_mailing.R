@@ -61,12 +61,6 @@ make_mailing <- function(output, ..., .status = NA){
   # Select columns
   out <- dplyr::select(cohort, ID, Name, Mailing, City, State, ZIP)
 
-  # Remove NAs
-  out <- dplyr::mutate(out, Physical = dplyr::case_when(
-    is.na(Physical) ~ "",
-    .default = Physical
-  ))
-
   # Output CSV
   if(output == "csv"){
     readr::write_csv(out, "Contacts/Mailing.csv")
