@@ -4,7 +4,10 @@
 \alias{view_cohort}
 \title{View cohort file}
 \usage{
-view_cohort()
+view_cohort(show = TRUE)
+}
+\arguments{
+\item{show}{If FALSE, returns cohort file without opening Viewer. Defaults to TRUE.}
 }
 \description{
 Quickly opens the cohort file for viewing. Invisibly returns the cohort file
