@@ -41,6 +41,7 @@
 #' @importFrom rlang `:=`
 #' @importFrom rlang abort
 #' @importFrom rlang inform
+#' @importFrom rlang warn
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi viewer
 #' @importFrom tidyselect all_of
@@ -130,6 +131,16 @@ update_cohort <- function(args = list()){
       "x" = "Remove duplicates from Editor.csv."
     ))
   }
+  if(FALSE %in% (.cluster$df_manual$ID %in% .cluster$df_cohort$ID)){
+    rlang::warn(message = c(
+      cli::style_bold("New IDs in Editor!"),
+      "!" = "This warning should only appear when adding new IDs to the cohort.",
+      "i" = paste(
+        "New IDs:",
+        .cluster$df_manual$ID[!(.cluster$df_manual$ID %in% .cluster$df_cohort$ID)]
+      )
+    ))
+  }
 
   # Join and verify source data
   coh_src_errs <- list()
@@ -149,6 +160,16 @@ update_cohort <- function(args = list()){
       )))
   }
   names(coh_src_errs) <- setdiff(names(.cluster$df_source), c("ID", "Source"))
+  if(FALSE %in% (.cluster$df_source$ID %in% .cluster$df_cohort$ID)){
+    rlang::warn(message = c(
+      cli::style_bold("New IDs from data source!"),
+      "!" = "This warning should only appear when adding new IDs to the cohort.",
+      "i" = paste(
+        "New IDs:",
+        .cluster$df_source$ID[!(.cluster$df_source$ID %in% .cluster$df_cohort$ID)]
+      )
+    ))
+  }
 
   # Knit
   knit_env <- list(
