@@ -442,7 +442,7 @@ view_breakdown <- function(codebook,
       rmarkdown::render(
         input = system.file("auto", "view_breakdown.Rmd", package = "clusteR"),
         output_dir = paste0(getwd(), "/Survey Data"),
-        output_file = paste0("Breakdown Report by ", strata, ".pdf"),
+        output_file = paste0("Report by ", strata, ".pdf"),
         envir = knit_env,
         quiet = T
       )
@@ -450,18 +450,18 @@ view_breakdown <- function(codebook,
       rmarkdown::render(
         input = template,
         output_dir = paste0(getwd(), "/Survey Data"),
-        output_file = paste0("Breakdown Report by ", strata, ".pdf"),
+        output_file = paste0("Report by ", strata, ".pdf"),
         envir = knit_env,
         quiet = T
       )
     }
     if(Sys.getenv("RSTUDIO") == "1"){
-      rstudioapi::viewer(paste0("Survey Data/Breakdown Report by ", strata, ".pdf"))
+      rstudioapi::viewer(paste0("Survey Data/Report by ", strata, ".pdf"))
     } else {
       rlang::inform(
         message = c(
           cli::style_bold("Report generated."),
-          "i" = paste0("See ", cli::style_underline(paste0("Survey Data/Breakdown Report by ", strata, ".pdf")), ".")
+          "i" = paste0("See ", cli::style_underline(paste0("Survey Data/Report by ", strata, ".pdf")), ".")
         )
       )
     }
@@ -496,11 +496,11 @@ view_breakdown <- function(codebook,
     )
 
     ## Output
-    readr::write_csv(out, "Survey Data/Topline.csv")
+    readr::write_csv(out, paste0("Survey Data/Report by ", strata, ".csv"))
     rlang::inform(
       message = c(
         cli::style_bold("Report generated."),
-        "i" = paste0("See ", cli::style_underline("Survey Data/Topline.csv"), ".")
+        "i" = paste0("See ", cli::style_underline(paste0("Survey Data/Report by ", strata, ".csv")), ".")
       ))
     return()
   }
