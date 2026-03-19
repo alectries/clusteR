@@ -12,7 +12,7 @@ header-includes:
 # Front material
 
 You may include front material in this section. This material will only be on
-the first page of the printout, not on every group's coversheet.
+the first page of the printout, not before every results table.
 
 ```{r, echo = FALSE, results = 'asis'}
 # Definitions

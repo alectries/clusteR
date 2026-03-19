@@ -73,6 +73,7 @@
 #' @importFrom rlang get_expr
 #' @importFrom rlang inform
 #' @importFrom rlang is_null
+#' @importFrom rlang warn
 #' @importFrom rmarkdown render
 #' @importFrom tibble add_column
 #' @importFrom tibble add_row
@@ -134,9 +135,6 @@ view_topline <- function(codebook,
     ## Question info
     q <- cb$QN[i]
     type <- cb$type[i]
-
-    ## Message
-
 
     ## For multiple-choice questions
     if(type == "mc"){
@@ -419,6 +417,13 @@ view_topline <- function(codebook,
 
   # CSV
   if(make == "csv"){
+    ## Warn if template is present
+    if(!is.na(template)){
+      rlang::warn(message = c(
+        "!" = "Template detected but ignored for CSV output."
+      ))
+    }
+
     ## Loop to get names and format
     for(i in 1:length(tables)){
       q <- names(tables[[i]])[1]
