@@ -71,4 +71,7 @@ make_clusters <- function(n,
       "!" = "This clusteR environment is not configured. Manually add geoids in setup()."
     ))
   }
+
+  # Return file path
+  return(invisible("Cohort/geoids.csv"))
 }
