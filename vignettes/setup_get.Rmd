@@ -73,7 +73,7 @@ While there is nothing stopping you from implementing an alternative data struct
 
 ## Why not Excel?
 
-You may be wondering why I haven't created functions to get data from a Microsft Excel source file, even though clusteR supports Excel for other tasks (like importing a cohort file). The reasons are:
+You may be wondering why I haven't created functions to get data from a Microsoft Excel source file, even though clusteR supports Excel for other tasks (like importing a cohort file). The reasons are:
 
 1. You can easily save your Excel file as a CSV.
 2. If you *can't* easily save your Excel file as a CSV, it is probably because you have formatted your Excel file in a way that R (and therefore clusteR) will not handle well.

@@ -41,7 +41,7 @@ Most of these fields can be formatted however you like, but Consent is picky. Yo
 - **Do not contact**: The participant wishes to be removed from the cohort; this is optional and "No" can be used instead.
 - **NA**: The system default, which should be used when a prospective participant has not yet been reached.
 
-`update` will throw an error if anything other than these options is used. For an Alchemer survey (but, importantly, not a CSV file), you can enter a key in `setup_get_alc` to convert responses for you.
+`update_cohort` will throw an error if anything other than these options is used. For an Alchemer survey (but, importantly, not a CSV file), you can enter a key in `setup_get_alc` to convert responses for you.
 
 ## Input
 
@@ -69,4 +69,4 @@ Because this file is plain-text, it should be stored in a secure location. clust
 
 ## Editor
 
-During setup, clusteR will produce an Editor.csv file in the Cohort subdirectory so that you can manually make changes to existing cohort member records and add new records. It will include all columns in your custom cohort file, but will show no data from the file. Each time the cohort file is successfully updated, Editor will be cleared.
+During setup, clusteR will produce an Editor.csv file in the Cohort subdirectory so that you can manually make changes to existing cohort member records and add new records. It will include all columns in your custom cohort file, but will show no data from the file.
