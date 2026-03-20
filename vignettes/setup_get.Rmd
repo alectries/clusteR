@@ -34,7 +34,7 @@ clusteR accepts comma-delimited files as data sources via `setup_get_csv` and `g
 - A permanent file path (given as a string) denoting the location of the input .csv file.
 - Any arguments you wish to pass to `read_csv` to read your file correctly. (`col_types` is recommended!)
 
-To set up a comma-deliminated data source, you will need to run `setup` and include this argument:
+To set up a comma-delimited data source, you will need to run `setup` and include this argument:
 
 `setup_get = setup_get_csv(file, ...)`
 
