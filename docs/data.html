@@ -1,33 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>5 Data | clusteR Documentation</title>
-<meta name="author" content="Alec Higgins">
-<meta name="description" content="The focus of your technical work outside clusteR will be the setup and implementation of your data collection tool. clusteR can’t help with that (see What clusteR can do), but it can connect to...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="5 Data | clusteR Documentation">
-<meta property="og:type" content="book">
-<meta property="og:description" content="The focus of your technical work outside clusteR will be the setup and implementation of your data collection tool. clusteR can’t help with that (see What clusteR can do), but it can connect to...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5 Data | clusteR Documentation">
-<meta name="twitter:description" content="The focus of your technical work outside clusteR will be the setup and implementation of your data collection tool. clusteR can’t help with that (see What clusteR can do), but it can connect to...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>5 Data | clusteR Documentation</title>
+
+    <meta name="author" content="Alec Higgins" />
+  
+   <meta name="description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="5 Data | clusteR Documentation" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Data | clusteR Documentation" />
+  
+  <meta name="twitter:description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.10.0/transition.js"></script>
+    <script src="libs/bs3compat-0.10.0/tabs.js"></script>
+    <script src="libs/bs3compat-0.10.0/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="style.css" />
+  
 </head>
+
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -39,28 +63,22 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
+      </form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
-<li><a class="" href="quick-start.html"><span class="header-section-number">2</span> Quick Start</a></li>
-<li><a class="" href="setup.html"><span class="header-section-number">3</span> Setup</a></li>
-<li><a class="" href="cohort.html"><span class="header-section-number">4</span> Cohort</a></li>
-<li><a class="active" href="data.html"><span class="header-section-number">5</span> Data</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">6</span> Analysis</a></li>
-<li><a class="" href="extensions.html"><span class="header-section-number">7</span> Extensions</a></li>
-</ul>
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/alectries/clusteR">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
         </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data" class="section level1" number="5">
-<h1>
-<span class="header-section-number">5</span> Data<a class="anchor" aria-label="anchor" href="#data"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="data" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Data</h1>
 <p>The focus of your technical work outside clusteR will be the setup and
 implementation of your data collection tool. clusteR can’t help with that
 (see <a href="index.html#what-cluster-can-do">What clusteR can do</a>), but it can connect to your data automatically.</p>
@@ -68,9 +86,7 @@ implementation of your data collection tool. clusteR can’t help with that
 establishing a data connection, see <a href="setup.html#setup_get">setup_get</a>. For analyzing data, see
 <a href="analysis.html#analysis">Analysis</a>.</p>
 <div id="get_data" class="section level2" number="5.1">
-<h2>
-<span class="header-section-number">5.1</span> get_data<a class="anchor" aria-label="anchor" href="#get_data"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.1</span> get_data</h2>
 <p><code>get_data</code> downloads and archives survey responses from your data source.
 clusteR natively supports <a href="https:://www.alchemer.com">Alchemer</a> and CSV data
 sources. <code>get_data</code> itself archives data and both invisibly returns the file
@@ -91,9 +107,7 @@ return a tidy dataframe with formatted (though not necessarily cleaned) data,
 which <code>get_data</code> will handle.</p>
 </div>
 <div id="cleaning" class="section level2" number="5.2">
-<h2>
-<span class="header-section-number">5.2</span> Cleaning<a class="anchor" aria-label="anchor" href="#cleaning"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.2</span> Cleaning</h2>
 <p>clusteR provides a simple, friendly way to clean survey data: <code>clean_data</code>.
 By default, <code>clean_data</code> will use the most recent data file archived by
 <a href="data.html#get_data"><code>get_data</code></a>, but you can specify a different archive file using
@@ -103,7 +117,7 @@ inverse probability weighting according to a generalized linear model with
 <a href="data.html#clean_weight"><code>clean_weight</code></a>. <code>.wt</code> is very robust, so if a simpler solution
 is desired (e.g. calculating weights using simple mutates), create a weight
 variable using regular cleaning mutates instead.</p>
-<p>Arguments passed to <code>clean_data</code> are passed on to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate</a></code>
+<p>Arguments passed to <code>clean_data</code> are passed on to <code>dplyr::mutate</code>
 to modify existing columns and create new ones. Columns are set by your <code>get_x</code>
 function: <code>get_csv</code> will use the first row of your input CSV as names, while
 <code>get_alc</code> will use a codebook, for instance.</p>
@@ -113,15 +127,11 @@ same raw data archive twice will overwrite the previously cleaned version of
 the same archive.</p>
 </div>
 <div id="weighting" class="section level2" number="5.3">
-<h2>
-<span class="header-section-number">5.3</span> Weighting<a class="anchor" aria-label="anchor" href="#weighting"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.3</span> Weighting</h2>
 <p>Weighting is usually operationalized as part of cleaning (<code>.wt</code>) and is
 performed before cleaning mutates.</p>
 <div id="simple-weighting-schemes" class="section level3" number="5.3.1">
-<h3>
-<span class="header-section-number">5.3.1</span> Simple weighting schemes<a class="anchor" aria-label="anchor" href="#simple-weighting-schemes"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.3.1</span> Simple weighting schemes</h3>
 <p>If you are calculating simple weights based on columns in survey responses or
 the cohort file, you should create your weight variable within the dynamic dots
 (<code>clean_data(...)</code>). If you are depending on columns that you have not yet
@@ -133,9 +143,7 @@ information you can keep in the cohort file or refer to in your <code>clean_data
 call.</p>
 </div>
 <div id="clean_weight" class="section level3" number="5.3.2">
-<h3>
-<span class="header-section-number">5.3.2</span> clean_weight<a class="anchor" aria-label="anchor" href="#clean_weight"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.3.2</span> clean_weight</h3>
 <p>The author’s weighting approach is based on each individual participant’s
 estimated, adjusted probability of completing the survey if selected to
 participate. This approach relies on data in the cohort file, data in survey
@@ -161,18 +169,16 @@ Census demographic data for each cluster.</p>
 <p><code>.filt</code> allows you to filter data before weighting to limit which cohort members
 are included in weighting. Filters are applied before weighting mutates or
 modeling.</p>
-<p>Arguments passed to <code>...</code> are passed on to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate</a></code>.
-These are weighting mutates, so they are accessible to <code><a href="https://rdrr.io/r/stats/glm.html">stats::glm</a></code> for modeling
+<p>Arguments passed to <code>...</code> are passed on to <code>dplyr::mutate</code>.
+These are weighting mutates, so they are accessible to <code>stats::glm</code> for modeling
 but are not included in <code>clean_data</code> output.</p>
 </div>
 <div id="custom-weighting-schemes" class="section level3" number="5.3.3">
-<h3>
-<span class="header-section-number">5.3.3</span> Custom weighting schemes<a class="anchor" aria-label="anchor" href="#custom-weighting-schemes"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.3.3</span> Custom weighting schemes</h3>
 <p>clusteR is <a href="extensions.html#extensions">highly extensible</a>, including providing a framework to
 create complex, custom weighting schemes and apply those weights to cleaned
 data. If you develop a custom weighting function, you must <code>source</code> it (or
-otherwise attach it) before passing it to <code>.wt</code> in [<code>clean_data</code>][clean_data].
+otherwise attach it) before passing it to <code>.wt</code> in <a href="data.html#cleaning"><code>clean_data</code></a>.
 Your custom weighting function must return a function with exactly one argument
 (<code>x</code>), the dataframe of raw data, that itself returns a dataframe with at least
 two columns: <code>ID</code>, a column of participant IDs, and at least one numeric column
@@ -181,14 +187,12 @@ weights according to <code>ID</code>.</p>
 </div>
 </div>
 <div id="export_data" class="section level2" number="5.4">
-<h2>
-<span class="header-section-number">5.4</span> export_data<a class="anchor" aria-label="anchor" href="#export_data"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.4</span> export_data</h2>
 <p>You may wish to export your (raw or cleaned) survey responses to a file. You
 can use <code>export_data</code> to create a CSV from archived survey data.</p>
-<p>Arguments passed to <code>...</code> are passed on to <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select</a></code>. Unlike
-<code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select</a></code>, leaving <code>...</code> blank will include all columns, not no columns.
-Otherwise, however, default <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select</a></code> behavior applies; if, for instance,
+<p>Arguments passed to <code>...</code> are passed on to <code>dplyr::select</code>. Unlike
+<code>dplyr::select</code>, leaving <code>...</code> blank will include all columns, not no columns.
+Otherwise, however, default <code>dplyr::select</code> behavior applies; if, for instance,
 you wish to rename <code>Q1</code> to <code>Q01</code>, running:</p>
 <p><code>export_data("Q01" = Q1)</code></p>
 <p>will export only <code>Q01</code>. Instead, you may need to run:</p>
@@ -204,38 +208,27 @@ pass these requirements to <code>...</code> rather than enabling <code>.deid</co
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="cohort.html"><span class="header-section-number">4</span> Cohort</a></div>
-<div class="next"><a href="analysis.html"><span class="header-section-number">6</span> Analysis</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data"><span class="header-section-number">5</span> Data</a></li>
-<li><a class="nav-link" href="#get_data"><span class="header-section-number">5.1</span> get_data</a></li>
-<li><a class="nav-link" href="#cleaning"><span class="header-section-number">5.2</span> Cleaning</a></li>
-<li>
-<a class="nav-link" href="#weighting"><span class="header-section-number">5.3</span> Weighting</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#simple-weighting-schemes"><span class="header-section-number">5.3.1</span> Simple weighting schemes</a></li>
-<li><a class="nav-link" href="#clean_weight"><span class="header-section-number">5.3.2</span> clean_weight</a></li>
-<li><a class="nav-link" href="#custom-weighting-schemes"><span class="header-section-number">5.3.3</span> Custom weighting schemes</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#export_data"><span class="header-section-number">5.4</span> export_data</a></li>
-</ul>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/alectries/clusteR/blob/main/book/04-data.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/alectries/clusteR/edit/main/book/04-data.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-</div>
+      </div>
     </nav>
-</div>
+  </div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-03-23.</p>
@@ -247,5 +240,8 @@ pass these requirements to <code>...</code> rather than enabling <code>.deid</co
 
 </div></div>
 </footer>
+
+
 </body>
+
 </html>

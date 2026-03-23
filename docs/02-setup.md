@@ -187,8 +187,8 @@ to connect to this data. clusteR natively supports two data sources, but other
 packages can add support for additional data sources, and end users can write
 functions to support a custom data source. The two default sources are:
 
-- **.csv files**, connected with [`setup_get_csv`][From CSV].
-- **Alchemer surveys**, connected with [`setup_get_alc`][From Alchemer].
+- **.csv files**, connected with [`setup_get_csv`][Comma-delimited (.csv) data source].
+- **Alchemer surveys**, connected with [`setup_get_alc`][Alchemer data source].
 
 Additional native sources will be documented here in future releases.
 
@@ -199,7 +199,7 @@ values separated by commas and observations separated by newlines. These files
 are easy to create, modify, and view.
 
 clusteR accepts comma-delimited files as data sources via
-[`setup_get_csv`][From CSV] and `get_csv`). You will need:
+[`setup_get_csv`][Comma-delimited (.csv) data source] and `get_csv`). You will need:
 
 - A permanent file path (given as a string) denoting the location of the input
 .csv file.
@@ -222,7 +222,7 @@ natively by clusteR, not least because the author uses Alchemer at his local
 health department.
 
 clusteR accepts Alchemer survey data using Alchemer's [SurveyResponse API call](https://apihelp.alchemer.com/help/surveyresponse-sub-object-v5) via
-[`setup_get_alc`][From Alchemer] and `get_alc`. You will need:
+[`setup_get_alc`][Alchemer data source] and `get_alc`. You will need:
 
 - An Alchemer account, with your survey already created.
 - The Survey ID, which is a number that can be found in the URL when you are

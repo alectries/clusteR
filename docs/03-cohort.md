@@ -54,7 +54,7 @@ completion maps is customizable via `breaks` and `colors`, which are passed to
 You may need to view the U.S. Census blocks used as clusters for your survey.
 `view_map` displays these blocks on a simple map with county lines. It is
 customizable, including a title, subtitle, fill, and background colors. The map
-on [`view_progress`] is more comprehensive.
+on [`view_progress`][view_progress] is more comprehensive.
 
 ## Maintaining the cohort
 

@@ -1,33 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>3 Setup | clusteR Documentation</title>
-<meta name="author" content="Alec Higgins">
-<meta name="description" content="Setup is the trickiest and least forgiving step in using clusteR. The most critical information is available in R with ?setup. This page goes into additional detail.  3.1 Location setup generates...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="3 Setup | clusteR Documentation">
-<meta property="og:type" content="book">
-<meta property="og:description" content="Setup is the trickiest and least forgiving step in using clusteR. The most critical information is available in R with ?setup. This page goes into additional detail.  3.1 Location setup generates...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="3 Setup | clusteR Documentation">
-<meta name="twitter:description" content="Setup is the trickiest and least forgiving step in using clusteR. The most critical information is available in R with ?setup. This page goes into additional detail.  3.1 Location setup generates...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>3 Setup | clusteR Documentation</title>
+
+    <meta name="author" content="Alec Higgins" />
+  
+   <meta name="description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="3 Setup | clusteR Documentation" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Setup | clusteR Documentation" />
+  
+  <meta name="twitter:description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.10.0/transition.js"></script>
+    <script src="libs/bs3compat-0.10.0/tabs.js"></script>
+    <script src="libs/bs3compat-0.10.0/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="style.css" />
+  
 </head>
+
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -39,35 +63,27 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
+      </form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
-<li><a class="" href="quick-start.html"><span class="header-section-number">2</span> Quick Start</a></li>
-<li><a class="active" href="setup.html"><span class="header-section-number">3</span> Setup</a></li>
-<li><a class="" href="cohort.html"><span class="header-section-number">4</span> Cohort</a></li>
-<li><a class="" href="data.html"><span class="header-section-number">5</span> Data</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">6</span> Analysis</a></li>
-<li><a class="" href="extensions.html"><span class="header-section-number">7</span> Extensions</a></li>
-</ul>
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/alectries/clusteR">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
         </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="setup" class="section level1" number="3">
-<h1>
-<span class="header-section-number">3</span> Setup<a class="anchor" aria-label="anchor" href="#setup"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="setup" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Setup</h1>
 <p>Setup is the trickiest and least forgiving step in using clusteR. The most
 critical information is available in R with <code>?setup</code>. This page goes into
 additional detail.</p>
 <div id="location" class="section level2" number="3.1">
-<h2>
-<span class="header-section-number">3.1</span> Location<a class="anchor" aria-label="anchor" href="#location"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">3.1</span> Location</h2>
 <p><code>setup</code> generates an environment for clusteR. Before beginning setup, you need
 to set your working directory to a dedicated folder for your project. You
 should not reuse the same folder as past clusteR projects. You can, however,
@@ -88,9 +104,7 @@ you wish to reset your clusteR configuration and start over, you should not
 delete or tamper with this file.</p>
 </div>
 <div id="name-short_name" class="section level2" number="3.2">
-<h2>
-<span class="header-section-number">3.2</span> name, short_name<a class="anchor" aria-label="anchor" href="#name-short_name"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">3.2</span> name, short_name</h2>
 <p>These are your project identifiers. Both should be strings. <code>name</code> will be used
 primarily for formatted titles on reports, while <code>short_name</code> will be used
 primarily for file name prefixes.</p>
@@ -102,9 +116,7 @@ However, because so many other configured options are required for clusteR to
 actually work, <code>setup</code> will provide warnings for other options you do not set.</p>
 </div>
 <div id="state-county" class="section level2" number="3.3">
-<h2>
-<span class="header-section-number">3.3</span> state, county<a class="anchor" aria-label="anchor" href="#state-county"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">3.3</span> state, county</h2>
 <p>These variables allow you to specify FIPS/INCITS codes, which clusteR uses to
 download U.S. Census TIGER/Line shapefiles for your region of interest.
 <a href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code">State codes</a> and
@@ -119,17 +131,13 @@ but may be useful in other states.</p>
 Support for other years is planned in later versions.</p>
 </div>
 <div id="geoids" class="section level2" number="3.4">
-<h2>
-<span class="header-section-number">3.4</span> geoids<a class="anchor" aria-label="anchor" href="#geoids"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">3.4</span> geoids</h2>
 <p>If you have already selected U.S. Census blocks to serve as your clusters, you
 will need a file to link cluster identifiers to U.S. Census GEOIDs. If you have
 not selected them yet, you can do so using <code>make_clusters</code> or a similar
 function.</p>
 <div id="make_clusters" class="section level3" number="3.4.1">
-<h3>
-<span class="header-section-number">3.4.1</span> make_clusters<a class="anchor" aria-label="anchor" href="#make_clusters"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">3.4.1</span> make_clusters</h3>
 <p><code>make_clusters</code> will generate a file for you that matches cluster identifiers
 to GEOIDs. If you have already run <code>setup</code> previously, <code>make_clusters</code> will
 obtain your state and county FIPS/INCITS codes from your configuration, if
@@ -139,9 +147,7 @@ a message from <a href="https://walker-data.com/tidycensus/">tidycensus</a> with
 relevant FIPS/INCITS codes so you don’t need to look them up.</p>
 </div>
 <div id="custom-clusters" class="section level3" number="3.4.2">
-<h3>
-<span class="header-section-number">3.4.2</span> Custom clusters<a class="anchor" aria-label="anchor" href="#custom-clusters"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">3.4.2</span> Custom clusters</h3>
 <p>clusteR is <a href="extensions.html#extensions">highly extensible</a>, and you can create custom functions
 or scripts to manage cluster selection for you. Your function or script must
 save a delimited text file with two columns: “geoid” (specifying the 15-digit
@@ -154,62 +160,41 @@ must match the “Cluster” column in your cohort file.</p>
 </div>
 </div>
 <div id="setup_cohort" class="section level2" number="3.5">
-<h2>
-<span class="header-section-number">3.5</span> setup_cohort<a class="anchor" aria-label="anchor" href="#setup_cohort"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">3.5</span> setup_cohort</h2>
 <p>For clusteR to perform management tasks, it needs to maintain a master file of
 cohort members, their information, and their participation status. clusteR
 maintains a raw text file in the Cohort subdirectory with this information and
 automatically updates some of the information as survey responses come in.</p>
 <div id="required-fields" class="section level3" number="3.5.1">
-<h3>
-<span class="header-section-number">3.5.1</span> Required fields<a class="anchor" aria-label="anchor" href="#required-fields"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">3.5.1</span> Required fields</h3>
 <p>clusteR requires certain fields in the cohort file. These are:</p>
 <ul>
-<li>
-<strong>ID</strong>: A unique identifier, which can be in any format.</li>
-<li>
-<strong>Cluster</strong>: An identifier of the cluster a participant is in.</li>
-<li>
-<strong>Name</strong>: The participant’s name, which defaults to “Current Resident”.</li>
-<li>
-<strong>Mailing</strong>: The participant’s mailing street address.</li>
-<li>
-<strong>Physical</strong>: When the participant’s mailing address is not their residence,
+<li><strong>ID</strong>: A unique identifier, which can be in any format.</li>
+<li><strong>Cluster</strong>: An identifier of the cluster a participant is in.</li>
+<li><strong>Name</strong>: The participant’s name, which defaults to “Current Resident”.</li>
+<li><strong>Mailing</strong>: The participant’s mailing street address.</li>
+<li><strong>Physical</strong>: When the participant’s mailing address is not their residence,
 the participant’s actual street address of residence.</li>
-<li>
-<strong>City</strong>: The city of the mailing address.</li>
-<li>
-<strong>State</strong>: The state of the mailing address.</li>
-<li>
-<strong>ZIP</strong>: The ZIP code of the mailing address.</li>
-<li>
-<strong>Phone</strong>: The participant’s phone number.</li>
-<li>
-<strong>Email</strong>: The participant’s email address.</li>
-<li>
-<strong>Consent</strong>: The participant’s consent status (“Yes”, “No”, “Unknown”,
+<li><strong>City</strong>: The city of the mailing address.</li>
+<li><strong>State</strong>: The state of the mailing address.</li>
+<li><strong>ZIP</strong>: The ZIP code of the mailing address.</li>
+<li><strong>Phone</strong>: The participant’s phone number.</li>
+<li><strong>Email</strong>: The participant’s email address.</li>
+<li><strong>Consent</strong>: The participant’s consent status (“Yes”, “No”, “Unknown”,
 “Do not contact”, or NA), defaulting to NA.</li>
-<li>
-<strong>Status</strong>: The participant’s completion status with enrollment information,
+<li><strong>Status</strong>: The participant’s completion status with enrollment information,
 which is automatically determined.</li>
 </ul>
 <p>Most of these fields can be formatted however you like, but Consent is picky.
 You must use only the following options:</p>
 <ul>
-<li>
-<strong>Yes</strong>: The participant has participated and consented to be surveyed.</li>
-<li>
-<strong>No</strong>: The participant has participated or refused and did not consent to be
+<li><strong>Yes</strong>: The participant has participated and consented to be surveyed.</li>
+<li><strong>No</strong>: The participant has participated or refused and did not consent to be
 surveyed.</li>
-<li>
-<strong>Unknown</strong>: The participant has participated, but did not return a consent.</li>
-<li>
-<strong>Do not contact</strong>: The participant wishes to be removed from the cohort; this
+<li><strong>Unknown</strong>: The participant has participated, but did not return a consent.</li>
+<li><strong>Do not contact</strong>: The participant wishes to be removed from the cohort; this
 is optional and “No” can be used instead.</li>
-<li>
-<strong>NA</strong>: The system default, which should be used when a prospective
+<li><strong>NA</strong>: The system default, which should be used when a prospective
 participant has not yet been reached.</li>
 </ul>
 <p><code>update_cohort</code> will throw an error if anything other than these options is
@@ -217,9 +202,7 @@ used. For an Alchemer survey (but, importantly, not a CSV file), you can enter
 a key in <code>setup_get_alc</code> to convert your responses for you.</p>
 </div>
 <div id="input" class="section level3" number="3.5.2">
-<h3>
-<span class="header-section-number">3.5.2</span> Input<a class="anchor" aria-label="anchor" href="#input"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">3.5.2</span> Input</h3>
 <p>During initial setup, you will need to specify a cohort input file, which must
 be a:</p>
 <ul>
@@ -229,15 +212,13 @@ be a:</p>
 </ul>
 <p>No other format is supported. There are two ways to provide this input file.</p>
 <div id="pre-generate-and-provide-easy" class="section level4 unnumbered">
-<h4>Pre-generate and provide (easy)<a class="anchor" aria-label="anchor" href="#pre-generate-and-provide-easy"><i class="fas fa-link"></i></a>
-</h4>
+<h4>Pre-generate and provide (easy)</h4>
 <p>The easy way is to generate the file in advance and provide its file path to
 <code>setup</code> as a string. The file should be pre-filled with as much participant
 information as you have available.</p>
 </div>
 <div id="generate-during-setup-harder" class="section level4 unnumbered">
-<h4>Generate during setup (harder)<a class="anchor" aria-label="anchor" href="#generate-during-setup-harder"><i class="fas fa-link"></i></a>
-</h4>
+<h4>Generate during setup (harder)</h4>
 <p>The more complicated way is to write and run a function as part of setup that
 will generate your cohort input file for you. This function can work however you
 like, but must be available when you run <code>setup</code> and must return only the file
@@ -248,9 +229,7 @@ console.</p>
 </div>
 </div>
 <div id="cohort-file-storage" class="section level3" number="3.5.3">
-<h3>
-<span class="header-section-number">3.5.3</span> Cohort file storage<a class="anchor" aria-label="anchor" href="#cohort-file-storage"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">3.5.3</span> Cohort file storage</h3>
 <p>The cohort data file will be stored in the automatically-generated Cohort
 subdirectory and will be named <code>short_name</code> as provided in <code>setup</code>. <em>It is not
 recommended to edit this file by hand.</em> However, should you need to edit it by
@@ -259,9 +238,7 @@ hand, it is a CSV file that can be edited in a text editor or Excel.</p>
 clusteR does not have built-in protection for confidential information.</p>
 </div>
 <div id="editor" class="section level3" number="3.5.4">
-<h3>
-<span class="header-section-number">3.5.4</span> Editor<a class="anchor" aria-label="anchor" href="#editor"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">3.5.4</span> Editor</h3>
 <p>During setup, clusteR will produce an Editor.csv file in the Cohort subdirectory
 so that you can manually make changes to existing cohort member records and add
 new records. It will include all columns in your custom cohort file, but will
@@ -269,29 +246,23 @@ show no data from the file.</p>
 </div>
 </div>
 <div id="setup_get" class="section level2" number="3.6">
-<h2>
-<span class="header-section-number">3.6</span> setup_get<a class="anchor" aria-label="anchor" href="#setup_get"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">3.6</span> setup_get</h2>
 <p>A survey generates survey data, and in order to manage the survey, clusteR needs
 to connect to this data. clusteR natively supports two data sources, but other
 packages can add support for additional data sources, and end users can write
 functions to support a custom data source. The two default sources are:</p>
 <ul>
-<li>
-<strong>.csv files</strong>, connected with [<code>setup_get_csv</code>][From CSV].</li>
-<li>
-<strong>Alchemer surveys</strong>, connected with [<code>setup_get_alc</code>][From Alchemer].</li>
+<li><strong>.csv files</strong>, connected with <a href="setup.html#comma-delimited-.csv-data-source"><code>setup_get_csv</code></a>.</li>
+<li><strong>Alchemer surveys</strong>, connected with <a href="setup.html#alchemer-data-source"><code>setup_get_alc</code></a>.</li>
 </ul>
 <p>Additional native sources will be documented here in future releases.</p>
 <div id="comma-delimited-.csv-data-source" class="section level3" number="3.6.1">
-<h3>
-<span class="header-section-number">3.6.1</span> Comma-delimited (.csv) data source<a class="anchor" aria-label="anchor" href="#comma-delimited-.csv-data-source"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">3.6.1</span> Comma-delimited (.csv) data source</h3>
 <p>The simplest data source in existence is the humble .csv file: a text file with
 values separated by commas and observations separated by newlines. These files
 are easy to create, modify, and view.</p>
 <p>clusteR accepts comma-delimited files as data sources via
-[<code>setup_get_csv</code>][From CSV] and <code>get_csv</code>). You will need:</p>
+<a href="setup.html#comma-delimited-.csv-data-source"><code>setup_get_csv</code></a> and <code>get_csv</code>). You will need:</p>
 <ul>
 <li>A permanent file path (given as a string) denoting the location of the input
 .csv file.</li>
@@ -305,15 +276,13 @@ include this argument:</p>
 this again.</p>
 </div>
 <div id="alchemer-data-source" class="section level3" number="3.6.2">
-<h3>
-<span class="header-section-number">3.6.2</span> Alchemer data source<a class="anchor" aria-label="anchor" href="#alchemer-data-source"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">3.6.2</span> Alchemer data source</h3>
 <p><a href="https://www.alchemer.com/">Alchemer</a> is a survey tool used widely by local
 public health agencies in the United States. Alchemer surveys are handled
 natively by clusteR, not least because the author uses Alchemer at his local
 health department.</p>
 <p>clusteR accepts Alchemer survey data using Alchemer’s <a href="https://apihelp.alchemer.com/help/surveyresponse-sub-object-v5">SurveyResponse API call</a> via
-[<code>setup_get_alc</code>][From Alchemer] and <code>get_alc</code>. You will need:</p>
+<a href="setup.html#alchemer-data-source"><code>setup_get_alc</code></a> and <code>get_alc</code>. You will need:</p>
 <ul>
 <li>An Alchemer account, with your survey already created.</li>
 <li>The Survey ID, which is a number that can be found in the URL when you are
@@ -330,9 +299,7 @@ and include this argument:</p>
 this again.</p>
 </div>
 <div id="custom-data-sources" class="section level3" number="3.6.3">
-<h3>
-<span class="header-section-number">3.6.3</span> Custom data sources<a class="anchor" aria-label="anchor" href="#custom-data-sources"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">3.6.3</span> Custom data sources</h3>
 <p>In general, because each data source and its format are unique, clusteR is very
 flexible with custom data sources. However, there are a few requirements
 (replace x with a shorthand for your data source):</p>
@@ -361,9 +328,7 @@ archive data in an appropriate format that is compatible across data source
 types and with all native clusteR functions.</p>
 </div>
 <div id="why-not-excel" class="section level3" number="3.6.4">
-<h3>
-<span class="header-section-number">3.6.4</span> Why not Excel?<a class="anchor" aria-label="anchor" href="#why-not-excel"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">3.6.4</span> Why not Excel?</h3>
 <p>You may be wondering why the author hasn’t created functions to get data from a
 Microsoft Excel source file, even though clusteR supports Excel for other tasks
 (like importing a cohort file). The reasons are:</p>
@@ -382,9 +347,7 @@ time-consuming.</p>
 </div>
 </div>
 <div id="additional-variables" class="section level2" number="3.7">
-<h2>
-<span class="header-section-number">3.7</span> Additional variables<a class="anchor" aria-label="anchor" href="#additional-variables"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">3.7</span> Additional variables</h2>
 <p>As mentioned previously, clusteR is <a href="extensions.html#extensions">highly extensible</a>, and your
 extensions may need persistent variables. While <code>setup</code> will not perform any
 validation on these additional variables, it will save them to config.</p>
@@ -395,54 +358,27 @@ attached. For example, you can access the project name using
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="quick-start.html"><span class="header-section-number">2</span> Quick Start</a></div>
-<div class="next"><a href="cohort.html"><span class="header-section-number">4</span> Cohort</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#setup"><span class="header-section-number">3</span> Setup</a></li>
-<li><a class="nav-link" href="#location"><span class="header-section-number">3.1</span> Location</a></li>
-<li><a class="nav-link" href="#name-short_name"><span class="header-section-number">3.2</span> name, short_name</a></li>
-<li><a class="nav-link" href="#state-county"><span class="header-section-number">3.3</span> state, county</a></li>
-<li>
-<a class="nav-link" href="#geoids"><span class="header-section-number">3.4</span> geoids</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#make_clusters"><span class="header-section-number">3.4.1</span> make_clusters</a></li>
-<li><a class="nav-link" href="#custom-clusters"><span class="header-section-number">3.4.2</span> Custom clusters</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#setup_cohort"><span class="header-section-number">3.5</span> setup_cohort</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#required-fields"><span class="header-section-number">3.5.1</span> Required fields</a></li>
-<li><a class="nav-link" href="#input"><span class="header-section-number">3.5.2</span> Input</a></li>
-<li><a class="nav-link" href="#cohort-file-storage"><span class="header-section-number">3.5.3</span> Cohort file storage</a></li>
-<li><a class="nav-link" href="#editor"><span class="header-section-number">3.5.4</span> Editor</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#setup_get"><span class="header-section-number">3.6</span> setup_get</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#comma-delimited-.csv-data-source"><span class="header-section-number">3.6.1</span> Comma-delimited (.csv) data source</a></li>
-<li><a class="nav-link" href="#alchemer-data-source"><span class="header-section-number">3.6.2</span> Alchemer data source</a></li>
-<li><a class="nav-link" href="#custom-data-sources"><span class="header-section-number">3.6.3</span> Custom data sources</a></li>
-<li><a class="nav-link" href="#why-not-excel"><span class="header-section-number">3.6.4</span> Why not Excel?</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#additional-variables"><span class="header-section-number">3.7</span> Additional variables</a></li>
-</ul>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/alectries/clusteR/blob/main/book/02-setup.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/alectries/clusteR/edit/main/book/02-setup.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-</div>
+      </div>
     </nav>
-</div>
+  </div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-03-23.</p>
@@ -454,5 +390,8 @@ attached. For example, you can access the project name using
 
 </div></div>
 </footer>
+
+
 </body>
+
 </html>

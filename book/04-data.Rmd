@@ -118,7 +118,7 @@ but are not included in `clean_data` output.
 clusteR is [highly extensible][Extensions], including providing a framework to
 create complex, custom weighting schemes and apply those weights to cleaned
 data. If you develop a custom weighting function, you must `source` it (or
-otherwise attach it) before passing it to `.wt` in [`clean_data`][clean_data].
+otherwise attach it) before passing it to `.wt` in [`clean_data`][Cleaning].
 Your custom weighting function must return a function with exactly one argument
 (`x`), the dataframe of raw data, that itself returns a dataframe with at least
 two columns: `ID`, a column of participant IDs, and at least one numeric column

@@ -1,33 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>4 Cohort | clusteR Documentation</title>
-<meta name="author" content="Alec Higgins">
-<meta name="description" content="The focus of clusteR is the cohort file: a data file where information about your survey participants is stored. This section focuses on updating, maintaining, and exporting cohort information....">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="4 Cohort | clusteR Documentation">
-<meta property="og:type" content="book">
-<meta property="og:description" content="The focus of clusteR is the cohort file: a data file where information about your survey participants is stored. This section focuses on updating, maintaining, and exporting cohort information....">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="4 Cohort | clusteR Documentation">
-<meta name="twitter:description" content="The focus of clusteR is the cohort file: a data file where information about your survey participants is stored. This section focuses on updating, maintaining, and exporting cohort information....">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>4 Cohort | clusteR Documentation</title>
+
+    <meta name="author" content="Alec Higgins" />
+  
+   <meta name="description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="4 Cohort | clusteR Documentation" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Cohort | clusteR Documentation" />
+  
+  <meta name="twitter:description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.10.0/transition.js"></script>
+    <script src="libs/bs3compat-0.10.0/tabs.js"></script>
+    <script src="libs/bs3compat-0.10.0/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="style.css" />
+  
 </head>
+
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -39,36 +63,28 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
+      </form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
-<li><a class="" href="quick-start.html"><span class="header-section-number">2</span> Quick Start</a></li>
-<li><a class="" href="setup.html"><span class="header-section-number">3</span> Setup</a></li>
-<li><a class="active" href="cohort.html"><span class="header-section-number">4</span> Cohort</a></li>
-<li><a class="" href="data.html"><span class="header-section-number">5</span> Data</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">6</span> Analysis</a></li>
-<li><a class="" href="extensions.html"><span class="header-section-number">7</span> Extensions</a></li>
-</ul>
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/alectries/clusteR">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
         </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cohort" class="section level1" number="4">
-<h1>
-<span class="header-section-number">4</span> Cohort<a class="anchor" aria-label="anchor" href="#cohort"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="cohort" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Cohort</h1>
 <p>The focus of clusteR is the cohort file: a data file where information about
 your survey participants is stored. This section focuses on updating,
 maintaining, and exporting cohort information. For creating a cohort file, see
 <a href="setup.html#setup_cohort"><code>setup_cohort</code></a>.</p>
 <div id="update_cohort" class="section level2" number="4.1">
-<h2>
-<span class="header-section-number">4.1</span> update_cohort<a class="anchor" aria-label="anchor" href="#update_cohort"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">4.1</span> update_cohort</h2>
 <p><code>update_cohort</code> (and its partner, <code>update_confirm</code>) is the workhorse of
 clusteR. Using the data source specified in <a href="setup.html#setup_get"><code>setup_get</code></a> and the
 <a href="setup.html#editor">Editor</a>, <code>update_cohort</code> reviews new information and applies changes to the
@@ -85,9 +101,7 @@ run in the same R session.</p>
 information, run <code>update_confirm</code> to write the updates to the cohort file.
 Changes can be made in your data source or in Editor.</p>
 <div id="editor-1" class="section level3" number="4.1.1">
-<h3>
-<span class="header-section-number">4.1.1</span> Editor<a class="anchor" aria-label="anchor" href="#editor-1"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.1.1</span> Editor</h3>
 <p>Editor is an automatically-generated CSV file located in the Cohort folder.
 It will be read by <code>update_cohort</code>, and changes you make in Editor will override
 any existing or future updates from your data source. It is recommended to make
@@ -99,36 +113,28 @@ cells in Editor. It does not overwrite entire rows, and it never overwrites
 answers to survey questions that are not stored in your cohort file.</p>
 </div>
 <div id="view_progress" class="section level3" number="4.1.2">
-<h3>
-<span class="header-section-number">4.1.2</span> view_progress<a class="anchor" aria-label="anchor" href="#view_progress"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.1.2</span> view_progress</h3>
 <p>You can generate and view a simple report on survey completion, including data
 and maps by cluster, by running <code>view_progress</code>. The color scale on the
 completion maps is customizable via <code>breaks</code> and <code>colors</code>, which are passed to
-<code><a href="https://ggplot2.tidyverse.org/reference/scale_steps.html">ggplot2::scale_fill_stepsn</a></code>.</p>
+<code>ggplot2::scale_fill_stepsn</code>.</p>
 </div>
 <div id="view_map" class="section level3" number="4.1.3">
-<h3>
-<span class="header-section-number">4.1.3</span> view_map<a class="anchor" aria-label="anchor" href="#view_map"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.1.3</span> view_map</h3>
 <p>You may need to view the U.S. Census blocks used as clusters for your survey.
 <code>view_map</code> displays these blocks on a simple map with county lines. It is
 customizable, including a title, subtitle, fill, and background colors. The map
-on [<code>view_progress</code>] is more comprehensive.</p>
+on <a href="cohort.html#view_progress"><code>view_progress</code></a> is more comprehensive.</p>
 </div>
 </div>
 <div id="maintaining-the-cohort" class="section level2" number="4.2">
-<h2>
-<span class="header-section-number">4.2</span> Maintaining the cohort<a class="anchor" aria-label="anchor" href="#maintaining-the-cohort"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">4.2</span> Maintaining the cohort</h2>
 <p>While <code>update_cohort</code> (and <code>update_confirm</code>) handle most of the cohort
 maintenance automatically, you may need to perform additional, more manual
 maintenance tasks. These functions assist with manual cohort monitoring and
 maintenance.</p>
 <div id="restore_cohort" class="section level3" number="4.2.1">
-<h3>
-<span class="header-section-number">4.2.1</span> restore_cohort<a class="anchor" aria-label="anchor" href="#restore_cohort"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.2.1</span> restore_cohort</h3>
 <p>Each time the cohort file is updated, an archived version is saved in
 Cohort/Archive. You can restore an archived version using <code>restore_cohort</code>. When
 a specific archive is not named, the most recent is displayed and can be saved
@@ -137,27 +143,21 @@ restore an older version. Unless you type “save” in the console, the display
 archive version is not stored as the cohort file.</p>
 </div>
 <div id="view_cohort" class="section level3" number="4.2.2">
-<h3>
-<span class="header-section-number">4.2.2</span> view_cohort<a class="anchor" aria-label="anchor" href="#view_cohort"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.2.2</span> view_cohort</h3>
 <p>You can view the cohort at any time with <code>view_cohort</code>. It also invisibly
 returns the cohort file, so you can use the assignment operator <code>&lt;-</code> to
 save it to memory. If you would like to do this silently, use
 <code>view_cohort(FALSE)</code>.</p>
 </div>
 <div id="search_cohort" class="section level3" number="4.2.3">
-<h3>
-<span class="header-section-number">4.2.3</span> search_cohort<a class="anchor" aria-label="anchor" href="#search_cohort"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.2.3</span> search_cohort</h3>
 <p>You can search (more accurately, filter) the cohort with <code>search_cohort</code>, which
 displays the results in a viewer and invisibly returns the filtered results.
-<code>search_cohort</code> accepts normal <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter</a></code> syntax.</p>
+<code>search_cohort</code> accepts normal <code>dplyr::filter</code> syntax.</p>
 </div>
 </div>
 <div id="reaching-the-cohort" class="section level2" number="4.3">
-<h2>
-<span class="header-section-number">4.3</span> Reaching the cohort<a class="anchor" aria-label="anchor" href="#reaching-the-cohort"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">4.3</span> Reaching the cohort</h2>
 <p>clusteR includes functions to output data about cohort participants. This can
 often be done in PDF or CSV format for convenience.</p>
 <p><a href="cohort.html#make_email"><code>make_email</code></a>, <a href="cohort.html#make_mailing"><code>make_mailing</code></a>, and
@@ -172,43 +172,31 @@ the survey (status “Completed - enrolled”, “Completed - re-enroll”, or
 cohort information filtered by cluster characteristics. The <code>filt</code> argument
 allows users to filter clusters by a summary table of cluster characteristics.</p>
 <ul>
-<li>
-<code>n</code>, the total number of cohort members in each cluster</li>
-<li>
-<code>completed</code>, <code>completed_pct</code>: The number or percent (out of 100) of
+<li><code>n</code>, the total number of cohort members in each cluster</li>
+<li><code>completed</code>, <code>completed_pct</code>: The number or percent (out of 100) of
 participants with any Completed status</li>
-<li>
-<code>pending</code>, <code>pending_pct</code>: The number or percent (out of 100) of participants
+<li><code>pending</code>, <code>pending_pct</code>: The number or percent (out of 100) of participants
 with an Enrolled, Re-enroll, or Not enrolled status</li>
-<li>
-<code>enrolled</code>, <code>enrolled_pct</code>: The number or percent (out of 100) of participants
+<li><code>enrolled</code>, <code>enrolled_pct</code>: The number or percent (out of 100) of participants
 with a Completed - enrolled or Enrolled status</li>
 </ul>
 <div id="make_email" class="section level3" number="4.3.1">
-<h3>
-<span class="header-section-number">4.3.1</span> make_email<a class="anchor" aria-label="anchor" href="#make_email"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.3.1</span> make_email</h3>
 <p><code>make_email</code> outputs each participant’s ID, name, and email address. See
 <a href="cohort.html#reaching-the-cohort">Reaching the cohort</a> for filtering options.</p>
 </div>
 <div id="make_mailing" class="section level3" number="4.3.2">
-<h3>
-<span class="header-section-number">4.3.2</span> make_mailing<a class="anchor" aria-label="anchor" href="#make_mailing"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.3.2</span> make_mailing</h3>
 <p><code>make_mailing</code> outputs each participant’s ID, name, mailing address, city,
 state, and ZIP code. See <a href="cohort.html#reaching-the-cohort">Reaching the cohort</a> for filtering options.</p>
 </div>
 <div id="make_phone" class="section level3" number="4.3.3">
-<h3>
-<span class="header-section-number">4.3.3</span> make_phone<a class="anchor" aria-label="anchor" href="#make_phone"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.3.3</span> make_phone</h3>
 <p><code>make_phone</code> outputs each participant’s ID, name, and phone number. See
 <a href="cohort.html#reaching-the-cohort">Reaching the cohort</a> for filtering options.</p>
 </div>
 <div id="make_groups" class="section level3" number="4.3.4">
-<h3>
-<span class="header-section-number">4.3.4</span> make_groups<a class="anchor" aria-label="anchor" href="#make_groups"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.3.4</span> make_groups</h3>
 <p><code>make_groups</code> filters clusters by a summary table of cluster characteristics
 (using the <code>filt</code> argument), groups clusters, and creates Assignments.csv in the
 Contacts folder. It also outputs a plot of these automatic groups. <code>make_groups</code>
@@ -224,22 +212,15 @@ grouping functions using the <code>fn</code> argument and the dynamic dots (<cod
 specify any necessary arguments beyond the defaults. <code>make_groups</code> requires the
 function to output a dataframe with the following columns:</p>
 <ul>
-<li>
-<code>cluster</code>, matching the cohort file cluster identifier</li>
-<li>
-<code>geoid</code>, matching the Census block GEOID</li>
-<li>
-<code>lat</code> and <code>long</code>, the latitude and longtitude of a point within the cluster</li>
-<li>
-<code>ur</code>, showing whether the block is urban or rural</li>
-<li>
-<code>geometry</code>, an <em>sf</em> geometry field to draw the block shape</li>
+<li><code>cluster</code>, matching the cohort file cluster identifier</li>
+<li><code>geoid</code>, matching the Census block GEOID</li>
+<li><code>lat</code> and <code>long</code>, the latitude and longtitude of a point within the cluster</li>
+<li><code>ur</code>, showing whether the block is urban or rural</li>
+<li><code>geometry</code>, an <em>sf</em> geometry field to draw the block shape</li>
 </ul>
 </div>
 <div id="make_walklist" class="section level3" number="4.3.5">
-<h3>
-<span class="header-section-number">4.3.5</span> make_walklist<a class="anchor" aria-label="anchor" href="#make_walklist"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">4.3.5</span> make_walklist</h3>
 <p><code>make_walklist</code>, unlike <a href="cohort.html#make_mailing"><code>make_mailing</code></a>, exports addresses in a
 formatted PDF intended to be used in door-to-door outreach. You can specify the
 cohort file columns to be included in the output by changing <code>cols</code>.</p>
@@ -250,9 +231,7 @@ they can be provided to <code>make_walklist</code> as named arguments.</p>
 </div>
 </div>
 <div id="export_cohort" class="section level2" number="4.4">
-<h2>
-<span class="header-section-number">4.4</span> export_cohort<a class="anchor" aria-label="anchor" href="#export_cohort"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">4.4</span> export_cohort</h2>
 <p>Cohort information is stored as a plain text file. The data can be exported to
 a CSV file with <code>export_cohort</code>.</p>
 <p>By default, the exported file will be named after <code>name</code> specified during
@@ -263,57 +242,32 @@ completion and participants with an unenroll or do not contact flag will be
 removed.</p>
 <p>Setting <code>.removed</code> to TRUE will create removed.csv, which lists all participants
 removed by setting <code>.status</code> to TRUE.</p>
-<p>All other arguments passed to <code>export_cohort</code> are passed on to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate</a></code>.
+<p>All other arguments passed to <code>export_cohort</code> are passed on to <code>dplyr::mutate</code>.
 To remove columns from the output, you can set them to NULL.</p>
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="setup.html"><span class="header-section-number">3</span> Setup</a></div>
-<div class="next"><a href="data.html"><span class="header-section-number">5</span> Data</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cohort"><span class="header-section-number">4</span> Cohort</a></li>
-<li>
-<a class="nav-link" href="#update_cohort"><span class="header-section-number">4.1</span> update_cohort</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#editor-1"><span class="header-section-number">4.1.1</span> Editor</a></li>
-<li><a class="nav-link" href="#view_progress"><span class="header-section-number">4.1.2</span> view_progress</a></li>
-<li><a class="nav-link" href="#view_map"><span class="header-section-number">4.1.3</span> view_map</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#maintaining-the-cohort"><span class="header-section-number">4.2</span> Maintaining the cohort</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#restore_cohort"><span class="header-section-number">4.2.1</span> restore_cohort</a></li>
-<li><a class="nav-link" href="#view_cohort"><span class="header-section-number">4.2.2</span> view_cohort</a></li>
-<li><a class="nav-link" href="#search_cohort"><span class="header-section-number">4.2.3</span> search_cohort</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#reaching-the-cohort"><span class="header-section-number">4.3</span> Reaching the cohort</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#make_email"><span class="header-section-number">4.3.1</span> make_email</a></li>
-<li><a class="nav-link" href="#make_mailing"><span class="header-section-number">4.3.2</span> make_mailing</a></li>
-<li><a class="nav-link" href="#make_phone"><span class="header-section-number">4.3.3</span> make_phone</a></li>
-<li><a class="nav-link" href="#make_groups"><span class="header-section-number">4.3.4</span> make_groups</a></li>
-<li><a class="nav-link" href="#make_walklist"><span class="header-section-number">4.3.5</span> make_walklist</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#export_cohort"><span class="header-section-number">4.4</span> export_cohort</a></li>
-</ul>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/alectries/clusteR/blob/main/book/03-cohort.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/alectries/clusteR/edit/main/book/03-cohort.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-</div>
+      </div>
     </nav>
-</div>
+  </div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-03-23.</p>
@@ -325,5 +279,8 @@ To remove columns from the output, you can set them to NULL.</p>
 
 </div></div>
 </footer>
+
+
 </body>
+
 </html>

@@ -1,33 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>7 Extensions | clusteR Documentation</title>
-<meta name="author" content="Alec Higgins">
-<meta name="description" content="clusteR is built for epidemiologists in local, regional, or state health departments to manage a cluster-sampled survey. These surveys may have varied study designs, outreach strategies, and...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="7 Extensions | clusteR Documentation">
-<meta property="og:type" content="book">
-<meta property="og:description" content="clusteR is built for epidemiologists in local, regional, or state health departments to manage a cluster-sampled survey. These surveys may have varied study designs, outreach strategies, and...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="7 Extensions | clusteR Documentation">
-<meta name="twitter:description" content="clusteR is built for epidemiologists in local, regional, or state health departments to manage a cluster-sampled survey. These surveys may have varied study designs, outreach strategies, and...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>7 Extensions | clusteR Documentation</title>
+
+    <meta name="author" content="Alec Higgins" />
+  
+   <meta name="description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="7 Extensions | clusteR Documentation" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Extensions | clusteR Documentation" />
+  
+  <meta name="twitter:description" content="R package for local epidemiologists to manage cluster-sampled cohort surveys." />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.10.0/transition.js"></script>
+    <script src="libs/bs3compat-0.10.0/tabs.js"></script>
+    <script src="libs/bs3compat-0.10.0/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="style.css" />
+  
 </head>
+
 <body data-spy="scroll" data-target="#toc">
 
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
@@ -39,28 +63,22 @@
     <div id="main-nav" class="collapse-lg">
       <form role="search">
         <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
+      </form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
-<li><a class="" href="quick-start.html"><span class="header-section-number">2</span> Quick Start</a></li>
-<li><a class="" href="setup.html"><span class="header-section-number">3</span> Setup</a></li>
-<li><a class="" href="cohort.html"><span class="header-section-number">4</span> Cohort</a></li>
-<li><a class="" href="data.html"><span class="header-section-number">5</span> Data</a></li>
-<li><a class="" href="analysis.html"><span class="header-section-number">6</span> Analysis</a></li>
-<li><a class="active" href="extensions.html"><span class="header-section-number">7</span> Extensions</a></li>
-</ul>
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/alectries/clusteR">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
         </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="extensions" class="section level1" number="7">
-<h1>
-<span class="header-section-number">7</span> Extensions<a class="anchor" aria-label="anchor" href="#extensions"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="extensions" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Extensions</h1>
 <p>clusteR is built for epidemiologists in local, regional, or state health
 departments to manage a cluster-sampled survey. These surveys may have varied
 study designs, outreach strategies, and analytic schemes. With that variability
@@ -71,45 +89,40 @@ there is no modular support, you can write new functions to access and modify
 the files directly as needed.</p>
 <p>The areas where clusteR supports extensions are:</p>
 <ul>
-<li>The selection of <a href="setup.html#custom-clusters">custom clusters</a>
-</li>
-<li>
-<a href="setup.html#additional-variables">Additional variables</a> during setup that are added to <code>.cluster$cfg</code> when
+<li>The selection of <a href="setup.html#custom-clusters">custom clusters</a></li>
+<li><a href="setup.html#additional-variables">Additional variables</a> during setup that are added to <code>.cluster$cfg</code> when
 clusteR is loaded</li>
-<li>Custom cluster grouping methods for use with <a href="cohort.html#make_groups"><code>make_groups</code></a>
-</li>
-<li>Custom data sources to access with <a href="data.html#get_data"><code>get_data</code></a>
-</li>
-<li>Functions to implement <a href="data.html#custom-weighting-schemes">custom weighting schemes</a>
-</li>
+<li>Custom cluster grouping methods for use with <a href="cohort.html#make_groups"><code>make_groups</code></a></li>
+<li>Custom data sources to access with <a href="data.html#get_data"><code>get_data</code></a></li>
+<li>Functions to implement <a href="data.html#custom-weighting-schemes">custom weighting schemes</a></li>
 <li>Custom templates for <a href="cohort.html#make_walklist"><code>make_walklist</code></a>,
-<a href="analysis.html#view_topline"><code>view_topline</code></a>, and <a href="analysis.html#view_breakdown"><code>view_breakdown</code></a>
-</li>
+<a href="analysis.html#view_topline"><code>view_topline</code></a>, and <a href="analysis.html#view_breakdown"><code>view_breakdown</code></a></li>
 </ul>
 <p>If you develop an interesting extension for clusteR, please let us know so we
 can list and describe it here.</p>
 
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="analysis.html"><span class="header-section-number">6</span> Analysis</a></div>
-<div class="empty"></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#extensions"><span class="header-section-number">7</span> Extensions</a></li></ul>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/alectries/clusteR/blob/main/book/06-extensions.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/alectries/clusteR/edit/main/book/06-extensions.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
-</div>
+      </div>
     </nav>
-</div>
+  </div>
 
 </div>
 </div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-03-23.</p>
@@ -121,5 +134,8 @@ can list and describe it here.</p>
 
 </div></div>
 </footer>
+
+
 </body>
+
 </html>
