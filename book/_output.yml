@@ -1,0 +1,16 @@
+bookdown::bs4_book:
+  theme:
+    bootswatch: pulse
+    primary: "#8E1281"
+  css: style.css
+  repo:
+    base: https://github.com/alectries/clusteR
+    branch: main
+    subdir: book
+  config:
+    toc:
+      collapse: section
+    download: ["pdf"]
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex

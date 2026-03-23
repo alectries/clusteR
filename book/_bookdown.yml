@@ -1,0 +1,5 @@
+book_filename: "clusteR-docs"
+output_dir: "../docs"
+rmd_files: ["index.Rmd", "01-quick-start.Rmd", "02-setup.Rmd", "03-cohort.Rmd", "04-data.Rmd", "05-analysis.Rmd"]
+new_session: yes
+delete_merged_file: true
