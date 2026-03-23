@@ -49,3 +49,7 @@ simple-weighting-schemes
 clean_weight
 custom-weighting-schemes
 export_data
+analysis
+view_topline
+view_breakdown
+extensions

@@ -271,7 +271,7 @@ types and with all native clusteR functions.
 
 ### Why not Excel?
 
-You may be wondering why I haven't created functions to get data from a
+You may be wondering why the author hasn't created functions to get data from a
 Microsoft Excel source file, even though clusteR supports Excel for other tasks
 (like importing a cohort file). The reasons are:
 
@@ -281,9 +281,9 @@ you have formatted your Excel file in a way that R (and therefore clusteR) will
 not handle well.
 
 To prevent very confusing and difficult to troubleshoot issues that would
-inevitably result from using clusteR with messy Excel files, I require you to
-either make a CSV, which will make formatting problems more obvious to you and
-force you to fix them sooner, or learn to write and implement your own
+inevitably result from using clusteR with messy Excel files, clusteR requires
+you to either make a CSV, which will make formatting problems more obvious to
+you and force you to fix them sooner, or learn to write and implement your own
 `setup_get_excel` and `get_excel` functions, which is considerably more
 time-consuming.
 
