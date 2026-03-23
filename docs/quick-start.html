@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>2 Quick Start | clusteR Documentation</title>
+<meta name="author" content="Alec Higgins">
+<meta name="description" content='2.1 Installation Run the following commands in your R console to install clusteR: install.packages("devtools") devtools::install_github("alectries/clusteR") You can update clusteR by running...'>
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta property="og:title" content="2 Quick Start | clusteR Documentation">
+<meta property="og:type" content="book">
+<meta property="og:description" content='2.1 Installation Run the following commands in your R console to install clusteR: install.packages("devtools") devtools::install_github("alectries/clusteR") You can update clusteR by running...'>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2 Quick Start | clusteR Documentation">
+<meta name="twitter:description" content='2.1 Installation Run the following commands in your R console to install clusteR: install.packages("devtools") devtools::install_github("alectries/clusteR") You can update clusteR by running...'>
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">clusteR Documentation</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="active" href="quick-start.html"><span class="header-section-number">2</span> Quick Start</a></li>
+<li><a class="" href="setup.html"><span class="header-section-number">3</span> Setup</a></li>
+<li><a class="" href="cohort.html"><span class="header-section-number">4</span> Cohort</a></li>
+<li><a class="" href="data.html"><span class="header-section-number">5</span> Data</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/alectries/clusteR">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="quick-start" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"><i class="fas fa-link"></i></a>
+</h1>
+<div id="installation" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Installation<a class="anchor" aria-label="anchor" href="#installation"><i class="fas fa-link"></i></a>
+</h2>
+<p>Run the following commands in your R console to install clusteR:</p>
+<pre><code>install.packages("devtools")
+devtools::install_github("alectries/clusteR")</code></pre>
+<p>You can update clusteR by running <code><a href="https://remotes.r-lib.org/reference/update_packages.html">devtools::update_packages()</a></code> and selecting
+the option for clusteR.</p>
+</div>
+<div id="setting-up" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Setting up<a class="anchor" aria-label="anchor" href="#setting-up"><i class="fas fa-link"></i></a>
+</h2>
+<p>Each survey should be run in a unique folder. clusteR will set up a survey
+environment in this folder with a custom file structure. You may add and modify
+files and folders within this structure as needed. clusteR will ignore files
+that it did not create or does not need.</p>
+<p>To load clusteR, run:</p>
+<pre><code><a href="https://alectries.github.io/clusteR/">library(clusteR)</a></code></pre>
+<p>R is case-sensitive, so the capital <code>R</code> matters! On first load in a new folder,
+clusteR will give a warning:</p>
+<pre><code>Warning message:
+clusteR environment not configured!
+! Please run clusteR::setup() to set up your survey environment. </code></pre>
+<p>You will need to run <a href="setup.html#setup"><code>setup()</code></a> to create the survey environment in your working
+directory. Use either <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> or create an R project in RStudio in your
+desired folder before running <code>setup()</code>.</p>
+</div>
+<div id="workflow" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Workflow<a class="anchor" aria-label="anchor" href="#workflow"><i class="fas fa-link"></i></a>
+</h2>
+<p>Your project will likely go through three phases: setup, collection, and
+data analysis. Below is an overview of the functions you are most likely to use
+in each phase.</p>
+<div id="setup-and-sampling" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> Setup and sampling<a class="anchor" aria-label="anchor" href="#setup-and-sampling"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<a href="setup.html#make_clusters"><code>make_clusters</code></a> to randomly select U.S. Census blocks,
+weighted by their population, to serve as clusters.
+<ul>
+<li>
+<a href="cohort.html#view_map"><code>view_map</code></a> to view a simple graphical map of sampled
+clusters.</li>
+</ul>
+</li>
+<li>
+<a href="setup.html#setup"><code>setup</code></a> to set up the clusteR environment.
+<ul>
+<li>
+<a href="setup.html#alchemer-data-source"><code>setup_get_alc</code></a> to establish a connection to an
+Alchemer survey.</li>
+<li>
+<a href="setup.html#comma-delimited-.csv-data-source"><code>setup_get_csv</code></a> to establish a
+connection to a CSV file with survey response data.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="collection" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> Collection<a class="anchor" aria-label="anchor" href="#collection"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<a href="cohort.html#make_email"><code>make_email</code></a> to generate a PDF or CSV with information<br>
+needed to send emails to cohort members.</li>
+<li>
+<a href="cohort.html#make_mailing"><code>make_mailing</code></a> to generate a PDF or CSV with information
+needed to send physical mailings to cohort members.</li>
+<li>
+<a href="cohort.html#make_phone"><code>make_phone</code></a> to generate a PDF or CSV with information
+needed to make calls to cohort members.</li>
+<li>
+<a href="cohort.html#make_groups"><code>make_groups</code></a> to automatically group clusters by physical
+proximity and output a file to make manual adjustments for door-to-door
+interviews.</li>
+<li>
+<a href="cohort.html#make_walklist"><code>make_walklist</code></a> to generate PDF walk lists for groups
+assigned by <code>make_groups</code>, taking into account manual adjustments.
+<ul>
+<li>
+<code>custom_walklist</code> to save a starter custom template for walk lists.</li>
+</ul>
+</li>
+<li>
+<a href="cohort.html#update_cohort"><code>update_cohort</code></a> to obtain, join, and view updated cohort
+information from the data source and the Editor.
+<ul>
+<li>
+<code>update_confirm</code> to apply updates to the cohort file.</li>
+<li>
+<a href="cohort.html#view_cohort"><code>view_cohort</code></a> to view the full cohort file.</li>
+<li>
+<a href="cohort.html#search_cohort"><code>search_cohort</code></a> to view filtered results from the
+cohort file.</li>
+<li>
+<a href="cohort.html#restore_cohort"><code>restore_cohort</code></a> to restore an archived version of the
+cohort file.</li>
+</ul>
+</li>
+<li>
+<a href="cohort.html#view_progress"><code>view_progress</code></a> to generate a report on survey
+completion by cluster.</li>
+<li>
+<a href="data.html#get_data"><code>get_data</code></a> to download and archive survey responses from a
+pre-specified data source.
+<ul>
+<li>
+<code>get_alc</code>, generally used by <code>get_data</code>, to retrieve data from
+<a href="https://www.alchemer.com">Alchemer</a>.</li>
+<li>
+<code>get_csv</code>, generally used by <code>get_data</code>, to retrieve data from a CSV.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="data-analysis" class="section level3" number="2.3.3">
+<h3>
+<span class="header-section-number">2.3.3</span> Data analysis<a class="anchor" aria-label="anchor" href="#data-analysis"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<a href="data.html#cleaning"><code>clean_data</code></a> to clean downloaded, standardized survey data.
+<ul>
+<li>
+<a href="data.html#clean_weight"><code>clean_weight</code></a>, within <code>clean_data</code>, to calculate and save
+survey weights.</li>
+</ul>
+</li>
+<li>[<code>view_topline</code>][view_topline] to analyze responses and view or export
+overall results.
+<ul>
+<li>
+<code>custom_topline</code> to save a starter custom template for topline reports.</li>
+</ul>
+</li>
+<li>[<code>view_breakdown</code>][view_breakdown] to analyze responses and break them
+down by a stratification variable.
+<ul>
+<li>
+<code>custom_breakdown</code> to save a starter custom template for breakdown
+reports.</li>
+</ul>
+</li>
+<li>
+<a href="cohort.html#export_cohort"><code>export_cohort</code></a> to export the cohort file to a CSV.</li>
+<li>
+<a href="data.html#export_data"><code>export_data</code></a> to export survey responses to a CSV.</li>
+</ul>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Introduction</a></div>
+<div class="next"><a href="setup.html"><span class="header-section-number">3</span> Setup</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#quick-start"><span class="header-section-number">2</span> Quick Start</a></li>
+<li><a class="nav-link" href="#installation"><span class="header-section-number">2.1</span> Installation</a></li>
+<li><a class="nav-link" href="#setting-up"><span class="header-section-number">2.2</span> Setting up</a></li>
+<li>
+<a class="nav-link" href="#workflow"><span class="header-section-number">2.3</span> Workflow</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#setup-and-sampling"><span class="header-section-number">2.3.1</span> Setup and sampling</a></li>
+<li><a class="nav-link" href="#collection"><span class="header-section-number">2.3.2</span> Collection</a></li>
+<li><a class="nav-link" href="#data-analysis"><span class="header-section-number">2.3.3</span> Data analysis</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/alectries/clusteR/blob/main/book/01-quick-start.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/alectries/clusteR/edit/main/book/01-quick-start.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-03-23.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
