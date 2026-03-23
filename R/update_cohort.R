@@ -32,6 +32,7 @@
 #' @importFrom dplyr filter
 #' @importFrom dplyr full_join
 #' @importFrom dplyr mutate
+#' @importFrom dplyr pull
 #' @importFrom dplyr select
 #' @importFrom knitr kable
 #' @importFrom lubridate now
@@ -153,7 +154,15 @@ update_cohort <- function(args = list()){
       by = "ID",
       suffix = c(".coh", ".src")
     ) %>%
-      dplyr::filter(.data[[paste0(col, ".coh")]] != .data[[paste0(col, ".src")]]) %>%
+      dplyr::filter(
+        .data[[paste0(col, ".coh")]] != .data[[paste0(col, ".src")]] &
+          !(ID %in% coh_man_errs[[i]]) &
+          !(ID %in% pull(
+            mutate(.cluster$df_manual,
+                   across(everything(), ~ifelse(is.na(.x), NA, ID))),
+            col
+          ))
+      ) %>%
       dplyr::select("ID", any_of(c(
         paste0(col, ".coh"),
         paste0(col, ".src")
