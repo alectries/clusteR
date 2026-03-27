@@ -71,6 +71,8 @@ needed to make calls to cohort members.
 - [`make_groups`][make_groups] to automatically group clusters by physical
 proximity and output a file to make manual adjustments for door-to-door
 interviews.
+- [`make_walkmap`][make_walkmap] to regenerate the cluster map, taking into
+account manual adjustments.
 - [`make_walklist`][make_walklist] to generate PDF walk lists for groups
 assigned by `make_groups`, taking into account manual adjustments.
   - `custom_walklist` to save a starter custom template for walk lists.

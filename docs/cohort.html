@@ -236,9 +236,23 @@ function to output a dataframe with the following columns:</p>
 <code>geometry</code>, an <em>sf</em> geometry field to draw the block shape</li>
 </ul>
 </div>
-<div id="make_walklist" class="section level3" number="4.3.5">
+<div id="make_walkmap" class="section level3" number="4.3.5">
 <h3>
-<span class="header-section-number">4.3.5</span> make_walklist<a class="anchor" aria-label="anchor" href="#make_walklist"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.5</span> make_walkmap<a class="anchor" aria-label="anchor" href="#make_walkmap"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>make_walkmap</code> rebuilds a very similar map to <a href="cohort.html#make_groups"><code>make_groups</code></a>, but
+can tweak the groups included and save the map as a PNG file.</p>
+<p>The map can be saved as a PNG by specifying a path as <code>save</code>, including the
+.png extension.</p>
+<p>You can customize the groups included on the map you produce by passing them
+as a vector to <code>groups</code>.</p>
+<p>As with <a href="cohort.html#view_map"><code>view_map</code></a>, you can specify the title, subtitle, and
+background colors (though not the fill color, since that is automatically
+determined by group).</p>
+</div>
+<div id="make_walklist" class="section level3" number="4.3.6">
+<h3>
+<span class="header-section-number">4.3.6</span> make_walklist<a class="anchor" aria-label="anchor" href="#make_walklist"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>make_walklist</code>, unlike <a href="cohort.html#make_mailing"><code>make_mailing</code></a>, exports addresses in a
 formatted PDF intended to be used in door-to-door outreach. You can specify the
@@ -295,7 +309,8 @@ To remove columns from the output, you can set them to NULL.</p>
 <li><a class="nav-link" href="#make_mailing"><span class="header-section-number">4.3.2</span> make_mailing</a></li>
 <li><a class="nav-link" href="#make_phone"><span class="header-section-number">4.3.3</span> make_phone</a></li>
 <li><a class="nav-link" href="#make_groups"><span class="header-section-number">4.3.4</span> make_groups</a></li>
-<li><a class="nav-link" href="#make_walklist"><span class="header-section-number">4.3.5</span> make_walklist</a></li>
+<li><a class="nav-link" href="#make_walkmap"><span class="header-section-number">4.3.5</span> make_walkmap</a></li>
+<li><a class="nav-link" href="#make_walklist"><span class="header-section-number">4.3.6</span> make_walklist</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#export_cohort"><span class="header-section-number">4.4</span> export_cohort</a></li>
@@ -316,7 +331,7 @@ To remove columns from the output, you can set them to NULL.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-03-23.</p>
+    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-03-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

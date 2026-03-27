@@ -39,6 +39,7 @@ make_email
 make_mailing
 make_phone
 make_groups
+make_walkmap
 make_walklist
 export_cohort
 data

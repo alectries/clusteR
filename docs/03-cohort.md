@@ -151,6 +151,21 @@ function to output a dataframe with the following columns:
 - `ur`, showing whether the block is urban or rural
 - `geometry`, an *sf* geometry field to draw the block shape
 
+### make_walkmap
+
+`make_walkmap` rebuilds a very similar map to [`make_groups`][make_groups], but
+can tweak the groups included and save the map as a PNG file.
+
+The map can be saved as a PNG by specifying a path as `save`, including the
+.png extension.
+
+You can customize the groups included on the map you produce by passing them
+as a vector to `groups`.
+
+As with [`view_map`][view_map], you can specify the title, subtitle, and
+background colors (though not the fill color, since that is automatically
+determined by group).
+
 ### make_walklist
 
 `make_walklist`, unlike [`make_mailing`][make_mailing], exports addresses in a
