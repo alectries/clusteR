@@ -31,6 +31,8 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom magrittr `%>%`
 #' @importFrom readr read_tsv
+#' @importFrom stringr regex
+#' @importFrom stringr str_detect
 #' @importFrom tibble deframe
 #' @importFrom tibble tibble
 #' @importFrom tibble tibble_row
@@ -99,8 +101,19 @@ get_alc <- function(){
     return(q$answer)
   }
   q.parent <- function(q, j){ # For multiple-select (select all that apply) questions
-    choice <- q$options[[j]]$option[!is.na(unique(q$options[[j]]$option))]
-    return(q$options[[j]]$answer)
+    choice <- ifelse(
+      is.na(q$options[[j]]$answer),
+      NA,
+      ifelse(
+        stringr::str_detect(
+          q$options[[j]]$option,
+          stringr::regex("other", ignore_case = T)
+        ),
+        q$options[[j]]$answer,
+        q$options[[j]]$option
+      )
+    )
+    return(choice)
   }
 
   # Pull data
