@@ -89,7 +89,7 @@ setup_get_alc <- function(survey_id,
   }
 
   # Test codebook for compliance
-  codebook_file <- read_delim(codebook, delim = "  ", show_col_types = F)
+  codebook_file <- read_tsv(codebook, show_col_types = F)
   if(FALSE %in% (names(codebook_file) == c("QN", "ALC"))){
     rlang::abort(message = c(
       cli::style_bold("Data import from Alchemer failed."),
