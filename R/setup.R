@@ -280,24 +280,28 @@ setup <- function(name,
     }
 
     ## Get, unzip, and save name of county shapefile
-    download.file(
-      url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/COUNTY/tl_2020_us_county.zip"),
-      destfile = "Cohort/Shapefiles/tl_2020_us_county.zip"
-    )
-    unzip("Cohort/Shapefiles/tl_2020_us_county.zip", exdir = "Cohort/Shapefiles/")
+    if(!file.exists("Cohort/Shapefiles/tl_2020_us_county.shp")){
+      download.file(
+        url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/COUNTY/tl_2020_us_county.zip"),
+        destfile = "Cohort/Shapefiles/tl_2020_us_county.zip"
+      )
+      unzip("Cohort/Shapefiles/tl_2020_us_county.zip", exdir = "Cohort/Shapefiles/")
+    }
     input$shape_county <- "Cohort/Shapefiles/tl_2020_us_county.shp"
 
     ## Get, unzip, and save name of block shapefile
-    download.file(
-      url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/tl_2020_",
-                   input$state,
-                   "_tabblock20.zip"),
-      destfile = paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip")
-    )
-    unzip(
-      paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip"),
-      exdir = "Cohort/Shapefiles/"
-    )
+    if(!file.exists(paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.shp"))){
+      download.file(
+        url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/tl_2020_",
+                     input$state,
+                     "_tabblock20.zip"),
+        destfile = paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip")
+      )
+      unzip(
+        paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip"),
+        exdir = "Cohort/Shapefiles/"
+      )
+    }
     input$shape_block <- paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.shp")
   }
 
