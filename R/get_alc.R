@@ -30,7 +30,7 @@
 #' @importFrom dplyr select
 #' @importFrom jsonlite fromJSON
 #' @importFrom magrittr `%>%`
-#' @importFrom readr read_delim
+#' @importFrom readr read_tsv
 #' @importFrom tibble deframe
 #' @importFrom tibble tibble
 #' @importFrom tibble tibble_row
@@ -139,7 +139,7 @@ get_alc <- function(){
   names(res.bind) <- gsub("\u00A0", " ", names(res.bind))
   res <- dplyr::rename(
     res.bind,
-    !!!readr::read_delim(.cluster$cfg$setup_get$codebook, delim = "  ",
+    !!!readr::read_tsv(.cluster$cfg$setup_get$codebook,
                   show_col_types = F) %>%
       dplyr::filter(ALC %in% names(res.bind)) %>%
       tibble::deframe()
