@@ -57,6 +57,11 @@ get_alc <- function(){
       "!" = alc$message
     ))
   }
+  if(alc$total_count < 1){
+    rlang::abort(message = c(
+      cli::style_bold("No responses yet! Data processing stopped.")
+    ))
+  }
 
   # Prep table of question types
   types <- tibble::tibble(
