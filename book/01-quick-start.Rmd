@@ -9,11 +9,11 @@ output: html_document
 Run the following commands in your R console to install clusteR:
 
 ```
-install.packages("devtools")
-devtools::install_github("alectries/clusteR")
+install.packages("pak")
+pak::pak("alectries/clusteR")
 ```
 
-You can update clusteR by running `devtools::update_packages()` and selecting
+You can update clusteR by running `pak::pak()` and selecting
 the option for clusteR.
 
 ## Setting up
