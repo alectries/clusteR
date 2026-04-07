@@ -21,6 +21,7 @@
 #' @param ... Objects passed to the environment where the template is built.
 #' @importFrom cli style_bold
 #' @importFrom cli style_underline
+#' @importFrom dplyr across
 #' @importFrom dplyr arrange
 #' @importFrom dplyr case_when
 #' @importFrom dplyr filter
@@ -94,7 +95,10 @@ make_walklist <- function(template = NA,
     ) %>%
     dplyr::filter(!is.na(Group)) %>%
     dplyr::arrange(Group, Cluster, ID) %>%
-    dplyr::select(tidyselect::any_of(c(cols, "Group")))
+    dplyr::select(tidyselect::any_of(c(cols, "Group"))) %>%
+    dplyr::mutate(dplyr::across(
+      tidyselect::any_of(c(cols)), ~ifelse(is.na(.x), "", .x)
+    ))
 
   # Split group tables
   by_group <- list()
