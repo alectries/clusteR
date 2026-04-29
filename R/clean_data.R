@@ -38,26 +38,26 @@ clean_data <- function(...,
   # Definitions
   `%>%` <- magrittr::`%>%`
   # Get data
-  x <- readRDS(.x)
+  ..x <- readRDS(.x)
 
   # Weighting
   if(!is.null(.wt)){
-    wt <- .wt(x)
-    x <- dplyr::left_join(x, wt, by = "ID")
+    ..wt <- .wt(..x)
+    ..x <- dplyr::left_join(..x, ..wt, by = "ID")
   }
 
   # Mutates
-  out <- x %>%
+  ..out <- ..x %>%
     dplyr::mutate(...)
 
   # Save and return
   path <- paste0(stringr::str_remove(.x, ".rds"), "_clean.rds")
-  saveRDS(out, path)
+  saveRDS(..out, path)
   .cluster$cfg$last_clean <<- path
   saveRDS(.cluster$cfg, "Scripts/config.rds")
   rlang::inform(message = c(
     cli::style_bold("Data cleaned."),
     "i" = paste0("Saved to ", cli::style_underline(path), ".")
   ))
-  return(invisible(out))
+  return(invisible(..out))
 }
