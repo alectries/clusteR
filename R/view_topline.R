@@ -146,7 +146,7 @@ view_topline <- function(codebook,
       if(!rlang::is_null(wt)){
         wt_tot <- res %>%
           dplyr::filter(!is.na(!!as.symbol(q))) %>%
-          dplyr::pull(as.symbol(wt)) %>%
+          dplyr::pull(!!as.symbol(wt)) %>%
           sum(na.rm = T)
       }
 
@@ -217,7 +217,7 @@ view_topline <- function(codebook,
       if(!is.null(wt)){
         wt_tot <- ans %>%
           dplyr::filter(Q_ans) %>%
-          dplyr::pull(as.symbol(wt)) %>%
+          dplyr::pull(!!as.symbol(wt)) %>%
           sum()
       }
 
@@ -317,7 +317,7 @@ view_topline <- function(codebook,
       if(!is.null(wt)){
         wt_tot <- ans %>%
           dplyr::filter(Q_ans) %>%
-          dplyr::pull(as.symbol(wt)) %>%
+          dplyr::pull(!!as.symbol(wt)) %>%
           sum()
       }
 
