@@ -152,7 +152,7 @@ view_progress <- function(breaks = c(1, 30, 50, 80, 90),
       Cluster = NA,
       Completed = sum(Completed, na.rm = T),
       `Not yet completed` = sum(`Not yet completed`, na.rm = T),
-      Completion = paste0(round(Completed / (Completed = `Not yet completed`) * 100, 1), "%")
+      Completion = paste0(round(Completed / (Completed + `Not yet completed`) * 100, 1), "%")
     ))
 
   # Cohort status map by cluster
