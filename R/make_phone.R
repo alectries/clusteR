@@ -26,6 +26,7 @@
 #' @importFrom rmarkdown render
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_remove
+#' @importFrom tinytex lualatex
 #' @export
 
 make_phone <- function(output, ..., .status = NA){

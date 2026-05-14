@@ -26,6 +26,7 @@
 #' @importFrom rlang list2
 #' @importFrom rmarkdown render
 #' @importFrom stringr str_detect
+#' @importFrom tinytex lualatex
 #' @export
 
 make_mailing <- function(output, ..., .status = NA){

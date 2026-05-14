@@ -1,7 +1,7 @@
 Package: clusteR
 Type: Package
 Title: Cluster-sampled Survey Management for Local Epidemiologists
-Version: 0.1.6
+Version: 0.1.7
 Authors@R: c(
     person(
       "Alec", "Higgins",
@@ -14,7 +14,6 @@ Description: Manage cohort database, export contact lists, download survey data,
 License: GNU GPL 3.0
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.3
 URL: https://alectries.github.io/clusteR/
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
@@ -27,6 +26,7 @@ Imports:
     knitr,
     lubridate,
     magrittr,
+    Polychrome,
     purrr,
     readr,
     readxl,
@@ -38,4 +38,6 @@ Imports:
     tibble,
     tidycensus,
     tidyr,
-    tidyselect
+    tidyselect,
+    tinytex
+Config/roxygen2/version: 8.0.0

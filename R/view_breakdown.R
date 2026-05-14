@@ -88,6 +88,7 @@
 #' @importFrom tidyselect all_of
 #' @importFrom tidyselect any_of
 #' @importFrom tidyselect starts_with
+#' @importFrom tinytex lualatex
 #' @export
 
 view_breakdown <- function(codebook,

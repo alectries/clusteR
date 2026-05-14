@@ -52,6 +52,7 @@
 #' @importFrom tidyr replace_na
 #' @importFrom tidyr spread
 #' @importFrom tidyselect everything
+#' @importFrom tinytex lualatex
 #' @export
 
 view_progress <- function(breaks = c(1, 30, 50, 80, 90),

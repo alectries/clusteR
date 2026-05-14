@@ -42,6 +42,7 @@
 #' @importFrom rstudioapi viewer
 #' @importFrom stringr str_detect
 #' @importFrom tidyselect any_of
+#' @importFrom tinytex lualatex
 #' @export
 
 make_walklist <- function(template = NA,
