@@ -2,8 +2,18 @@
 #' @importFrom rlang inform
 #' @importFrom cli style_bold
 #' @importFrom cli style_underline
+#' @importFrom tinytex is_tinytex
 
 .onLoad <- function(libname, pkgname){
+  # Check for tinytex
+  if(!tinytex::is_tinytex()){
+    rlang::inform(message = c(
+      cli::style_bold("i" = "Installing TinyTeX..")
+    ))
+    tinytex::install_tinytex()
+    options(tinytex.install_packages = TRUE)
+  }
+
   # Check for settings file
   tryCatch(
     {
