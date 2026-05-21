@@ -39,6 +39,7 @@
 #' @importFrom Polychrome createPalette
 #' @importFrom readr read_csv
 #' @importFrom sf read_sf
+#' @importFrom stringr str_remove
 #' @export
 
 make_walkmap <- function(save = NA,
@@ -54,6 +55,7 @@ make_walkmap <- function(save = NA,
   assign <- readr::read_csv(
     "Contacts/Assignments.csv", show_col_types = F
   ) %>%
+    dplyr::mutate(geoid = as.numeric(stringr::str_remove(geoid, "'"))) %>%
     dplyr::filter(is.na(manual) | manual != 0)
 
   # Load shapefiles

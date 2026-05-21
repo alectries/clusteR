@@ -6,3 +6,5 @@
 ^Meta$
 ^book$
 ^docs$
+^\.positai$
+^\.claude$

@@ -41,6 +41,7 @@
 #' @importFrom rmarkdown render
 #' @importFrom rstudioapi viewer
 #' @importFrom stringr str_detect
+#' @importFrom stringr str_remove
 #' @importFrom tidyselect any_of
 #' @importFrom tinytex lualatex
 #' @export
@@ -63,6 +64,7 @@ make_walklist <- function(template = NA,
   assign <- readr::read_csv(
     "Contacts/Assignments.csv", show_col_types = F
   ) %>%
+    dplyr::mutate(geoid = as.numeric(stringr::str_remove(geoid, "'"))) %>%
     dplyr::filter(is.na(manual) | manual != 0)
 
   # Reframe and group data for forms, keep only door-to-door prospects

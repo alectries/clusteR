@@ -158,6 +158,7 @@ make_groups <- function(k,
   out <- dplyr::arrange(
     dplyr::mutate(
       dplyr::select(assign, geoid, cluster, ur, auto = group),
+      geoid = paste0("'", geoid),
       manual = ""
     ),
     auto, cluster
