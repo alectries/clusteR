@@ -76,7 +76,7 @@ make_walklist <- function(template = NA,
     ) %>%
     dplyr::mutate(
       "Address" = dplyr::case_when(
-        stringr::str_detect(toupper(Mailing), "PO BOX") ~ paste(
+        !is.na(Physical) ~ paste(
           Physical, City, paste0(State, " ", substr(ZIP, 1, 5)), sep = ", "
         ),
         .default = paste(
