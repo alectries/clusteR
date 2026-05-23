@@ -56,7 +56,7 @@
 #' @export
 
 view_progress <- function(breaks = c(1, 30, 50, 80, 90),
-                          colors = c("white", "tomato3", "tomato2", "tomato",
+                          colors = c("white", "lightgray", "tomato", "tomato3",
                                      "lightblue", "lightblue4")
 ){
   # Definitions
