@@ -91,7 +91,7 @@ update_confirm <- function(){
   out <- out %>%
     dplyr::mutate(
       Status = case_when(
-        Consent == "Yes" & !is.na(Source) && Source != "MANUAL" ~ "Completed - enrolled",
+        Consent == "Yes" & !is.na(Source) & Source != "MANUAL" ~ "Completed - enrolled",
         Consent == "No" & !is.na(Source) ~ "Completed - unenroll",
         Consent == "No" & is.na(Source) ~ "Unenroll",
         Consent == "Unknown" & !is.na(Source) ~ "Completed - re-enroll",
