@@ -28,7 +28,7 @@ Contacts, Scripts, and Survey Data folders in the main working directory.
 clusteR will only write or modify files inside these folders, except a handful
 of HTML outputs written to the main working directory.
 
-The most important file for your clusteR setup is `Cohort/config.rds`. Unless
+The most important file for your clusteR setup is `Scripts/config.rds`. Unless
 you wish to reset your clusteR configuration and start over, you should not
 delete or tamper with this file.
 
