@@ -6,7 +6,7 @@
 \usage{
 view_progress(
   breaks = c(1, 30, 50, 80, 90),
-  colors = c("white", "tomato3", "tomato2", "tomato", "lightblue", "lightblue4")
+  colors = c("white", "lightgray", "tomato", "tomato3", "lightblue", "lightblue4")
 )
 }
 \arguments{
