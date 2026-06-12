@@ -114,7 +114,8 @@ view_breakdown <- function(codebook,
   rlang::inform(message = c(
     "i" = paste0("Loading codebook from ", codebook, ".")
   ))
-  cb <- readr::read_tsv(codebook, show_col_types = F)
+  cb <- readr::read_tsv(codebook, show_col_types = F) %>%
+    filter(QN != strata)
 
   # Weights
   wt_quo <- rlang::enquo(wt)
@@ -155,7 +156,7 @@ view_breakdown <- function(codebook,
       if(!rlang::is_null(wt)){
         wt_tot <- res %>%
           dplyr::filter(!is.na(!!as.symbol(q))) %>%
-          dplyr::pull(as.symbol(wt)) %>%
+          dplyr::pull(!!as.symbol(wt)) %>%
           sum(na.rm = T)
       }
 
@@ -235,7 +236,7 @@ view_breakdown <- function(codebook,
       if(!is.null(wt)){
         wt_tot <- ans %>%
           dplyr::filter(Q_ans) %>%
-          dplyr::pull(as.symbol(wt)) %>%
+          dplyr::pull(!!as.symbol(wt)) %>%
           sum()
       }
 
@@ -362,7 +363,7 @@ view_breakdown <- function(codebook,
       if(!is.null(wt)){
         wt_tot <- ans %>%
           dplyr::filter(Q_ans) %>%
-          dplyr::pull(as.symbol(wt)) %>%
+          dplyr::pull(!!as.symbol(wt)) %>%
           sum()
       }
 
