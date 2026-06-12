@@ -27,6 +27,8 @@
 #' @param ... Mutates to perform on data before regression; passed to `dplyr::mutate`.
 #' @param .import A string; the file path to a delimited file with cluster-level data to join to the survey data. The file must contain a column titled `Cluster` with the cluster identifiers.
 #' @param .filt Filter data before weighting; defaults to include everyone in the cohort file.
+#' @param .v Print model details to console; defaults to silent.
+#' @importFrom cli style_bold
 #' @importFrom dplyr c_across
 #' @importFrom dplyr filter
 #' @importFrom dplyr left_join
@@ -38,13 +40,15 @@
 #' @importFrom readr read_csv
 #' @importFrom rlang `!!`
 #' @importFrom rlang expr
+#' @importFrom rlang inform
 #' @importFrom tidyselect all_of
 #' @export
 
 clean_weight <- function(formula,
                          ...,
                          .import = NA,
-                         .filt = T
+                         .filt = T,
+                         .v = F
 ){
   function(x){
     # Definitions
@@ -99,6 +103,29 @@ clean_weight <- function(formula,
       ) %>%
       dplyr::ungroup() %>%
       dplyr::select(ID, prob, ipw)
+
+    # Print information
+    if(.v){
+      rlang::inform(message = c(
+        cli::style_bold("Model summary:")
+      ))
+      print(summary(model))
+      rlang::inform(message = c(
+        cli::style_bold("Betas (exponentiated):")
+      ))
+      print(exp(model$coefficients))
+      rlang::inform(message = c(
+        cli::style_bold("\n95% CI for betas:")
+      ))
+      print(suppressMessages(exp(confint(model, level = 0.95))))
+      rlang::inform(message = c(
+        cli::style_bold("\nParticipation probabilities (percentiles):")
+      ))
+      print(quantile(data_wt$prob, c(0, 0.025, 0.5, 0.975, 1)))
+      rlang::inform(message = c(
+        cli::style_bold("\nModeling complete.")
+      ))
+    }
 
     # Return weights
     return(data_wt)

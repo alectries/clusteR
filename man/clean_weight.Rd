@@ -4,7 +4,7 @@
 \alias{clean_weight}
 \title{Calculate weights from logistic regression and append to data}
 \usage{
-clean_weight(formula, ..., .import = NA, .filt = T)
+clean_weight(formula, ..., .import = NA, .filt = T, .v = F)
 }
 \arguments{
 \item{formula}{The regression formula to pass to \code{glm}.}
@@ -14,6 +14,8 @@ clean_weight(formula, ..., .import = NA, .filt = T)
 \item{.import}{A string; the file path to a delimited file with cluster-level data to join to the survey data. The file must contain a column titled \code{Cluster} with the cluster identifiers.}
 
 \item{.filt}{Filter data before weighting; defaults to include everyone in the cohort file.}
+
+\item{.v}{Print model details to console; defaults to silent.}
 }
 \description{
 This function uses logistic regression to weight survey data for analysis.

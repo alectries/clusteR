@@ -109,6 +109,9 @@ Census demographic data for each cluster.
 are included in weighting. Filters are applied before weighting mutates or
 modeling.
 
+`.v` will show details about the model, including coefficients and confidence
+intervals, in the console.
+
 Arguments passed to `...` are passed on to `dplyr::mutate`.
 These are weighting mutates, so they are accessible to `stats::glm` for modeling
 but are not included in `clean_data` output.

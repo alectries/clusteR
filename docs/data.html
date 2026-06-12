@@ -161,6 +161,8 @@ Census demographic data for each cluster.</p>
 <p><code>.filt</code> allows you to filter data before weighting to limit which cohort members
 are included in weighting. Filters are applied before weighting mutates or
 modeling.</p>
+<p><code>.v</code> will show details about the model, including coefficients and confidence
+intervals, in the console.</p>
 <p>Arguments passed to <code>...</code> are passed on to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate</a></code>.
 These are weighting mutates, so they are accessible to <code><a href="https://rdrr.io/r/stats/glm.html">stats::glm</a></code> for modeling
 but are not included in <code>clean_data</code> output.</p>
@@ -238,7 +240,7 @@ pass these requirements to <code>...</code> rather than enabling <code>.deid</co
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-05-27.</p>
+    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-06-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
