@@ -4,7 +4,12 @@
 \alias{make_clusters}
 \title{Randomly select census blocks and assign cluster identifiers}
 \usage{
-make_clusters(n, state = .cluster$cfg$state, county = .cluster$cfg$county)
+make_clusters(
+  n,
+  state = .cluster$cfg$state,
+  county = .cluster$cfg$county,
+  year = .cluster$cfg$year
+)
 }
 \arguments{
 \item{n}{The number of clusters to select.}
@@ -12,6 +17,8 @@ make_clusters(n, state = .cluster$cfg$state, county = .cluster$cfg$county)
 \item{state}{The state where clusters will be selected. Defaults to the state in the config file; must be specified if running before \code{setup}.}
 
 \item{county}{The county where clusters will be selected. Defaults to the county in the config file; must be specified if running before \code{setup}.}
+
+\item{year}{The year to use for shapefiles in setup; population will be determined based on the decennial census preceding the year.}
 }
 \description{
 Using U.S. Census data, randomly selects Census blocks, weighted by

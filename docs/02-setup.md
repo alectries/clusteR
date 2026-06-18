@@ -46,7 +46,7 @@ These are the only variables required for `setup` to run and exit successfully.
 However, because so many other configured options are required for clusteR to
 actually work, `setup` will provide warnings for other options you do not set.
 
-## state, county
+## state, county, year
 
 These variables allow you to specify FIPS/INCITS codes, which clusteR uses to
 download U.S. Census TIGER/Line shapefiles for your region of interest.
@@ -60,8 +60,11 @@ to accommodate North Carolina district health departments (see information from 
 [UNC School of Government](https://humanservices.sog.unc.edu/visualization-all/))
 but may be useful in other states.
 
-As of version 0.1, clusteR is hard-coded to retrieve 2020 TIGER/Line shapefiles.
-Support for other years is planned in later versions.
+clusteR allows you to select shapefiles from any year available in the U.S.
+Census [Mapping Files](https://www.census.gov/geographies/mapping-files.html),
+specifically the TIGER/Line shapefiles. The shapefiles (and related population
+data) will be automatically downloaded. When `year` is not specified, for
+historical reasons, clusteR defaults to 2020 shapefiles and populations.
 
 ## geoids
 
@@ -78,7 +81,9 @@ obtain your state and county FIPS/INCITS codes from your configuration, if
 available. Otherwise, you will need to specify them, or provide the names of
 your state and county/counties of interest. Providing names will display
 a message from [tidycensus](https://walker-data.com/tidycensus/) with the
-relevant FIPS/INCITS codes so you don't need to look them up.
+relevant FIPS/INCITS codes so you don't need to look them up. You will also
+need to specify a year to get population data; clusteR will get data from
+the most recent decennial census relative to your year of choice.
 
 ### Custom clusters
 

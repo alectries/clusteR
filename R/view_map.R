@@ -23,6 +23,9 @@
 #' @importFrom ggplot2 theme_void
 #' @importFrom magrittr `%>%`
 #' @importFrom sf read_sf
+#' @importFrom tidyselect everything
+#' @importFrom tidyselect matches
+#' @importFrom tidyselect starts_with
 #' @export
 
 view_map <- function(title = NULL,
@@ -37,9 +40,12 @@ view_map <- function(title = NULL,
   county <- sf::read_sf(.cluster$cfg$shape_county) %>%
     dplyr::filter(GEOID %in% as.character(.cluster$cfg$county))
   blocks <- sf::read_sf(.cluster$cfg$shape_block) %>%
+    dplyr::select(tidyselect::everything(),
+                  STATEFP = tidyselect::starts_with("STATEFP"),
+                  COUNTYFP = tidyselect::starts_with("COUNTYFP")) %>%
     dplyr::filter(
-      STATEFP20 == as.character(.cluster$cfg$state) &
-        COUNTYFP20 %in% substr(as.character(.cluster$cfg$county), 3, 5)
+      STATEFP == as.character(.cluster$cfg$state) &
+        COUNTYFP %in% substr(as.character(.cluster$cfg$county), 3, 5)
     )
 
   # Get geoids and merge
@@ -47,8 +53,10 @@ view_map <- function(title = NULL,
   clusters <- geoids %>%
     dplyr::mutate(geoid = as.character(geoid)) %>%
     dplyr::left_join(
-      dplyr::select(blocks, geoid = GEOID20, lat = INTPTLAT20, long = INTPTLON20,
-             ur = UR20, geometry),
+      dplyr::select(blocks, geoid = tidyselect::matches("^GEOID[0-9]+$"),
+                    lat = tidyselect::starts_with("INTPTLAT"),
+                    long = tidyselect::starts_with("INTPTLON"),
+                    ur = tidyselect::starts_with("UR"), geometry),
       by = "geoid"
     )
 

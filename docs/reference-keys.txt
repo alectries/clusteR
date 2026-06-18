@@ -10,7 +10,7 @@ data-analysis
 setup
 location
 name-short_name
-state-county
+state-county-year
 geoids
 make_clusters
 custom-clusters

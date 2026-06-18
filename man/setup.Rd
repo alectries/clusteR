@@ -19,6 +19,8 @@ setup(name, short_name, ...)
 
 \item{county}{The FIPS code (or vector of FIPS codes) for the county (or counties) of interest}
 
+\item{year}{The year for which TIGER/Line shapefiles should be obtained}
+
 \item{geoids}{The name of a properly-formatted cluster matching file or a function to generate that file}
 }
 \description{
@@ -52,9 +54,10 @@ your cohort database. You can call a function here to generate the input file
 and return the path as a string. The input file must be a .csv, .xls, .xlsx,
 or .rds file with the proper file extension.
 
-\code{state}, \code{county}: This package is designed for a local epidemiologist to
+\code{state}, \code{county}, \code{year}: This package is designed for a local epidemiologist to
 perform a cluster sampling survey; therefore, the state and county (or
-county-equivalent) should be specified. setup will obtain the 2020 TIGER/Line
+county-equivalent) should be specified, along with the year for which to
+pull TIGER/Line shapefiles from the U.S. Census. \code{setup} will obtain the
 shapefiles for your county for you, but you must specify the
 \href{https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code}{state}
 and \href{https://en.wikipedia.org/wiki/List_of_United_States_INCITS_codes_by_county}{county}

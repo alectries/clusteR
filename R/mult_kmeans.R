@@ -20,6 +20,9 @@
 #' @importFrom rlang inform
 #' @importFrom sf read_sf
 #' @importFrom tibble tibble_row
+#' @importFrom tidyselect everything
+#' @importFrom tidyselect matches
+#' @importFrom tidyselect starts_with
 #' @keywords internal
 
 mult_kmeans <- function(include, geoids, shape_county, shape_block, k, runs, iter.max){
@@ -29,17 +32,22 @@ mult_kmeans <- function(include, geoids, shape_county, shape_block, k, runs, ite
   # Get clusters and geographies
   geoids <- readr::read_delim(geoids, show_col_types = F)
   blocks <- sf::read_sf(shape_block) %>%
+    dplyr::select(tidyselect::everything(),
+                  STATEFP = tidyselect::starts_with("STATEFP"),
+                  COUNTYFP = tidyselect::starts_with("COUNTYFP")) %>%
     dplyr::filter(
-      STATEFP20 == as.character(.cluster$cfg$state) &
-        COUNTYFP20 %in% substr(as.character(.cluster$cfg$county), 3, 5)
+      STATEFP == as.character(.cluster$cfg$state) &
+        COUNTYFP %in% substr(as.character(.cluster$cfg$county), 3, 5)
     )
 
   # Merge clusters with geographies
   clusters <- geoids %>%
     dplyr::mutate(geoid = as.character(geoid)) %>%
     dplyr::left_join(
-      dplyr::select(blocks, geoid = GEOID20, lat = INTPTLAT20, long = INTPTLON20,
-             ur = UR20, geometry),
+      dplyr::select(blocks, geoid = tidyselect::matches("^GEOID[0-9]+$"),
+                    lat = tidyselect::starts_with("INTPTLAT"),
+                    long = tidyselect::starts_with("INTPTLON"),
+                    ur = tidyselect::starts_with("UR"), geometry),
       by = "geoid"
     ) %>%
     dplyr::filter(cluster %in% include)

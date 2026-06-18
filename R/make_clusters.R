@@ -10,15 +10,20 @@
 #' @param n The number of clusters to select.
 #' @param state The state where clusters will be selected. Defaults to the state in the config file; must be specified if running before `setup`.
 #' @param county The county where clusters will be selected. Defaults to the county in the config file; must be specified if running before `setup`.
+#' @param year The year to use for shapefiles in setup; population will be determined based on the decennial census preceding the year.
 #' @importFrom cli style_bold
+#' @importFrom dplyr filter
+#' @importFrom dplyr pull
 #' @importFrom rlang abort
 #' @importFrom tibble tibble
 #' @importFrom tidycensus get_decennial
+#' @importFrom tidycensus load_variables
 #' @export
 
 make_clusters <- function(n,
                           state = .cluster$cfg$state,
-                          county = .cluster$cfg$county
+                          county = .cluster$cfg$county,
+                          year = .cluster$cfg$year
 ){
   # Check if state and county exist
   if(is.null(state) && is.null(county)){
@@ -35,11 +40,19 @@ make_clusters <- function(n,
     county <- substr(county, 3, 5)
   }
 
+  # Get population variable
+  pop <- tidycensus::load_variables(
+    year = 10 * floor(as.numeric(year) / 10),
+    dataset = ifelse(year >= 2020, "dhc", "sf1")
+  ) %>%
+    dplyr::filter(concept == "TOTAL POPULATION") %>%
+    dplyr::pull(name)
+
   # Get population data
   dec <- tidycensus::get_decennial(
     "block",
-    "P1_001N",
-    year = 2020,
+    variables = pop,
+    year = 10 * floor(as.numeric(year) / 10),
     state = state,
     county = county
   )

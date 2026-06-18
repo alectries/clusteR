@@ -40,6 +40,9 @@
 #' @importFrom readr read_csv
 #' @importFrom sf read_sf
 #' @importFrom stringr str_remove
+#' @importFrom tidyselect everything
+#' @importFrom tidyselect matches
+#' @importFrom tidyselect starts_with
 #' @export
 
 make_walkmap <- function(save = NA,
@@ -62,9 +65,12 @@ make_walkmap <- function(save = NA,
   county <- sf::read_sf(.cluster$cfg$shape_county) %>%
     dplyr::filter(GEOID %in% as.character(.cluster$cfg$county))
   blocks <- sf::read_sf(.cluster$cfg$shape_block) %>%
+    dplyr::select(tidyselect::everything(),
+                  STATEFP = tidyselect::starts_with("STATEFP"),
+                  COUNTYFP = tidyselect::starts_with("COUNTYFP")) %>%
     dplyr::filter(
-      STATEFP20 == as.character(.cluster$cfg$state) &
-        COUNTYFP20 %in% substr(as.character(.cluster$cfg$county), 3, 5)
+      STATEFP == as.character(.cluster$cfg$state) &
+        COUNTYFP %in% substr(as.character(.cluster$cfg$county), 3, 5)
     )
 
   # Merge
@@ -81,7 +87,9 @@ make_walkmap <- function(save = NA,
       )
     ) %>%
     dplyr::left_join(
-      dplyr::select(blocks, geoid = GEOID20, lat = INTPTLAT20, long = INTPTLON20,
+      dplyr::select(blocks, geoid = tidyselect::matches("^GEOID[0-9]+$"),
+                    lat = tidyselect::starts_with("INTPTLAT"),
+                    long = tidyselect::starts_with("INTPTLON"),
                     geometry),
       by = "geoid"
     )

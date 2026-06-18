@@ -101,9 +101,9 @@ to tamper directly with the cohort file.</p>
 However, because so many other configured options are required for clusteR to
 actually work, <code>setup</code> will provide warnings for other options you do not set.</p>
 </div>
-<div id="state-county" class="section level2" number="3.3">
+<div id="state-county-year" class="section level2" number="3.3">
 <h2>
-<span class="header-section-number">3.3</span> state, county<a class="anchor" aria-label="anchor" href="#state-county"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3</span> state, county, year<a class="anchor" aria-label="anchor" href="#state-county-year"><i class="fas fa-link"></i></a>
 </h2>
 <p>These variables allow you to specify FIPS/INCITS codes, which clusteR uses to
 download U.S. Census TIGER/Line shapefiles for your region of interest.
@@ -115,8 +115,11 @@ and all county codes must be within the same state. This feature is intended
 to accommodate North Carolina district health departments (see information from the
 <a href="https://humanservices.sog.unc.edu/visualization-all/">UNC School of Government</a>)
 but may be useful in other states.</p>
-<p>As of version 0.1, clusteR is hard-coded to retrieve 2020 TIGER/Line shapefiles.
-Support for other years is planned in later versions.</p>
+<p>clusteR allows you to select shapefiles from any year available in the U.S.
+Census <a href="https://www.census.gov/geographies/mapping-files.html">Mapping Files</a>,
+specifically the TIGER/Line shapefiles. The shapefiles (and related population
+data) will be automatically downloaded. When <code>year</code> is not specified, for
+historical reasons, clusteR defaults to 2020 shapefiles and populations.</p>
 </div>
 <div id="geoids" class="section level2" number="3.4">
 <h2>
@@ -136,7 +139,9 @@ obtain your state and county FIPS/INCITS codes from your configuration, if
 available. Otherwise, you will need to specify them, or provide the names of
 your state and county/counties of interest. Providing names will display
 a message from <a href="https://walker-data.com/tidycensus/">tidycensus</a> with the
-relevant FIPS/INCITS codes so you don’t need to look them up.</p>
+relevant FIPS/INCITS codes so you don’t need to look them up. You will also
+need to specify a year to get population data; clusteR will get data from
+the most recent decennial census relative to your year of choice.</p>
 </div>
 <div id="custom-clusters" class="section level3" number="3.4.2">
 <h3>
@@ -404,7 +409,7 @@ attached. For example, you can access the project name using
 <li><a class="nav-link" href="#setup"><span class="header-section-number">3</span> Setup</a></li>
 <li><a class="nav-link" href="#location"><span class="header-section-number">3.1</span> Location</a></li>
 <li><a class="nav-link" href="#name-short_name"><span class="header-section-number">3.2</span> name, short_name</a></li>
-<li><a class="nav-link" href="#state-county"><span class="header-section-number">3.3</span> state, county</a></li>
+<li><a class="nav-link" href="#state-county-year"><span class="header-section-number">3.3</span> state, county, year</a></li>
 <li>
 <a class="nav-link" href="#geoids"><span class="header-section-number">3.4</span> geoids</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#make_clusters"><span class="header-section-number">3.4.1</span> make_clusters</a></li>
@@ -445,7 +450,7 @@ attached. For example, you can access the project name using
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-06-12.</p>
+    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-06-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

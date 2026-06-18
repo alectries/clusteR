@@ -29,9 +29,10 @@
 #' and return the path as a string. The input file must be a .csv, .xls, .xlsx,
 #' or .rds file with the proper file extension.
 #'
-#' `state`, `county`: This package is designed for a local epidemiologist to
+#' `state`, `county`, `year`: This package is designed for a local epidemiologist to
 #' perform a cluster sampling survey; therefore, the state and county (or
-#' county-equivalent) should be specified. setup will obtain the 2020 TIGER/Line
+#' county-equivalent) should be specified, along with the year for which to
+#' pull TIGER/Line shapefiles from the U.S. Census. `setup` will obtain the
 #' shapefiles for your county for you, but you must specify the
 #' [state](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code)
 #' and [county](https://en.wikipedia.org/wiki/List_of_United_States_INCITS_codes_by_county)
@@ -50,6 +51,7 @@
 #' @param setup_cohort The name of a properly-formatted cohort input file or a function to generate that file (see `vignette('setup_cohort')`)
 #' @param state The FIPS code for the state of interest
 #' @param county The FIPS code (or vector of FIPS codes) for the county (or counties) of interest
+#' @param year  The year for which TIGER/Line shapefiles should be obtained
 #' @param geoids The name of a properly-formatted cluster matching file or a function to generate that file
 #' @importFrom cli style_bold
 #' @importFrom cli style_underline
@@ -279,30 +281,140 @@ setup <- function(name,
       input$county <- counties$new
     }
 
-    ## Get, unzip, and save name of county shapefile
-    if(!file.exists("Cohort/Shapefiles/tl_2020_us_county.shp")){
-      download.file(
-        url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/COUNTY/tl_2020_us_county.zip"),
-        destfile = "Cohort/Shapefiles/tl_2020_us_county.zip"
-      )
-      unzip("Cohort/Shapefiles/tl_2020_us_county.zip", exdir = "Cohort/Shapefiles/")
+    ## Check that year exists; if not, default to 2020
+    if(exists("year", where = input)){
+      rlang::inform(message = c("i" = paste0("Using ", input$year, " shapefile.")))
+      year <- input$year
+    } else {
+      rlang::inform(message = c("!" = paste0("No year specified! Using 2020 shapefile.")))
+      input$year <- 2020
+      year <- 2020
     }
-    input$shape_county <- "Cohort/Shapefiles/tl_2020_us_county.shp"
 
-    ## Get, unzip, and save name of block shapefile
-    if(!file.exists(paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.shp"))){
+    ## Get, unzip, and save name of county shapefile
+    if(!file.exists(paste0("Cohort/Shapefiles/tl_", year, "_us_county.shp"))){
       download.file(
-        url = paste0("https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/tl_2020_",
-                     input$state,
-                     "_tabblock20.zip"),
-        destfile = paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip")
+        url = paste0(
+          "https://www2.census.gov/geo/tiger/TIGER",
+          year,
+          "/COUNTY/tl_",
+          year,
+          "_us_county.zip"
+        ),
+        destfile = paste0("Cohort/Shapefiles/tl_", year, "_us_county.zip")
       )
       unzip(
-        paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.zip"),
+        paste0("Cohort/Shapefiles/tl_", year, "_us_county.zip"),
         exdir = "Cohort/Shapefiles/"
       )
     }
-    input$shape_block <- paste0("Cohort/Shapefiles/tl_2020_", input$state, "_tabblock20.shp")
+    input$shape_county <- paste0("Cohort/Shapefiles/tl_", year, "_us_county.shp")
+
+    ## Get, unzip, and save name of block shapefile
+    if(!file.exists(
+      paste0(
+        "Cohort/Shapefiles/tl_",
+        year,
+        "_",
+        input$state,
+        "_tabblock",
+        10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
+        ".shp"
+      )
+    )){
+      tryCatch(
+        {
+          download.file(
+            url = paste0("https://www2.census.gov/geo/tiger/TIGER",
+                         year,
+                         "/TABBLOCK",
+                         10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
+                         "/tl_",
+                         year,
+                         "_",
+                         input$state,
+                         "_tabblock",
+                         10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
+                         ".zip"),
+            destfile = paste0(
+              "Cohort/Shapefiles/tl_",
+              year,
+              "_",
+              input$state,
+              "_tabblock",
+              10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
+              ".zip"
+            )
+          )
+          unzip(
+            paste0(
+              "Cohort/Shapefiles/tl_",
+              year,
+              "_",
+              input$state,
+              "_tabblock",
+              10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
+              ".zip"
+            ),
+            exdir = "Cohort/Shapefiles/"
+          )
+        },
+        error = function(e){
+          rlang::inform(
+            message = c("!" = "Initial attempt at shapefile download failed. This is normal for year = 2019 and earlier. Trying again...")
+          )
+            download.file(
+              url = paste0("https://www2.census.gov/geo/tiger/TIGER",
+                           year,
+                           "/TABBLOCK",
+                           "/tl_",
+                           year,
+                           "_",
+                           input$state,
+                           "_tabblock",
+                           10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
+                           ".zip"),
+              destfile = paste0(
+                "Cohort/Shapefiles/tl_",
+                year,
+                "_",
+                input$state,
+                "_tabblock",
+                10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
+                ".zip"
+              )
+            )
+            unzip(
+              paste0(
+                "Cohort/Shapefiles/tl_",
+                year,
+                "_",
+                input$state,
+                "_tabblock",
+                10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
+                ".zip"
+              ),
+              exdir = "Cohort/Shapefiles/"
+            )
+        },
+        error = function(e){
+          rlang::abort(message = c(
+            "x" = "Download failed.",
+            "i" = "If the error below is a timeout error, consider changing the timeout with options(timeout = 300).",
+            e
+          ))
+        }
+      )
+    }
+    input$shape_block <- paste0(
+      "Cohort/Shapefiles/tl_",
+      year,
+      "_",
+      input$state,
+      "_tabblock",
+      10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
+      ".shp"
+    )
   }
 
   # Output config
