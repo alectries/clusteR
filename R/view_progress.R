@@ -147,7 +147,7 @@ view_progress <- function(breaks = c(1, 30, 50, 80, 90),
     dplyr::mutate(
       Cluster = as.character(Cluster),
       "Completed" = ifelse("Completed" %in% names(.) && !is.na(Completed), Completed, 0),
-      Completion = paste0(round(Completed / (Completed + `Not yet completed`) * 100, 1), "%")
+      Completion = paste0(round(Completed / rowSums(across(where(is.numeric)), na.rm = T) * 100, 1), "%")
     ) %>%
     dplyr::ungroup()
   tbl_stat_cluster <- stat_cluster %>%
