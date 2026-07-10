@@ -30,7 +30,7 @@ The above map shows the census blocks of included participants. Blocks with whit
 
 ```{r, echo = FALSE, results = "asis"}
 `%>%` <- magrittr::`%>%`
-stat_cluster %>% 
+tbl_stat_cluster %>% 
   dplyr::mutate(dplyr::across(tidyselect::everything(), ~as.character(.x) %>% tidyr::replace_na(""))) %>% 
   knitr::kable(align = "ccccr") %>% 
   kableExtra::row_spec(n_clusters + 1, bold = T, underline = T, background = "gray40", color = "white") %>% 

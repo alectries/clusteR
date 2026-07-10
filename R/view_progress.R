@@ -49,6 +49,8 @@
 #' @importFrom rstudioapi viewer
 #' @importFrom sf read_sf
 #' @importFrom stringr str_detect
+#' @importFrom stringr str_pad
+#' @importFrom stringr str_width
 #' @importFrom tidyr replace_na
 #' @importFrom tidyr spread
 #' @importFrom tidyselect everything
@@ -143,10 +145,19 @@ view_progress <- function(breaks = c(1, 30, 50, 80, 90),
     tidyr::spread(Completion, n) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
+      Cluster = as.character(Cluster),
       "Completed" = ifelse("Completed" %in% names(.) && !is.na(Completed), Completed, 0),
       Completion = paste0(round(Completed / (Completed + `Not yet completed`) * 100, 1), "%")
     ) %>%
-    dplyr::ungroup() %>%
+    dplyr::ungroup()
+  tbl_stat_cluster <- stat_cluster %>%
+    dplyr::mutate(Cluster = stringr::str_pad(
+      Cluster,
+      width = max(stringr::str_length(Cluster)),
+      pad = "0",
+      side = "left",
+      use_width = F
+    )) %>%
     dplyr::arrange(Cluster) %>%
     dplyr::bind_rows(dplyr::summarize(
       .,
@@ -159,7 +170,10 @@ view_progress <- function(breaks = c(1, 30, 50, 80, 90),
   # Cohort status map by cluster
   blocks <- dplyr::left_join(
     readr::read_csv(.cluster$cfg$geoids, show_col_types = F) %>%
-      dplyr::mutate(geoid = as.character(geoid)),
+      dplyr::mutate(
+        cluster = as.character(cluster),
+        geoid = as.character(geoid)
+      ),
     sf::read_sf(.cluster$cfg$shape_block),
     by = dplyr::join_by(geoid == GEOID20)
   ) %>%
@@ -211,7 +225,7 @@ view_progress <- function(breaks = c(1, 30, 50, 80, 90),
     total = total,
     n_clusters = n_clusters,
     plot_stat_overall = plot_stat_overall,
-    stat_cluster = stat_cluster,
+    tbl_stat_cluster = tbl_stat_cluster,
     plot_stat_cluster = plot_stat_cluster
   )
   rmarkdown::render(
