@@ -22,10 +22,11 @@
 #' @importFrom ggplot2 theme
 #' @importFrom ggplot2 theme_void
 #' @importFrom magrittr `%>%`
-#' @importFrom sf read_sf
 #' @importFrom tidyselect everything
 #' @importFrom tidyselect matches
 #' @importFrom tidyselect starts_with
+#' @importFrom tigris blocks
+#' @importFrom tigris counties
 #' @export
 
 view_map <- function(title = NULL,
@@ -37,15 +38,22 @@ view_map <- function(title = NULL,
   `%>%` <- magrittr::`%>%`
 
   # Get shapefiles
-  county <- sf::read_sf(.cluster$cfg$shape_county) %>%
-    dplyr::filter(GEOID %in% as.character(.cluster$cfg$county))
-  blocks <- sf::read_sf(.cluster$cfg$shape_block) %>%
+  county <- tigris::counties(
+    state = .cluster$cfg$state,
+    year = .cluster$cfg$year
+  ) %>%
+    dplyr::filter(GEOID %in% paste0(.cluster$cfg$state, .cluster$cfg$county))
+  blocks <- tigris::blocks(
+    state = .cluster$cfg$state,
+    county = .cluster$cfg$county,
+    year = .cluster$cfg$year
+  ) %>%
     dplyr::select(tidyselect::everything(),
                   STATEFP = tidyselect::starts_with("STATEFP"),
                   COUNTYFP = tidyselect::starts_with("COUNTYFP")) %>%
     dplyr::filter(
-      STATEFP == as.character(.cluster$cfg$state) &
-        COUNTYFP %in% substr(as.character(.cluster$cfg$county), 3, 5)
+      STATEFP == .cluster$cfg$state &
+        COUNTYFP %in% .cluster$cfg$county
     )
 
   # Get geoids and merge

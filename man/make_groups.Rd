@@ -9,8 +9,6 @@ make_groups(
   filt = n > 0,
   fn = "clusteR:::mult_kmeans",
   geoids = .cluster$cfg$geoids,
-  shape_county = .cluster$cfg$shape_county,
-  shape_block = .cluster$cfg$shape_block,
   runs = 300,
   iter.max = 50,
   ...

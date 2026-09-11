@@ -47,13 +47,13 @@
 #' @importFrom rlang inform
 #' @importFrom rmarkdown render
 #' @importFrom rstudioapi viewer
-#' @importFrom sf read_sf
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_pad
 #' @importFrom stringr str_width
 #' @importFrom tidyr replace_na
 #' @importFrom tidyr spread
 #' @importFrom tidyselect everything
+#' @importFrom tidyselect starts_with
 #' @importFrom tinytex lualatex
 #' @export
 
@@ -174,15 +174,21 @@ view_progress <- function(breaks = c(1, 30, 50, 80, 90),
         cluster = as.character(cluster),
         geoid = as.character(geoid)
       ),
-    sf::read_sf(.cluster$cfg$shape_block),
-    by = dplyr::join_by(geoid == GEOID20)
+    tigris::blocks(
+      state = .cluster$cfg$state,
+      county = .cluster$cfg$county,
+      year = .cluster$cfg$year
+    ) %>%
+      dplyr::rename(GEOID = tidyselect::starts_with("GEOID") &
+                      !tidyselect::starts_with("GEOIDFQ")),
+    by = dplyr::join_by(geoid == GEOID)
   ) %>%
     dplyr::rename("Cluster" = cluster)
-  county <- sf::read_sf(.cluster$cfg$shape_county) %>%
-    dplyr::filter(
-      STATEFP == .cluster$cfg$state,
-      COUNTYFP %in% substr(.cluster$cfg$county, 3, 5)
-    )
+  county <- tigris::counties(
+    state = .cluster$cfg$state,
+    year = .cluster$cfg$year
+  ) %>%
+    dplyr::filter(COUNTYFP %in% .cluster$cfg$county)
   map_stat_cluster <- dplyr::left_join(
     blocks,
     stat_cluster,

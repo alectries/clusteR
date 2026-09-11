@@ -36,8 +36,9 @@
 #' shapefiles for your county for you, but you must specify the
 #' [state](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code)
 #' and [county](https://en.wikipedia.org/wiki/List_of_United_States_INCITS_codes_by_county)
-#' FIPS/INCITS codes for your area. These are technically not required if you
-#' choose to avoid all mapping functions, but that may cause problems.
+#' FIPS/INCITS codes for your area, or use their names or abbreviations. These
+#' are technically not required if you choose to avoid all mapping functions,
+#' but that may cause problems.
 #'
 #' `geoids`: To perform mapping functions, this package needs to know which
 #' cluster ID matches which U.S. Census GEOID. You may specify a file with
@@ -68,6 +69,8 @@
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_length
 #' @importFrom tibble tibble
+#' @importFrom tigris blocks
+#' @importFrom tigris counties
 #' @export
 
 setup <- function(name,
@@ -122,12 +125,36 @@ setup <- function(name,
       "i" = paste0("See ", cli::style_underline("vignette('setup_get')"), " for more information.")
     ))
   }
+  if(!exists("year", where = input)){
+    rlang::inform(message = c(
+      cli::style_bold("No year specified. Using 2020 shapefiles...")
+    ))
+    input$year <- 2020
+  }
   if(!exists("state", where = input) | !exists("county", where = input)){
     rlang::warn(message = c(
       cli::style_bold("No state or county specified!"),
       "!" = "Mapping functions will fail without shapefiles.",
       "i" = "To solve this issue, run setup with state and county specified."
     ))
+  } else {
+    if(length(input$state) != 1){
+      rlang::abort(message = c(
+        cli::style_bold("More than one state specified!"),
+        "!" = "clusteR only functions within one state.",
+        "i" = "To solve this issue, run setup with just one state specified."
+      ))
+    }
+    include <- dplyr::filter(
+      tigris::fips_codes,
+      (stringr::str_detect(state, stringr::regex(input$state, ignore_case = T)) |
+        state_code == as.character(input$state) |
+        stringr::str_detect(state_name, stringr::regex(input$state, ignore_case = T))) &
+        (county_code == as.character(input$county) |
+           stringr::str_detect(county, stringr::regex(input$county, ignore_case = T)))
+    )
+    input$state <- unique(include$state_code)
+    input$county <- include$county_code
   }
 
   # Set up cohort file
@@ -249,172 +276,40 @@ setup <- function(name,
     ))
   }
 
-  # Get shapefiles
+  # Cache shapefiles
   if(exists("state", where = input) & exists("county", where = input)){
-    ## Check that county is five digits
-    if(length(input$county) == 1){
-      if(stringr::str_length(input$county) != 5){
-        if(stringr::str_length(input$county) == 3){
-          input$county <- paste0(input$state, input$county)
-        } else {
-          rlang::abort(message = c(
-            cli::style_bold("Invalid county!"),
-            "x" = paste0("The county FIPS code is length ",
-                         stringr::str_length(input$county),
-                         ", which is invalid."),
-            "i" = paste0("See ", cli::style_underline("?setup"), ".")
-          ))
-        }
-      }
-    } else {
-      counties <- tibble::tibble(
-        orig = input$county
-      )
-      counties <- dplyr::mutate(
-        counties,
-        new = dplyr::case_when(
-          stringr::str_length(orig) == 5 ~ orig,
-          stringr::str_length(orig) == 3 ~ paste0(input$state, orig),
-          .default = NA
+    rlang::inform(message = c(
+      cli::style_bold("Downloading county line shapefile...")
+    ))
+    tryCatch(
+      tigris::counties(
+        state = input$state, year = input$year, refresh = TRUE
+      ),
+      error = function(e){
+        rlang::abort(
+          cli::style_bold("Unable to obtain county shapefile."),
+          paste0(e)
         )
-      )
-      input$county <- counties$new
-    }
-
-    ## Check that year exists; if not, default to 2020
-    if(exists("year", where = input)){
-      rlang::inform(message = c("i" = paste0("Using ", input$year, " shapefile.")))
-      year <- input$year
-    } else {
-      rlang::inform(message = c("!" = paste0("No year specified! Using 2020 shapefile.")))
-      input$year <- 2020
-      year <- 2020
-    }
-
-    ## Get, unzip, and save name of county shapefile
-    if(!file.exists(paste0("Cohort/Shapefiles/tl_", year, "_us_county.shp"))){
-      download.file(
-        url = paste0(
-          "https://www2.census.gov/geo/tiger/TIGER",
-          year,
-          "/COUNTY/tl_",
-          year,
-          "_us_county.zip"
-        ),
-        destfile = paste0("Cohort/Shapefiles/tl_", year, "_us_county.zip")
-      )
-      unzip(
-        paste0("Cohort/Shapefiles/tl_", year, "_us_county.zip"),
-        exdir = "Cohort/Shapefiles/"
-      )
-    }
-    input$shape_county <- paste0("Cohort/Shapefiles/tl_", year, "_us_county.shp")
-
-    ## Get, unzip, and save name of block shapefile
-    if(!file.exists(
-      paste0(
-        "Cohort/Shapefiles/tl_",
-        year,
-        "_",
-        input$state,
-        "_tabblock",
-        10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
-        ".shp"
-      )
-    )){
-      tryCatch(
-        {
-          download.file(
-            url = paste0("https://www2.census.gov/geo/tiger/TIGER",
-                         year,
-                         "/TABBLOCK",
-                         10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
-                         "/tl_",
-                         year,
-                         "_",
-                         input$state,
-                         "_tabblock",
-                         10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
-                         ".zip"),
-            destfile = paste0(
-              "Cohort/Shapefiles/tl_",
-              year,
-              "_",
-              input$state,
-              "_tabblock",
-              10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
-              ".zip"
-            )
-          )
-          unzip(
-            paste0(
-              "Cohort/Shapefiles/tl_",
-              year,
-              "_",
-              input$state,
-              "_tabblock",
-              10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
-              ".zip"
-            ),
-            exdir = "Cohort/Shapefiles/"
-          )
-        },
-        error = function(e){
-          rlang::inform(
-            message = c("!" = "Initial attempt at shapefile download failed. This is normal for year = 2019 and earlier. Trying again...")
-          )
-            download.file(
-              url = paste0("https://www2.census.gov/geo/tiger/TIGER",
-                           year,
-                           "/TABBLOCK",
-                           "/tl_",
-                           year,
-                           "_",
-                           input$state,
-                           "_tabblock",
-                           10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
-                           ".zip"),
-              destfile = paste0(
-                "Cohort/Shapefiles/tl_",
-                year,
-                "_",
-                input$state,
-                "_tabblock",
-                10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
-                ".zip"
-              )
-            )
-            unzip(
-              paste0(
-                "Cohort/Shapefiles/tl_",
-                year,
-                "_",
-                input$state,
-                "_tabblock",
-                10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
-                ".zip"
-              ),
-              exdir = "Cohort/Shapefiles/"
-            )
-        },
-        error = function(e){
-          rlang::abort(message = c(
-            "x" = "Download failed.",
-            "i" = "If the error below is a timeout error, consider changing the timeout with options(timeout = 300).",
-            e
-          ))
-        }
-      )
-    }
-    input$shape_block <- paste0(
-      "Cohort/Shapefiles/tl_",
-      year,
-      "_",
-      input$state,
-      "_tabblock",
-      10 * floor(as.numeric(substr(as.character(year), 3, 4)) / 10),
-      ".shp"
+      }
     )
+    rlang::inform(message = c(
+      cli::style_bold("Downloading block shapefile...")
+    ))
+    tryCatch(
+      tigris::blocks(
+        state = input$state, county = input$county, year = input$year,
+        refresh = TRUE
+      ),
+      error = function(e){
+        rlang::abort(
+          cli::style_bold("Unable to obtain block shapefile."),
+          paste0(e)
+        )
+      }
+    )
+    rlang::inform(message = c(
+      "v" = "Shapefiles cached."
+    ))
   }
 
   # Output config

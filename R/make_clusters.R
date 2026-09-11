@@ -33,13 +33,6 @@ make_clusters <- function(n,
     ))
   }
 
-  # If county is from config, modify it
-  if(exists(".cluster") && exists("cfg", where = .cluster) &&
-     exists("county", where = .cluster$cfg) &&
-     !(F %in% (.cluster$cfg$county == county))){
-    county <- substr(county, 3, 5)
-  }
-
   # Get population variable
   pop <- tidycensus::load_variables(
     year = 10 * floor(as.numeric(year) / 10),

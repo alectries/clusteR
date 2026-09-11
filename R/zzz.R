@@ -5,6 +5,9 @@
 #' @importFrom tinytex is_tinytex
 
 .onLoad <- function(libname, pkgname){
+  # Turn on shapefile caching
+  options(tigris_use_cache = TRUE)
+
   # Check for tinytex
   if(!tinytex::is_tinytex()){
     rlang::inform(message = c(

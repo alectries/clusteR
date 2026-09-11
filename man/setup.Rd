@@ -61,8 +61,9 @@ pull TIGER/Line shapefiles from the U.S. Census. \code{setup} will obtain the
 shapefiles for your county for you, but you must specify the
 \href{https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code}{state}
 and \href{https://en.wikipedia.org/wiki/List_of_United_States_INCITS_codes_by_county}{county}
-FIPS/INCITS codes for your area. These are technically not required if you
-choose to avoid all mapping functions, but that may cause problems.
+FIPS/INCITS codes for your area, or use their names or abbreviations. These
+are technically not required if you choose to avoid all mapping functions,
+but that may cause problems.
 
 \code{geoids}: To perform mapping functions, this package needs to know which
 cluster ID matches which U.S. Census GEOID. You may specify a file with

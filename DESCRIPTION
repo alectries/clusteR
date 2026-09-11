@@ -1,7 +1,7 @@
 Package: clusteR
 Type: Package
 Title: Cluster-sampled Survey Management for Local Epidemiologists
-Version: 0.1.15
+Version: 0.1.16
 Authors@R: c(
     person(
       "Alec", "Higgins",
@@ -33,11 +33,11 @@ Imports:
     rlang,
     rmarkdown,
     rstudioapi,
-    sf,
     stringr,
     tibble,
     tidycensus,
     tidyr,
     tidyselect,
+    tigris,
     tinytex
 Config/roxygen2/version: 8.0.0

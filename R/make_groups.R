@@ -67,16 +67,15 @@
 #' @importFrom readr write_csv
 #' @importFrom rlang `!!`
 #' @importFrom rlang enquo
-#' @importFrom sf read_sf
 #' @importFrom stringr str_detect
+#' @importFrom tigris blocks
+#' @importFrom tigris counties
 #' @export
 
 make_groups <- function(k,
                         filt = n > 0,
                         fn = "clusteR:::mult_kmeans",
                         geoids = .cluster$cfg$geoids,
-                        shape_county = .cluster$cfg$shape_county,
-                        shape_block = .cluster$cfg$shape_block,
                         runs = 300,
                         iter.max = 50,
                         ...
@@ -108,8 +107,6 @@ make_groups <- function(k,
       k = k,
       include = include,
       geoids = geoids,
-      shape_county = shape_county,
-      shape_block = shape_block,
       runs = runs,
       iter.max = iter.max,
       ...
@@ -117,8 +114,11 @@ make_groups <- function(k,
   )
 
   # Load county sf
-  county <- sf::read_sf(shape_county) %>%
-    dplyr::filter(GEOID %in% as.character(.cluster$cfg$county))
+  county <- tigris::counties(
+    state = .cluster$cfg$state,
+    year = .cluster$cfg$year
+  ) %>%
+    dplyr::filter(GEOID %in% paste0(.cluster$cfg$state, .cluster$cfg$county))
 
   # Map
   plot_map <- ggplot2::ggplot() +

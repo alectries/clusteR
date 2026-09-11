@@ -4,8 +4,6 @@
 #'
 #' @param include A vector of cluster identifiers to include in the map.
 #' @param geoids A table matching cluster identifiers to Census GEOIDs.
-#' @param shape_county The path to the county shapefile.
-#' @param shape_block The path to the Census block shapefile.
 #' @param k The number of groups to create.
 #' @param runs The number of kmeans runs to complete.
 #' @param iter.max The number of loops each kmeans run should complete.
@@ -18,26 +16,29 @@
 #' @importFrom magrittr `%>%`
 #' @importFrom readr read_delim
 #' @importFrom rlang inform
-#' @importFrom sf read_sf
 #' @importFrom tibble tibble_row
 #' @importFrom tidyselect everything
 #' @importFrom tidyselect matches
 #' @importFrom tidyselect starts_with
+#' @importFrom tigris blocks
 #' @keywords internal
 
-mult_kmeans <- function(include, geoids, shape_county, shape_block, k, runs, iter.max){
+mult_kmeans <- function(include, geoids, k, runs, iter.max){
   # Definitions
   `%>%` <- magrittr::`%>%`
 
   # Get clusters and geographies
   geoids <- readr::read_delim(geoids, show_col_types = F)
-  blocks <- sf::read_sf(shape_block) %>%
+  blocks <- tigris::blocks(
+    state = .cluster$cfg$state,
+    county = .cluster$cfg$county,
+    year = .cluster$cfg$year
+  ) %>%
     dplyr::select(tidyselect::everything(),
                   STATEFP = tidyselect::starts_with("STATEFP"),
                   COUNTYFP = tidyselect::starts_with("COUNTYFP")) %>%
     dplyr::filter(
-      STATEFP == as.character(.cluster$cfg$state) &
-        COUNTYFP %in% substr(as.character(.cluster$cfg$county), 3, 5)
+      STATEFP == .cluster$cfg$state & COUNTYFP %in% .cluster$cfg$county
     )
 
   # Merge clusters with geographies
