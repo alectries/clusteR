@@ -1,7 +1,7 @@
 Package: clusteR
 Type: Package
 Title: Cluster-sampled Survey Management for Local Epidemiologists
-Version: 0.1.16
+Version: 2026.09.1.0
 Authors@R: c(
     person(
       "Alec", "Higgins",
@@ -20,6 +20,7 @@ Roxygen: list(markdown = TRUE)
 Imports: 
     cli,
     dplyr,
+    forcats,
     ggplot2,
     jsonlite,
     kableExtra,
@@ -40,4 +41,4 @@ Imports:
     tidyselect,
     tigris,
     tinytex
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0

@@ -30,6 +30,7 @@ update_cohort
 editor-1
 view_progress
 view_map
+make_map
 maintaining-the-cohort
 restore_cohort
 view_cohort

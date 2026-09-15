@@ -53,8 +53,22 @@ completion maps is customizable via `breaks` and `colors`, which are passed to
 
 You may need to view the U.S. Census blocks used as clusters for your survey.
 `view_map` displays these blocks on a simple map with county lines. It is
-customizable, including a title, subtitle, fill, and background colors. The map
-on [`view_progress`][view_progress] is more comprehensive.
+customizable, including a title, subtitle, fill, and background colors.
+
+### make_map
+
+`make_map` is the function underlying all other mapping functions in clusteR.
+It allows you to map data and add custom layers without writing a full ggplot2
+call or manually adding shapefiles.
+
+Use `fill` and `color` to name the variables by which clusters should be
+colored.
+
+Use the `layers` argument to add shapefile layers. For example,
+`layers = c(primary_secondary_roads = "lightblue")` will add a layer of highways
+to your maps.
+
+You can also add ggplot2 layers in `...`, such as a coloring scale.
 
 ## Maintaining the cohort
 

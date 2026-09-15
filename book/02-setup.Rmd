@@ -48,13 +48,14 @@ actually work, `setup` will provide warnings for other options you do not set.
 
 ## state, county, year
 
-These variables allow you to specify FIPS/INCITS codes, which clusteR uses to
-download U.S. Census TIGER/Line shapefiles for your region of interest.
+These variables allow you to specify state and county names or
+FIPS/INCITS codes, which clusteR uses to download U.S. Census TIGER/Line
+shapefiles for your region of interest via the tigris package.
 [State codes](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code) and
 [county codes](https://en.wikipedia.org/wiki/List_of_United_States_INCITS_codes_by_county)
-are available online. These codes are required for all mapping functions.
+are available online. This information is required for all mapping functions.
 
-You may specify multiple county codes, but you may only specify one state code,
+You may specify multiple counties, but you may only specify one state,
 and all county codes must be within the same state. This feature is intended
 to accommodate North Carolina district health departments (see information from the
 [UNC School of Government](https://humanservices.sog.unc.edu/visualization-all/))
@@ -63,7 +64,7 @@ but may be useful in other states.
 clusteR allows you to select shapefiles from any year available in the U.S.
 Census [Mapping Files](https://www.census.gov/geographies/mapping-files.html),
 specifically the TIGER/Line shapefiles. The shapefiles (and related population
-data) will be automatically downloaded. When `year` is not specified, for
+data) will be automatically cached. When `year` is not specified, for
 historical reasons, clusteR defaults to 2020 shapefiles and populations.
 
 ## geoids

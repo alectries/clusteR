@@ -52,8 +52,8 @@ in each phase.
 
 - [`make_clusters`][make_clusters] to randomly select U.S. Census blocks,
 weighted by their population, to serve as clusters.
-  - [`view_map`][view_map] to view a simple graphical map of sampled
-  clusters.
+  - [`view_map`][view_map] to view a simple graphical map of sampled clusters.
+  - [`make_map`][make_map] to view a more customizable map of sampled clusters.
 - [`setup`][Setup] to set up the clusteR environment.
   - [`setup_get_alc`][Alchemer data source] to establish a connection to an
   Alchemer survey.

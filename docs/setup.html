@@ -7,7 +7,7 @@
 <title>3 Setup | clusteR Documentation</title>
 <meta name="author" content="Alec Higgins">
 <meta name="description" content="Setup is the trickiest and least forgiving step in using clusteR. The most critical information is available in R with ?setup. This page goes into additional detail.  3.1 Location setup generates...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="3 Setup | clusteR Documentation">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Setup is the trickiest and least forgiving step in using clusteR. The most critical information is available in R with ?setup. This page goes into additional detail.  3.1 Location setup generates...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="Setup is the trickiest and least forgiving step in using clusteR. The most critical information is available in R with ?setup. This page goes into additional detail.  3.1 Location setup generates...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -105,12 +105,13 @@ actually work, <code>setup</code> will provide warnings for other options you do
 <h2>
 <span class="header-section-number">3.3</span> state, county, year<a class="anchor" aria-label="anchor" href="#state-county-year"><i class="fas fa-link"></i></a>
 </h2>
-<p>These variables allow you to specify FIPS/INCITS codes, which clusteR uses to
-download U.S. Census TIGER/Line shapefiles for your region of interest.
+<p>These variables allow you to specify state and county names or
+FIPS/INCITS codes, which clusteR uses to download U.S. Census TIGER/Line
+shapefiles for your region of interest via the tigris package.
 <a href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code">State codes</a> and
 <a href="https://en.wikipedia.org/wiki/List_of_United_States_INCITS_codes_by_county">county codes</a>
-are available online. These codes are required for all mapping functions.</p>
-<p>You may specify multiple county codes, but you may only specify one state code,
+are available online. This information is required for all mapping functions.</p>
+<p>You may specify multiple counties, but you may only specify one state,
 and all county codes must be within the same state. This feature is intended
 to accommodate North Carolina district health departments (see information from the
 <a href="https://humanservices.sog.unc.edu/visualization-all/">UNC School of Government</a>)
@@ -118,7 +119,7 @@ but may be useful in other states.</p>
 <p>clusteR allows you to select shapefiles from any year available in the U.S.
 Census <a href="https://www.census.gov/geographies/mapping-files.html">Mapping Files</a>,
 specifically the TIGER/Line shapefiles. The shapefiles (and related population
-data) will be automatically downloaded. When <code>year</code> is not specified, for
+data) will be automatically cached. When <code>year</code> is not specified, for
 historical reasons, clusteR defaults to 2020 shapefiles and populations.</p>
 </div>
 <div id="geoids" class="section level2" number="3.4">
@@ -450,7 +451,7 @@ attached. For example, you can access the project name using
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-06-18.</p>
+    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-09-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
