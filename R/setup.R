@@ -150,8 +150,10 @@ setup <- function(name,
       (stringr::str_detect(state, stringr::regex(input$state, ignore_case = T)) |
         state_code == as.character(input$state) |
         stringr::str_detect(state_name, stringr::regex(input$state, ignore_case = T))) &
-        (county_code == as.character(input$county) |
-           stringr::str_detect(county, stringr::regex(input$county, ignore_case = T)))
+        (county_code %in% as.character(input$county) |
+           stringr::str_detect(county, stringr::regex(
+             paste(input$county, collapse = "|"), ignore_case = T
+           )))
     )
     input$state <- unique(include$state_code)
     input$county <- include$county_code
