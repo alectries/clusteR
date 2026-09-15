@@ -13,6 +13,7 @@ export(make_clusters)
 export(make_email)
 export(make_groups)
 export(make_mailing)
+export(make_map)
 export(make_phone)
 export(make_walklist)
 export(make_walkmap)
@@ -29,110 +30,151 @@ export(view_map)
 export(view_progress)
 export(view_topline)
 importFrom(Polychrome,createPalette)
-importFrom(cli,cli_progress_bar)
-importFrom(cli,style_bold)
-importFrom(cli,style_underline)
-importFrom(dplyr,across)
-importFrom(dplyr,arrange)
-importFrom(dplyr,bind_cols)
-importFrom(dplyr,bind_rows)
-importFrom(dplyr,c_across)
-importFrom(dplyr,case_when)
-importFrom(dplyr,coalesce)
-importFrom(dplyr,count)
-importFrom(dplyr,desc)
-importFrom(dplyr,filter)
-importFrom(dplyr,full_join)
-importFrom(dplyr,group_by)
-importFrom(dplyr,if_all)
-importFrom(dplyr,if_else)
-importFrom(dplyr,join_by)
-importFrom(dplyr,lead)
-importFrom(dplyr,left_join)
-importFrom(dplyr,mutate)
-importFrom(dplyr,n)
-importFrom(dplyr,pull)
-importFrom(dplyr,rename)
-importFrom(dplyr,row_number)
-importFrom(dplyr,rowwise)
-importFrom(dplyr,select)
-importFrom(dplyr,summarize)
-importFrom(dplyr,ungroup)
-importFrom(ggplot2,aes)
-importFrom(ggplot2,element_text)
-importFrom(ggplot2,geom_col)
-importFrom(ggplot2,geom_sf)
-importFrom(ggplot2,geom_sf_text)
-importFrom(ggplot2,geom_text)
-importFrom(ggplot2,ggplot)
-importFrom(ggplot2,ggsave)
-importFrom(ggplot2,labs)
-importFrom(ggplot2,scale_color_brewer)
-importFrom(ggplot2,scale_fill_gradient2)
-importFrom(ggplot2,scale_fill_manual)
-importFrom(ggplot2,scale_fill_stepsn)
-importFrom(ggplot2,theme)
-importFrom(ggplot2,theme_classic)
-importFrom(ggplot2,theme_void)
+importFrom(cli,
+  cli_progress_bar,
+  style_bold,
+  style_underline
+)
+importFrom(dplyr,
+  across,
+  arrange,
+  bind_cols,
+  bind_rows,
+  c_across,
+  case_when,
+  coalesce,
+  count,
+  desc,
+  filter,
+  full_join,
+  group_by,
+  if_all,
+  if_else,
+  inner_join,
+  join_by,
+  lead,
+  left_join,
+  mutate,
+  n,
+  pull,
+  rename,
+  right_join,
+  row_number,
+  rowwise,
+  select,
+  summarize,
+  ungroup
+)
+importFrom(forcats,fct)
+importFrom(ggplot2,
+  aes,
+  element_text,
+  geom_col,
+  geom_sf,
+  geom_sf_text,
+  geom_text,
+  ggplot,
+  ggsave,
+  labs,
+  scale_color_brewer,
+  scale_fill_gradient2,
+  scale_fill_manual,
+  scale_fill_stepsn,
+  theme,
+  theme_classic,
+  theme_void
+)
 importFrom(jsonlite,fromJSON)
-importFrom(kableExtra,collapse_rows)
-importFrom(kableExtra,column_spec)
-importFrom(kableExtra,kable_material)
-importFrom(kableExtra,row_spec)
-importFrom(knitr,asis_output)
-importFrom(knitr,kable)
+importFrom(kableExtra,
+  collapse_rows,
+  column_spec,
+  kable_material,
+  row_spec
+)
+importFrom(knitr,
+  asis_output,
+  kable
+)
 importFrom(lubridate,now)
 importFrom(magrittr,`%>%`)
-importFrom(purrr,map_int)
-importFrom(readr,read_csv)
-importFrom(readr,read_delim)
-importFrom(readr,read_tsv)
-importFrom(readr,write_csv)
+importFrom(purrr,
+  imap,
+  map_int,
+  reduce
+)
+importFrom(readr,
+  read_csv,
+  read_delim,
+  read_tsv,
+  write_csv
+)
 importFrom(readxl,read_excel)
-importFrom(rlang,`!!!`)
-importFrom(rlang,`!!`)
-importFrom(rlang,`:=`)
-importFrom(rlang,abort)
-importFrom(rlang,as_name)
-importFrom(rlang,as_string)
-importFrom(rlang,enquo)
-importFrom(rlang,enquos)
-importFrom(rlang,eval_tidy)
-importFrom(rlang,expr)
-importFrom(rlang,get_expr)
-importFrom(rlang,inform)
-importFrom(rlang,inject)
-importFrom(rlang,is_empty)
-importFrom(rlang,is_null)
-importFrom(rlang,list2)
-importFrom(rlang,sym)
-importFrom(rlang,warn)
+importFrom(rlang,
+  `!!!`,
+  abort,
+  as_name,
+  as_string,
+  enquo,
+  enquos,
+  eval_tidy,
+  expr,
+  get_expr,
+  inform,
+  inject,
+  is_empty,
+  is_null,
+  list2,
+  sym,
+  warn
+)
 importFrom(rmarkdown,render)
-importFrom(rstudioapi,isAvailable)
-importFrom(rstudioapi,viewer)
-importFrom(stringr,regex)
-importFrom(stringr,str_detect)
-importFrom(stringr,str_length)
-importFrom(stringr,str_pad)
-importFrom(stringr,str_remove)
-importFrom(stringr,str_width)
-importFrom(tibble,add_column)
-importFrom(tibble,add_row)
-importFrom(tibble,deframe)
-importFrom(tibble,enframe)
-importFrom(tibble,tibble)
-importFrom(tibble,tibble_row)
-importFrom(tidycensus,get_decennial)
-importFrom(tidycensus,load_variables)
-importFrom(tidyr,replace_na)
-importFrom(tidyr,spread)
-importFrom(tidyselect,all_of)
-importFrom(tidyselect,any_of)
-importFrom(tidyselect,everything)
-importFrom(tidyselect,matches)
-importFrom(tidyselect,starts_with)
-importFrom(tidyselect,where)
-importFrom(tigris,blocks)
-importFrom(tigris,counties)
-importFrom(tinytex,is_tinytex)
-importFrom(tinytex,lualatex)
+importFrom(rstudioapi,
+  isAvailable,
+  viewer
+)
+importFrom(sf,
+  st_filter,
+  st_intersection,
+  st_intersects,
+  st_union
+)
+importFrom(stringr,
+  regex,
+  str_detect,
+  str_length,
+  str_pad,
+  str_remove,
+  str_width
+)
+importFrom(tibble,
+  add_column,
+  add_row,
+  deframe,
+  enframe,
+  tibble,
+  tibble_row
+)
+importFrom(tidycensus,
+  get_decennial,
+  load_variables
+)
+importFrom(tidyr,
+  replace_na,
+  spread
+)
+importFrom(tidyselect,
+  all_of,
+  any_of,
+  everything,
+  matches,
+  starts_with,
+  where
+)
+importFrom(tigris,
+  blocks,
+  counties
+)
+importFrom(tinytex,
+  is_tinytex,
+  lualatex
+)

@@ -38,7 +38,6 @@
 #' @importFrom magrittr `%>%`
 #' @importFrom readr read_csv
 #' @importFrom readr write_csv
-#' @importFrom rlang `:=`
 #' @importFrom rlang inform
 #' @importFrom rlang sym
 #' @importFrom rstudioapi isAvailable

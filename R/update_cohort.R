@@ -39,7 +39,6 @@
 #' @importFrom magrittr `%>%`
 #' @importFrom readr read_csv
 #' @importFrom readr write_csv
-#' @importFrom rlang `:=`
 #' @importFrom rlang abort
 #' @importFrom rlang inform
 #' @importFrom rlang warn
