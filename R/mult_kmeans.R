@@ -28,7 +28,7 @@ mult_kmeans <- function(include, geoids, k, runs, iter.max){
   `%>%` <- magrittr::`%>%`
 
   # Get clusters and geographies
-  geoids <- readr::read_delim(geoids, show_col_types = F)
+  geoids <- readr::read_delim(geoids, col_types = "cc", show_col_types = F)
   blocks <- tigris::blocks(
     state = .cluster$cfg$state,
     county = .cluster$cfg$county,

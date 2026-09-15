@@ -1,7 +1,7 @@
 #' Generate a map of clusters
 #'
-#' Produces a simple, labeled map of your clusters. Simpler than `make_groups`,
-#' which is for cluster grouping.
+#' Produces a simple, labeled map of your clusters. For a more complex map, use
+#' `make_map`.
 #'
 #' @param title The title of the resulting map, if desired.
 #' @param subtitle The subtitle of the resulting map, if desired.
@@ -31,7 +31,6 @@
 
 view_map <- function(title = NULL,
                      subtitle = NULL,
-                     fill = "lightgray",
                      background = "white"
 ){
   # Definitions
@@ -69,37 +68,15 @@ view_map <- function(title = NULL,
     )
 
   # Map
-  plot_map <- ggplot2::ggplot() +
-    ggplot2::geom_sf(
-      ggplot2::aes(geometry = geometry),
-      data = county,
-      color = "lightblue4",
-      linewidth = 1,
-      fill = NA
-    ) +
-    ggplot2::geom_sf(
-      ggplot2::aes(geometry = geometry, color = ur),
-      data = clusters,
-      fill = fill,
-      linewidth = 1.05,
-      inherit.aes = F
-    ) +
-    ggplot2::geom_sf_text(
-      ggplot2::aes(label = cluster, geometry = geometry),
-      data = clusters,
-      size = 2.5
-    ) +
+  plot_map <- clusteR::make_map(
+    NA,
     ggplot2::labs(
       title = title,
-      subtitle = subtitle,
-      color = "Rural/Urban"
-    ) +
-    ggplot2::scale_color_brewer(palette = "Accent") +
-    ggplot2::theme_void(paper = background) +
-    ggplot2::theme(
-      plot.title = ggplot2::element_text(hjust = 0.5),
-      plot.subtitle = ggplot2::element_text(hjust = 0.5)
-    )
+      subtitle = subtitle
+    ),
+    ggplot2::scale_color_brewer(palette = "Accent"),
+    ggplot2::theme_void(paper = background)
+  )
 
   # Return
   return(plot_map)

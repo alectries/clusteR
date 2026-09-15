@@ -28,8 +28,6 @@
 #' @importFrom ggplot2 aes
 #' @importFrom ggplot2 element_text
 #' @importFrom ggplot2 geom_col
-#' @importFrom ggplot2 geom_sf
-#' @importFrom ggplot2 geom_sf_text
 #' @importFrom ggplot2 geom_text
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 labs
@@ -168,61 +166,20 @@ view_progress <- function(breaks = c(1, 30, 50, 80, 90),
     ))
 
   # Cohort status map by cluster
-  blocks <- dplyr::left_join(
-    readr::read_csv(.cluster$cfg$geoids, show_col_types = F) %>%
-      dplyr::mutate(
-        cluster = as.character(cluster),
-        geoid = as.character(geoid)
-      ),
-    tigris::blocks(
-      state = .cluster$cfg$state,
-      county = .cluster$cfg$county,
-      year = .cluster$cfg$year
-    ) %>%
-      dplyr::rename(GEOID = tidyselect::starts_with("GEOID") &
-                      !tidyselect::starts_with("GEOIDFQ")),
-    by = dplyr::join_by(geoid == GEOID)
-  ) %>%
-    dplyr::rename("Cluster" = cluster)
-  county <- tigris::counties(
-    state = .cluster$cfg$state,
-    year = .cluster$cfg$year
-  ) %>%
-    dplyr::filter(COUNTYFP %in% .cluster$cfg$county)
-  map_stat_cluster <- dplyr::left_join(
-    blocks,
-    stat_cluster,
-    by = "Cluster"
-  ) %>%
+  map_stat_cluster <- stat_cluster %>%
     dplyr::mutate(
-      Completion = as.numeric(gsub("%", "", Completion))
-    )
-  plot_stat_cluster <- ggplot2::ggplot() +
-    ggplot2::geom_sf(
-      ggplot2::aes(geometry = geometry),
-      data = county,
-      color = "lightblue4",
-      linewidth = 1,
-      fill = NA
-    ) +
-    ggplot2::geom_sf(
-      ggplot2::aes(fill = Completion, geometry = geometry),
-      data = map_stat_cluster,
-      color = "lightgray",
-      linewidth = 1.05,
-      inherit.aes = F
-    ) +
-    ggplot2::geom_sf_text(
-      aes(label = Cluster, geometry = geometry),
-      data = map_stat_cluster,
-      size = 2.5
-    ) +
+      Completion = as.numeric(gsub("%", "", Completion)),
+    ) %>%
+    dplyr::rename("cluster" = Cluster)
+  plot_stat_cluster <- clusteR::make_map(
+    map_stat_cluster,
+    fill = Completion,
     ggplot2::scale_fill_stepsn(
       breaks = breaks,
       limits = c(0, 100),
       colors = colors
-    ) +
-    ggplot2::theme_void()
+    )
+  )
 
   # Knit
   knit_env <- list(

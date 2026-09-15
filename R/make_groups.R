@@ -53,19 +53,13 @@
 #' @importFrom dplyr n
 #' @importFrom dplyr select
 #' @importFrom dplyr summarize
-#' @importFrom ggplot2 aes
-#' @importFrom ggplot2 geom_sf
-#' @importFrom ggplot2 geom_sf_text
-#' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 labs
 #' @importFrom ggplot2 scale_color_brewer
 #' @importFrom ggplot2 scale_fill_manual
-#' @importFrom ggplot2 theme_void
 #' @importFrom magrittr `%>%`
 #' @importFrom Polychrome createPalette
 #' @importFrom readr read_csv
 #' @importFrom readr write_csv
-#' @importFrom rlang `!!`
 #' @importFrom rlang enquo
 #' @importFrom stringr str_detect
 #' @importFrom tigris blocks
@@ -113,46 +107,24 @@ make_groups <- function(k,
     )
   )
 
-  # Load county sf
-  county <- tigris::counties(
-    state = .cluster$cfg$state,
-    year = .cluster$cfg$year
-  ) %>%
-    dplyr::filter(GEOID %in% paste0(.cluster$cfg$state, .cluster$cfg$county))
-
   # Map
-  plot_map <- ggplot2::ggplot() +
-    ggplot2::geom_sf(
-      ggplot2::aes(geometry = geometry),
-      data = county,
-      color = "lightblue4",
-      linewidth = 1,
-      fill = NA
-    ) +
-    ggplot2::geom_sf(
-      ggplot2::aes(fill = group, geometry = geometry, color = ur),
-      data = assign,
-      linewidth = 1.05,
-      inherit.aes = F
-    ) +
-    ggplot2::geom_sf_text(
-      ggplot2::aes(label = cluster, geometry = geometry),
-      data = assign,
-      size = 2.5
-    ) +
+  plot_map <- clusteR::make_map(
+    assign,
+    fill = group,
+    color = ur,
     ggplot2::scale_fill_manual(values = unname(Polychrome::createPalette(
       N = as.numeric(k),
       seedcolors = c("#F58638", "#008746", "#0098DA"),
       range = c(50, 90),
       target = "normal",
       M = 1000
-    ))) +
+    ))),
     ggplot2::labs(
       fill = "Group (auto)",
       color = "Rural/Urban"
-    ) +
-    ggplot2::scale_color_brewer(palette = "Accent") +
-    ggplot2::theme_void()
+    ),
+    ggplot2::scale_color_brewer(palette = "Accent")
+  )
 
   # Add manual assignment column, save, and return
   out <- dplyr::arrange(

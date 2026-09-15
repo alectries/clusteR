@@ -17,6 +17,7 @@
 #'
 #' @param save A string; the file path to save the image.
 #' @param groups A vector of groups to include.
+#' @param layers A named vector of tigris layers and border colors; see [`make_map`].
 #' @param title The title of the resulting map, if desired.
 #' @param subtitle The subtitle of the resulting map, if desired.
 #' @param background The background color for the map. Defaults to white.
@@ -25,6 +26,7 @@
 #' @importFrom dplyr left_join
 #' @importFrom dplyr select
 #' @importFrom dplyr mutate
+#' @importFrom forcats fct
 #' @importFrom ggplot2 element_text
 #' @importFrom ggplot2 geom_sf
 #' @importFrom ggplot2 geom_sf_text
@@ -48,6 +50,7 @@
 
 make_walkmap <- function(save = NA,
                          groups = NULL,
+                         layers = c(),
                          title = NULL,
                          subtitle = NULL,
                          background = "white"
@@ -59,93 +62,41 @@ make_walkmap <- function(save = NA,
   assign <- readr::read_csv(
     "Contacts/Assignments.csv", show_col_types = F
   ) %>%
-    dplyr::mutate(geoid = as.numeric(stringr::str_remove(geoid, "'"))) %>%
-    dplyr::filter(is.na(manual) | manual != 0)
-
-  # Load shapefiles
-  county <- tigris::counties(
-    state = .cluster$cfg$state,
-    year = .cluster$cfg$year
-  ) %>%
-    dplyr::filter(GEOID %in% paste0(.cluster$cfg$state, .cluster$cfg$county))
-  blocks <- tigris::blocks(
-    state = .cluster$cfg$state,
-    county = .cluster$cfg$county,
-    year = .cluster$cfg$year
-  ) %>%
-    dplyr::select(tidyselect::everything(),
-                  STATEFP = tidyselect::starts_with("STATEFP"),
-                  COUNTYFP = tidyselect::starts_with("COUNTYFP")) %>%
-    dplyr::filter(
-      STATEFP == .cluster$cfg$state & COUNTYFP %in% .cluster$cfg$county
-    )
-
-  # Merge
-  clusters <- assign %>%
+    dplyr::filter(is.na(manual) | manual != 0) %>%
     dplyr::mutate(
-      geoid = as.character(geoid),
-      "Group" = factor(
-        x = dplyr::case_when(
-          manual == "x" ~ NA,
-          is.na(manual) | manual == "" ~ as.character(auto),
-          .default = as.character(manual)
-        ),
-        levels = sort(unique(c(assign$manual, assign$auto)))
-      )
-    ) %>%
-    dplyr::left_join(
-      dplyr::select(blocks, geoid = tidyselect::matches("^GEOID[0-9]+$"),
-                    lat = tidyselect::starts_with("INTPTLAT"),
-                    long = tidyselect::starts_with("INTPTLON"),
-                    geometry),
-      by = "geoid"
+      group = ifelse(!is.na(manual), manual, auto),
+      geoid = as.numeric(stringr::str_remove(geoid, "'")),
+      cluster = as.character(cluster)
     )
 
   # Filter for groups to include
   if(!is.null(groups)){
-    clusters <- clusters %>%
-      dplyr::filter(Group %in% as.character(groups))
+    assign <- assign %>%
+      dplyr::filter(group %in% as.character(groups))
   }
 
   # Map
-  plot_map <- ggplot2::ggplot() +
-    ggplot2::geom_sf(
-      ggplot2::aes(geometry = geometry),
-      data = county,
-      color = "lightblue4",
-      linewidth = 1,
-      fill = NA
-    ) +
-    ggplot2::geom_sf(
-      ggplot2::aes(fill = Group, geometry = geometry, color = ur),
-      data = clusters,
-      linewidth = 1.05,
-      inherit.aes = F
-    ) +
-    ggplot2::geom_sf_text(
-      ggplot2::aes(label = cluster, geometry = geometry),
-      data = clusters,
-      size = 2.5
-    ) +
+  plot_map <- clusteR::make_map(
+    assign,
+    layers = layers,
+    fill = forcats::fct(
+      as.character(group),
+      levels = as.character(sort(unique(group)))
+    ),
+    color = ur,
+    title = title,
+    subtitle = subtitle,
+    background = background,
     ggplot2::scale_fill_manual(values = unname(Polychrome::createPalette(
-      N = length(unique(clusters$Group)),
+      N = length(unique(assign$group)),
       seedcolors = c("#F58638", "#008746", "#0098DA"),
       range = c(50, 90),
       target = "normal",
       M = 1000
-    ))) +
-    ggplot2::labs(
-      title = title,
-      subtitle = subtitle,
-      fill = "Group (assigned)",
-      color = "Rural/Urban"
-    ) +
-    ggplot2::scale_color_brewer(palette = "Accent") +
-    ggplot2::theme_void(paper = background) +
-    ggplot2::theme(
-      plot.title = ggplot2::element_text(hjust = 0.5),
-      plot.subtitle = ggplot2::element_text(hjust = 0.5)
-    )
+    ))),
+    ggplot2::labs(fill = "Group (assigned)"),
+    ggplot2::scale_color_brewer(palette = "Accent")
+  )
 
   # Save
   if(!is.na(save)){

@@ -7,6 +7,7 @@
 make_walkmap(
   save = NA,
   groups = NULL,
+  layers = c(),
   title = NULL,
   subtitle = NULL,
   background = "white"
@@ -16,6 +17,8 @@ make_walkmap(
 \item{save}{A string; the file path to save the image.}
 
 \item{groups}{A vector of groups to include.}
+
+\item{layers}{A named vector of tigris layers and border colors; see \code{\link{make_map}}.}
 
 \item{title}{The title of the resulting map, if desired.}
 

@@ -4,23 +4,18 @@
 \alias{view_map}
 \title{Generate a map of clusters}
 \usage{
-view_map(
-  title = NULL,
-  subtitle = NULL,
-  fill = "lightgray",
-  background = "white"
-)
+view_map(title = NULL, subtitle = NULL, background = "white")
 }
 \arguments{
 \item{title}{The title of the resulting map, if desired.}
 
 \item{subtitle}{The subtitle of the resulting map, if desired.}
 
-\item{fill}{The fill color for the clusters. Defaults to light gray.}
-
 \item{background}{The background color for the map. Defaults to white.}
+
+\item{fill}{The fill color for the clusters. Defaults to light gray.}
 }
 \description{
-Produces a simple, labeled map of your clusters. Simpler than \code{make_groups},
-which is for cluster grouping.
+Produces a simple, labeled map of your clusters. For a more complex map, use
+\code{make_map}.
 }
