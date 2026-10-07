@@ -40,7 +40,6 @@
 #' @importFrom readr read_csv
 #' @importFrom rlang expr
 #' @importFrom rlang inform
-#' @importFrom stats plogis
 #' @importFrom tidyselect all_of
 #' @export
 
@@ -110,13 +109,13 @@ clean_weight <- function(formula,
       ))
       print(summary(model))
       rlang::inform(message = c(
-        cli::style_bold("Betas (exponentiated):")
+        cli::style_bold("Betas:")
       ))
-      print(exp(model$coefficients))
+      print(model$coefficients)
       rlang::inform(message = c(
         cli::style_bold("\n95% CI for betas:")
       ))
-      print(suppressMessages(exp(confint(model, level = 0.95))))
+      print(suppressMessages(confint(model, level = 0.95)))
       rlang::inform(message = c(
         cli::style_bold("\nParticipation probabilities (percentiles):")
       ))
