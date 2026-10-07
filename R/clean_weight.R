@@ -40,6 +40,7 @@
 #' @importFrom readr read_csv
 #' @importFrom rlang expr
 #' @importFrom rlang inform
+#' @importFrom stats plogis
 #' @importFrom tidyselect all_of
 #' @export
 
@@ -87,12 +88,11 @@ clean_weight <- function(formula,
     )
 
     # Calculate IPWs
-    vars <- c("ones", vars)
     data_wt <- data %>%
       dplyr::mutate(ones = 1) %>%
       dplyr::rowwise() %>%
       dplyr::mutate(
-        prob = exp(sum(
+        prob = stats::plogis(sum(
           dplyr::c_across(
             tidyselect::all_of(c("ones", names(model$coefficients)[-1]))
           ) * model$coefficients,

@@ -1,7 +1,7 @@
 Package: clusteR
 Type: Package
 Title: Cluster-sampled Survey Management for Local Epidemiologists
-Version: 2026.09.1.0
+Version: 2026.10.1.0
 Authors@R: c(
     person(
       "Alec", "Higgins",
