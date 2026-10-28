@@ -42,6 +42,7 @@
 #' @importFrom rstudioapi viewer
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_remove
+#' @importFrom stringr str_replace
 #' @importFrom tidyselect any_of
 #' @importFrom tinytex lualatex
 #' @export
@@ -77,10 +78,12 @@ make_walklist <- function(template = NA,
     dplyr::mutate(
       "Address" = dplyr::case_when(
         !is.na(Physical) ~ paste(
-          Physical, City, paste0(State, " ", substr(ZIP, 1, 5)), sep = ", "
+          stringr::str_replace(stringr::str_replace(Physical, "&", "\\\\&"), "#", "\\\\#"),
+          City, paste0(State, " ", substr(ZIP, 1, 5)), sep = ", "
         ),
         .default = paste(
-          Mailing, City, paste0(State, " ", substr(ZIP, 1, 5)), sep = ", "
+          stringr::str_replace(stringr::str_replace(Mailing, "&", "\\\\&"), "#", "\\\\#"), City,
+          paste0(State, " ", substr(ZIP, 1, 5)), sep = ", "
         )
       ),
       "Name" = ifelse(Name == "Current Resident", "", Name),
