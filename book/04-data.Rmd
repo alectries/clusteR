@@ -15,9 +15,10 @@ establishing a data connection, see [setup_get]. For analyzing data, see
 ## get_data
 
 `get_data` downloads and archives survey responses from your data source.
-clusteR natively supports [Alchemer](https:://www.alchemer.com) and CSV data
-sources. `get_data` itself archives data and both invisibly returns the file
-path to that archive and saves it to the config as `.cluster$cfg$last_data`.
+clusteR natively supports [AOS](https://lhdacademyofscience.org),
+[Alchemer](https:://www.alchemer.com) and CSV data sources. `get_data` itself 
+archives data and both invisibly returns the file path to that archive and saves 
+it to the config as `.cluster$cfg$last_data`.
 
 `get_csv`, a native function, obtains data from a CSV according to
 [`setup`][Setup] and returns it. If you need to import data to R for manual

@@ -191,10 +191,11 @@ show no data from the file.
 A survey generates survey data, and in order to manage the survey, clusteR needs
 to connect to this data. clusteR natively supports two data sources, but other
 packages can add support for additional data sources, and end users can write
-functions to support a custom data source. The two default sources are:
+functions to support a custom data source. The three default sources are:
 
 - **.csv files**, connected with [`setup_get_csv`][Comma-delimited (.csv) data source].
 - **Alchemer surveys**, connected with [`setup_get_alc`][Alchemer data source].
+- **AOS surveys**, connected with [`setup_get_aos`][AOS data source].
 
 Additional native sources will be documented here in future releases.
 
@@ -223,9 +224,8 @@ this again.
 ### Alchemer data source
 
 [Alchemer](https://www.alchemer.com/) is a survey tool used widely by local
-public health agencies in the United States. Alchemer surveys are handled
-natively by clusteR, not least because the author uses Alchemer at his local
-health department.
+public health agencies in the United States, though it is being phased out
+in favor of AOS (see below).
 
 clusteR accepts Alchemer survey data using Alchemer's [SurveyResponse API call](https://apihelp.alchemer.com/help/surveyresponse-sub-object-v5) via
 [`setup_get_alc`][Alchemer data source] and `get_alc`. You will need:
@@ -242,6 +242,33 @@ To set up an Alchemer survey as your data source, you will need to run `setup`
 and include this argument:
 
 `setup_get = setup_get_alc(survey_id, api_token, api_token_secret, codebook)`
+
+Once setup is completed, clusteR saves this information. You will not need to do
+this again.
+
+### AOS data source
+
+AOS, the survey platform developed for local public health agencies by the
+[LHD Academy of Science](https://www.lhdacademyofscience.org), replaces 
+Alchemer as a survey tool widely used in the United States. AOS surveys are
+handled natively by clusteR, not least because the author uses AOS at his
+local health department.
+
+clusteR accepts AOS survey data using its 
+[JSON API export](https://lhdacademyofscience.org/help/results/exports) via
+[`setup_get_aos`][AOS data source] and `get_aos`. You will need:
+
+- An AOS account, with your survey already created.
+- The Survey ID, which is a code beginning with `AOS-` that appears next to your
+survey's title on the Build page.
+- An API key with read permissions passed as a string.
+- A codebook (as a *tab*-delimited file) to convert AOS questions to dataframe
+columns.
+
+To set up an AOS survey as your data source, you will need to run `setup` and
+include this argument:
+
+`setup_get = setup_get_aos(survey_id, api_key, codebook)`
 
 Once setup is completed, clusteR saves this information. You will not need to do
 this again.

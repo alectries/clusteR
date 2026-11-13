@@ -7,6 +7,7 @@ export(custom_walklist)
 export(export_cohort)
 export(export_data)
 export(get_alc)
+export(get_aos)
 export(get_csv)
 export(get_data)
 export(make_clusters)
@@ -21,6 +22,7 @@ export(restore_cohort)
 export(search_cohort)
 export(setup)
 export(setup_get_alc)
+export(setup_get_aos)
 export(setup_get_csv)
 export(update_cohort)
 export(update_confirm)
@@ -58,6 +60,7 @@ importFrom(dplyr,
   n,
   pull,
   rename,
+  rename_with,
   right_join,
   row_number,
   rowwise,
@@ -99,7 +102,12 @@ importFrom(lubridate,now)
 importFrom(magrittr,`%>%`)
 importFrom(purrr,
   imap,
+  list_c,
+  map_dfc,
   map_int,
+  map_vec,
+  pluck,
+  pmap,
   reduce
 )
 importFrom(readr,
@@ -124,6 +132,7 @@ importFrom(rlang,
   is_empty,
   is_null,
   list2,
+  set_names,
   sym,
   warn
 )

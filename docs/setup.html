@@ -281,12 +281,14 @@ show no data from the file.</p>
 <p>A survey generates survey data, and in order to manage the survey, clusteR needs
 to connect to this data. clusteR natively supports two data sources, but other
 packages can add support for additional data sources, and end users can write
-functions to support a custom data source. The two default sources are:</p>
+functions to support a custom data source. The three default sources are:</p>
 <ul>
 <li>
 <strong>.csv files</strong>, connected with <a href="setup.html#comma-delimited-.csv-data-source"><code>setup_get_csv</code></a>.</li>
 <li>
 <strong>Alchemer surveys</strong>, connected with <a href="setup.html#alchemer-data-source"><code>setup_get_alc</code></a>.</li>
+<li>
+<strong>AOS surveys</strong>, connected with <a href="setup.html#aos-data-source"><code>setup_get_aos</code></a>.</li>
 </ul>
 <p>Additional native sources will be documented here in future releases.</p>
 <div id="comma-delimited-.csv-data-source" class="section level3" number="3.6.1">
@@ -315,9 +317,8 @@ this again.</p>
 <span class="header-section-number">3.6.2</span> Alchemer data source<a class="anchor" aria-label="anchor" href="#alchemer-data-source"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://www.alchemer.com/">Alchemer</a> is a survey tool used widely by local
-public health agencies in the United States. Alchemer surveys are handled
-natively by clusteR, not least because the author uses Alchemer at his local
-health department.</p>
+public health agencies in the United States, though it is being phased out
+in favor of AOS (see below).</p>
 <p>clusteR accepts Alchemer survey data using Alchemer’s <a href="https://apihelp.alchemer.com/help/surveyresponse-sub-object-v5">SurveyResponse API call</a> via
 <a href="setup.html#alchemer-data-source"><code>setup_get_alc</code></a> and <code>get_alc</code>. You will need:</p>
 <ul>
@@ -335,9 +336,35 @@ and include this argument:</p>
 <p>Once setup is completed, clusteR saves this information. You will not need to do
 this again.</p>
 </div>
-<div id="custom-data-sources" class="section level3" number="3.6.3">
+<div id="aos-data-source" class="section level3" number="3.6.3">
 <h3>
-<span class="header-section-number">3.6.3</span> Custom data sources<a class="anchor" aria-label="anchor" href="#custom-data-sources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.6.3</span> AOS data source<a class="anchor" aria-label="anchor" href="#aos-data-source"><i class="fas fa-link"></i></a>
+</h3>
+<p>AOS, the survey platform developed for local public health agencies by the
+<a href="https://www.lhdacademyofscience.org">LHD Academy of Science</a>, replaces
+Alchemer as a survey tool widely used in the United States. AOS surveys are
+handled natively by clusteR, not least because the author uses AOS at his
+local health department.</p>
+<p>clusteR accepts AOS survey data using its
+<a href="https://lhdacademyofscience.org/help/results/exports">JSON API export</a> via
+<a href="setup.html#aos-data-source"><code>setup_get_aos</code></a> and <code>get_aos</code>. You will need:</p>
+<ul>
+<li>An AOS account, with your survey already created.</li>
+<li>The Survey ID, which is a code beginning with <code>AOS-</code> that appears next to your
+survey’s title on the Build page.</li>
+<li>An API key with read permissions passed as a string.</li>
+<li>A codebook (as a <em>tab</em>-delimited file) to convert AOS questions to dataframe
+columns.</li>
+</ul>
+<p>To set up an AOS survey as your data source, you will need to run <code>setup</code> and
+include this argument:</p>
+<p><code>setup_get = setup_get_aos(survey_id, api_key, codebook)</code></p>
+<p>Once setup is completed, clusteR saves this information. You will not need to do
+this again.</p>
+</div>
+<div id="custom-data-sources" class="section level3" number="3.6.4">
+<h3>
+<span class="header-section-number">3.6.4</span> Custom data sources<a class="anchor" aria-label="anchor" href="#custom-data-sources"><i class="fas fa-link"></i></a>
 </h3>
 <p>In general, because each data source and its format are unique, clusteR is very
 flexible with custom data sources. However, there are a few requirements
@@ -366,9 +393,9 @@ structure to the system default, it is not recommended. <code>get_data</code> wi
 archive data in an appropriate format that is compatible across data source
 types and with all native clusteR functions.</p>
 </div>
-<div id="why-not-excel" class="section level3" number="3.6.4">
+<div id="why-not-excel" class="section level3" number="3.6.5">
 <h3>
-<span class="header-section-number">3.6.4</span> Why not Excel?<a class="anchor" aria-label="anchor" href="#why-not-excel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.6.5</span> Why not Excel?<a class="anchor" aria-label="anchor" href="#why-not-excel"><i class="fas fa-link"></i></a>
 </h3>
 <p>You may be wondering why the author hasn’t created functions to get data from a
 Microsoft Excel source file, even though clusteR supports Excel for other tasks
@@ -429,8 +456,9 @@ attached. For example, you can access the project name using
 <a class="nav-link" href="#setup_get"><span class="header-section-number">3.6</span> setup_get</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#comma-delimited-.csv-data-source"><span class="header-section-number">3.6.1</span> Comma-delimited (.csv) data source</a></li>
 <li><a class="nav-link" href="#alchemer-data-source"><span class="header-section-number">3.6.2</span> Alchemer data source</a></li>
-<li><a class="nav-link" href="#custom-data-sources"><span class="header-section-number">3.6.3</span> Custom data sources</a></li>
-<li><a class="nav-link" href="#why-not-excel"><span class="header-section-number">3.6.4</span> Why not Excel?</a></li>
+<li><a class="nav-link" href="#aos-data-source"><span class="header-section-number">3.6.3</span> AOS data source</a></li>
+<li><a class="nav-link" href="#custom-data-sources"><span class="header-section-number">3.6.4</span> Custom data sources</a></li>
+<li><a class="nav-link" href="#why-not-excel"><span class="header-section-number">3.6.5</span> Why not Excel?</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#additional-variables"><span class="header-section-number">3.7</span> Additional variables</a></li>
@@ -451,7 +479,7 @@ attached. For example, you can access the project name using
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-09-15.</p>
+    <p>"<strong>clusteR Documentation</strong>" was written by Alec Higgins. It was last built on 2026-11-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

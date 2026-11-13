@@ -57,6 +57,8 @@ weighted by their population, to serve as clusters.
 - [`setup`][Setup] to set up the clusteR environment.
   - [`setup_get_alc`][Alchemer data source] to establish a connection to an
   Alchemer survey.
+  - [`setup_get_aos`][AOS data source] to establish a connection to an AOS
+  survey.
   - [`setup_get_csv`][Comma-delimited (.csv) data source] to establish a
   connection to a CSV file with survey response data.
 
@@ -90,6 +92,8 @@ completion by cluster.
 pre-specified data source.
   - `get_alc`, generally used by `get_data`, to retrieve data from
   [Alchemer](https://www.alchemer.com).
+  - `get_aos`, generally used by `get_data`, to retrieve data from
+  [AOS](https://lhdacademyofscience.org).
   - `get_csv`, generally used by `get_data`, to retrieve data from a CSV.
 
 ### Data analysis

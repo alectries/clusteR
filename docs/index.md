@@ -1,7 +1,7 @@
 ---
 title: "clusteR Documentation"
 author: "Alec Higgins"
-date: "2026-09-15"
+date: "2026-11-13"
 site: bookdown::bookdown_site
 documentclass: book
 description: "R package for local epidemiologists to manage cluster-sampled cohort surveys."
