@@ -103,6 +103,7 @@ importFrom(magrittr,`%>%`)
 importFrom(purrr,
   imap,
   list_c,
+  list_flatten,
   map_dfc,
   map_int,
   map_vec,

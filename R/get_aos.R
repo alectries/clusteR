@@ -34,6 +34,7 @@
 #' @importFrom magrittr `%>%`
 #' @importFrom purrr imap
 #' @importFrom purrr list_c
+#' @importFrom purrr list_flatten
 #' @importFrom purrr map_dfc
 #' @importFrom purrr map_vec
 #' @importFrom purrr pluck
@@ -84,7 +85,11 @@ get_aos <- function(){
           purrr::map_vec(ans, \(r){if(v %in% r){v} else {NA}})
         })
       } else {
-        res <- ans
+        if(type == "textbox_grid"){
+          res <- purrr::list_flatten(ans, is_node = is.data.frame, name_spec = "{outer}.{inner}")
+        } else {
+          res <- ans
+        }
       }
       return(res)
     }
