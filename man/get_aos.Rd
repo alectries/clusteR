@@ -27,7 +27,7 @@ You can format these fields largely however you'd like, and you can even
 leave them blank if they are not of use to you, but the fields must exist
 and be named correctly.
 
-Currently, \code{get_aos} can only handle four AOS output types: textbox,
-radio, essay, and parent. Most question types yield one of these field types,
-but you should verify before setup.
+Currently, \code{get_aos} is known to handle six AOS output types: short_text,
+radio, checkbox, long_text, textbox_list, and textbox_grid. Most question
+types yield one of these field types, but you should verify before setup.
 }
